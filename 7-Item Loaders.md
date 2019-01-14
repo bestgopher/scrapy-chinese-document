@@ -223,7 +223,13 @@ item，selector，response和其余的关键字参数分配到Item Loader上下�
 
 <font color=green>`get_xpath(xpath, *processors, **kwargs)`</font>：
 
-&nbsp;&nbsp;&nbsp;类似于`get_value()`，但是接受XPath而不是值，XPath被用来从selector中提取数据，返回unicode字符串的列表。</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Parameters**：</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**xpath**(str)： 提取数据的XPath字符串</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**re**(str或者编译好的正则表达式)：通过正则表达式从XPath提取出来的数据中再次匹配。
+&nbsp;&nbsp;&nbsp;类似于`get_value()`，但是接受XPath而不是值，XPath被用来从selector中提取数据，返回unicode字符串的列。
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Parameters**：
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**xpath**(str)： 提取数据的XPath字符串
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**re**(str或者编译好的正则表达式)：通过正则表达式从XPath提取出来的数据中再次匹配。
 
 举例:
 
@@ -250,7 +256,11 @@ item，selector，response和其余的关键字参数分配到Item Loader上下�
 
 <font color=green>`get_css(css, *processors, **kwargs)`</font>：
 
-&nbsp;&nbsp;&nbsp;类似于`get_value()`，但是接受CSS选择器而不是值，CSS选择器被用来从selector中提取数据，返回unicode字符串的列表。。</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Parameters**：</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**css**(str)： 提取数据的css选择器</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**re**(str或者编译好的正则表达式)：通过正则表达式从XPath提取出来的数据中再次匹配。
+&nbsp;&nbsp;&nbsp;类似于`get_value()`，但是接受CSS选择器而不是值，CSS选择器被用来从selector中提取数据，返回unicode字符串的列表。。</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Parameters**：
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**css**(str)： 提取数据的css选择器
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**re**(str或者编译好的正则表达式)：通过正则表达式从XPath提取出来的数据中再次匹配。
 
 举例:
 
