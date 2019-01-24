@@ -17,7 +17,7 @@ Scrapy选择器(selectors)是在lxml库上建立的，这意味着它们在解�
 
 ##构造选择器(Constructing selectors)##
 
-Scrapy选择器是用 **text** 或者 **TextResponse** 对象构建的 <font color=red>Selector</font> 类的实例。它会根据输入的格式自动选择最好的解析规则(XML vs HTML)。
+Scrapy选择器是用 **text** 或者 **TextResponse** 对象构建的 <font color=red>`Selector`</font> 类的实例。它会根据输入的格式自动选择最好的解析规则(XML vs HTML)。
 
 	>>> from scrapy.selector import Selector
 	>>> from scrapy.http import HtmlResponse
@@ -66,7 +66,7 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	
 	scrapy shell https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 
-然后，shell加载完毕之后，你将有 <font color=red>response</font> 变量绑定的response对象，response对象附加的 <font color=red>response.selector</font> 属性使用。
+然后，shell加载完毕之后，你将有 <font color=red>`response`</font> 变量绑定的response对象，response对象附加的 <font color=red>`response.selector`</font> 属性使用。
 
 因为我们在处理HTML，所以选择器将会自动使用HTML解析器。
 
@@ -75,14 +75,14 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	>>> response.selector.xpath('//title/text()')
 	[<Selector (text) xpath=//title/text()>]
 
-使用XPath和CSS查询响应非常常用，因此response对象有两个方便的快捷方式：<font color=red>response.xpath()</font> 和 <font color=red>response.css()</font>。
+使用XPath和CSS查询响应非常常用，因此response对象有两个方便的快捷方式：<font color=red>`response.xpath()`</font> 和 <font color=red>`response.css()`</font>。
 
 	>>> response.xpath('//title/text()')
 	[<Selector (text) xpath=//title/text()>]
 	>>> response.css('title::text')
 	[<Selector (text) xpath=//title/text()>]
 
-正如你看到的，<font color=red>.xpath</font> 和 <font color=red>.css</font> 方法返回一个 **SelectorList** 实例，是一列 **Selector** 实例。此API可用于快速选择嵌套的数据。
+正如你看到的，<font color=red>`.xpath`</font> 和 <font color=red>`.css`</font> 方法返回一个 `SelectorList` 实例，是一个 `Selector` 实例的列表。此API可用于快速选择嵌套的数据。
 
 	>>> response.css('img').xpath('@src').extract()
 	[u'image1_thumb.jpg',
@@ -91,22 +91,22 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	 u'image4_thumb.jpg',
 	 u'image5_thumb.jpg']
 
-要提取文本数据，你必须调用选择器的 <font color=red>.extract()</font> 方法，如下所示：
+要提取文本数据，你必须调用选择器的 <font color=red>·.extract()·</font> 方法，如下所示：
 
 	>>> response.xpath('//title/text()').extract()
 	[u'Example website']
 
-如果你想要提取第一个匹配的元素，你可以调用 <font color=red>.first_exctarct()</font>
+如果你想要提取第一个匹配的元素，你可以调用 <font color=red>`.first_exctarct()`</font>
 
 	>>> response.xpath('//div[@id="images"]/a/text()').extract_first()
 	u'Name: My image 1 '
 
-如果没有元素满足，它返回 **None**：
+如果没有元素满足，它返回 <font color=red>`None`</font>：
 
 	>>> response.xpath('//div[@id="not-exists"]/text()').extract_first() is None
 	True
 
-为了替换 <font color=red>None</font>， 我们可以在参数中提供一个默认的返回值：
+为了返回值不是 <font color=red>`None`</font>， 我们可以在参数中提供一个默认的返回值：
 
 	>>> response.xpath('//div[@id="not-exists"]/text()').extract_first(default='not-found')
 	'not-found'
@@ -154,7 +154,7 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 
 ##嵌套选择(Nesting selectors)##
 
-选择器方法 <font color=red>.xpath()</font> 和 <font color=red>.css()</font> 返回选择器对象的列表，因此你也可以用这些选择器对象调用选择器方法。例如：
+选择器方法 <font color=red>`.xpath()`</font> 和 <font color=red>`.css()`</font> 返回选择器对象的列表，因此你也可以用这些选择器对象调用选择器方法。例如：
 
 	>>> links = response.xpath('//a[contains(@href, "image")]')
 	>>> links.extract()
@@ -176,7 +176,7 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 
 ##选择器和正则结合(Using selectors with regular expressions)##
 
-**selector** 还有一个 <font color=red>.re()</font> 方法，通过正则表达式提取数据。然而，与 <font color=red>.xpath()</font> 和 <font color=red>.css()</font> 方法不同， <font color=red>.re()</font> 返回一个unicode字符串的列表。因此你不能构建嵌套式的 <font color=red>.re()</font> 调用。
+**selector** 还有一个 <font color=red>`.re()`</font> 方法，通过正则表达式提取数据。然而，与 <font color=red>`.xpath()`</font> 和 <font color=red>`.css()`</font> 方法不同， <font color=red>`.re()`</font> 返回一个unicode字符串的列表。因此你不能构建嵌套式的 <font color=red>`.re()`</font> 调用。
 
 这是一个从上面的HTML代码提取图片名称的例子：
 	
@@ -187,38 +187,38 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	 u'My image 4',
 	 u'My image 5']
 
-这里为 <font color=red>.re()</font> 额外添加了一个类似于 <font color=red>extract\_first()</font> 的方法，叫 <font color=red>re_first()</font>。用这个提取第一个匹配的字符串。
+这里为 <font color=red>`.re()`</font> 额外添加了一个类似于 <font color=red>`extract\_first()`</font> 的方法，叫 <font color=red>`re_first()`</font>。用这个提取第一个匹配的字符串。
 
 	>>> response.xpath('//a[contains(@href, "image")]/text()').re_first(r'Name:\s*(.*)')
 	u'My image 1'
 
 ##使用相对xpath(Working with relative XPahts)##
 
-记住，你调用内嵌式选择器时XPath以 <font color=red>/</font> 开始，Xpath将从文档的绝对路径而不是相对路径开始选择。
+记住，你调用内嵌式选择器时XPath以 <font color=red>`/`</font> 开始，Xpath将从文档的绝对路径而不是相对路径开始选择。
 
-比如，假设你想要提取 <font color=red><div\></font> 元素中所有的 <font color=red><p\></font> 元素。首先，你应该获得所有的 <font color=red><div\></font> 元素:
+比如，假设你想要提取 <font color=red>`<div>`</font> 元素中所有的 <font color=red>`<p>`</font> 元素。首先，你应该获得所有的 <font color=red>`<div>`</font> 元素:
 
 	>>> divs = response.xpath('//div')
 
-起初，你可能会使用下面的方法，它是错的，实际上它会提取文档中所有的 <font color=red><p\></font> 元素，而不仅是 <font color=red><div\></font> 中的。
+起初，你可能会使用下面的方法，它是错的，实际上它会提取文档中所有的 <font color=red>`<p>`</font> 元素，而不仅是 <font color=red>`<div>`</font> 中的。
 
 	>>> for p in divs.xpath('//p'):  # this is wrong - gets all <p> from the whole document
 	...     print p.extract()
 
-下面是比较合适的处理方法(注意Xpath表达式 <font color=red>**.//p**</font> 中的 **<font color=red>.</font>** 前缀):
+下面是比较合适的处理方法(注意Xpath表达式 <font color=red>`.//p`</font> 中的 <font color=red>`.`</font> 前缀):
 
 	>>> for p in divs.xpath('.//p'):  # extracts all <p> inside
 	...     print p.extract()
 
 
-另一种常见情况是提取直接后代 <font color=red><p\></font> 元素：
+另一种常见情况是提取直接后代 <font color=red>`<p>`</font> 元素：
 	
 	>>> for p in divs.xpath('p'):
 	...     print p.extract()
 
 ##XPath表达式中的变量(Variables in XPath expressions)##
 
-XPath允许在XPath中引用变量，语法是 <font color=red>$somevariable</font>。这就像SQL中的参数化查询或者预准备语句，你可以在使用占位符 <font color=red>?</font> 的地方用一些参数替换，这样就可以在查询用用这些值替换。
+XPath允许在XPath中引用变量，语法是 <font color=red>`$somevariable`</font>。这就像SQL中的参数化查询或者预准备语句，你可以在使用占位符 <font color=red>`?`</font> 的地方用一些参数替换，这样就可以在查询用用这些值替换。
 
 下面是一个例子，我们通过"id"属性来匹配一个元素，而不对其硬编码(就像我们前面所示的一样):
 
@@ -226,14 +226,14 @@ XPath允许在XPath中引用变量，语法是 <font color=red>$somevariable</fo
 	>>> response.xpath('//div[@id=$val]/a/text()', val='images').extract_first()
 	u'Name: My image 1 '
 
-这是另一个例子，提取一个包含5个 <font color=red><a\></font> 子元素的 <font color=red><div\></font> 的'id'属性(这里我们将值 <font color=red>5</font> 作为整数传递)：
+这是另一个例子，提取一个包含5个 <font color=red>`<a>`</font> 子元素的 <font color=red>`<div>`</font> 的'id'属性(这里我们将值 <font color=red>`5`</font> 作为整数传递)：
 
 	>>> response.xpath('//div[count(a)=$cnt]/@id', cnt=5).extract_first()
 	u'images'
 
-当调用 <font color=red>.path()</font> 时，所有的变量都必须绑定一个值(否则你将会得到 <font color=red>ValueError：XPath error：</font> 异常)。这就意味着传递一样数量的参数是必要的。
+当调用 <font color=red>`.path()`</font> 时，所有的变量都必须绑定一个值(否则你将会得到 <font color=red>`ValueError：XPath error：`</font> 异常)。这就意味着传递一样数量的参数是必要的。
 
-<font color=green>parsel</font>，一个强大的Scrapy选择器的库，有更多的细节和例子演示Xpath使用变量。
+<font color=red>`parsel`</font>，一个强大的Scrapy选择器的库，有更多的细节和例子演示Xpath使用变量。
 
 #使用EXSLT扩展(Using EXSLT extensions)#
 
@@ -259,7 +259,7 @@ XPath允许在XPath中引用变量，语法是 <font color=red>$somevariable</fo
 
 ##正则表达式(Regular expressions)##
 
-当 <font color=red>starts-with()</font> 或者 <font color=red>contains()</font> 不能满足要求时，<font color=red>test()</font> 函数能够提供很大的作用。
+当 <font color=red>`starts-with()`</font> 或者 <font color=red>`contains()`</font> 不能满足要求时，<font color=red>`test()`</font> 函数能够提供很大的作用。
 
 举例，提取下面'class'属性为数字结尾的链接：
 
@@ -284,8 +284,7 @@ XPath允许在XPath中引用变量，语法是 <font color=red>$somevariable</fo
 
 <font color=#FF7F24>
 Warning:
-
-C语言库 libxslt 不原生支持EXSLT正则表达式，因此 lxml 在实现时使用了Python re 模块的钩子。 因此，在XPath表达式中使用regexp函数可能会牺牲少量的性能。
+</br>C语言库 libxslt 不原生支持EXSLT正则表达式，因此 lxml 在实现时使用了Python re 模块的钩子。 因此，在XPath表达式中使用regexp函数可能会牺牲少量的性能。
 </font>
 
 ##集合操作(Set operations)##
@@ -384,9 +383,9 @@ C语言库 libxslt 不原生支持EXSLT正则表达式，因此 lxml 在实现�
 
 ##在条件中使用文本节点(Using text nodes in a condition)##
 
-当你需要通过Xpath字符串函数提取文本内容时，避免使用 <font color=red>**.//text()**</font>，而是使用 <font color=red>**.**</font> 代替。
+当你需要通过Xpath字符串函数提取文本内容时，避免使用 <font color=red>`.//text()`</font>，而是使用 <font color=red>`.`</font> 代替。
 
-这是因为 <font color=red>**.//text()**</font> 表达式生成一组文本元素 - 一个节点集。当这个表达式作为参数传递给字符串函数，例如 <font color=red>contains()</font> 或者 <font color=red>starts-with()</font>，这个节点集被转化为字符串，但是转化的结果文本只是这个节点集的第一个元素而已。
+这是因为 <font color=red>`.//text()`</font> 表达式生成一组文本元素 - 一个节点集。当这个表达式作为参数传递给字符串函数，例如 <font color=red>`contains()`</font> 或者 <font color=red>`starts-with()`</font>，这个节点集被转化为字符串，但是转化的结果文本只是这个节点集的第一个元素而已。
 
 例如：
 
@@ -407,21 +406,21 @@ C语言库 libxslt 不原生支持EXSLT正则表达式，因此 lxml 在实现�
 	>>> sel.xpath("string(//a[1])").extract() # convert it to string
 	[u'Click here to go to the Next Page']
 
-因此，在这个例子中使用 <font color=red>**.//text()**</font> 不能提取任何内容：
+因此，在这个例子中使用 <font color=red>`.//text()`</font> 不能提取任何内容：
 
 	>>> sel.xpath("//a[contains(.//text(), 'Next Page')]").extract()
 	[] 
 
-但是使用 <font color=red>**.**</font> 意味着整个节点，能达到效果：
+但是使用 <font color=red>`.`</font> 意味着整个节点，能达到效果：
 
 	>>> sel.xpath("//a[contains(., 'Next Page')]").extract()
 	[u'<a href="#">Click here to go to the <strong>Next Page</strong></a>']
 
 ##警惕 //node[1] 和 (//node)[1] 的区别##
 
-<font color=red>//node[1]</font> 提取的是每个父节点下的第一个节点。
+<font color=red>`//node[1]`</font> 提取的是每个父节点下的第一个节点。
 
-<font color=red>(//node)[1]</font> 提取的是文档中所有节点的第一个节点。
+<font color=red>`(//node)[1]`</font> 提取的是文档中所有节点的第一个节点。
 
 	>>> from scrapy import Selector
 	>>> sel = Selector(text="""
@@ -438,17 +437,17 @@ C语言库 libxslt 不原生支持EXSLT正则表达式，因此 lxml 在实现�
 	>>> xp = lambda x: sel.xpath(x).extract()
 
 
-这个提取所有第一个 <li color=red><li\></font> 元素，不论它的父节点是什么：
+这个提取所有第一个 <li color=red>`<li>`</font> 元素，不论它的父节点是什么：
 
 	>>> xp("//li[1]")
 	[u'<li>1</li>', u'<li>4</li>'] 
 
-这个提取整个文档中第一个 <font color=red><li\></font> 元素：
+这个提取整个文档中第一个 <font color=red>`<li>`</font> 元素：
 
 	>>> xp("//ul/li[1]")
 	[u'<li>1</li>', u'<li>4</li>']
 
-这个提取整个文档中父节点为 <font color=red><ul\></font> 的第一个 <font color=red><li\></font> 元素。
+这个提取整个文档中父节点为 <font color=red>`<ul>`</font> 的第一个 <font color=red><li\></font> 元素。
 
 	>>> xp("(//ul/li)[1]")
 	[u'<li>1</li>']
@@ -459,7 +458,7 @@ C语言库 libxslt 不原生支持EXSLT正则表达式，因此 lxml 在实现�
 
 	*[contains(concat(' ', normalize-space(@class), ' '), ' someclass ')]
 
-如果你使用 <font color=red>@class="someclass"</font>，你可能最终漏掉有其他class属性的元素。如果你使用 <font color=red>contains(@class, "someclass")</font> ，最终你可能得到比你想要数量更多的元素，因为它们有不同的class名称，但是都共有 <font color=red>someclass</font>。
+如果你使用 <font color=red>`@class="someclass"`</font>，你可能最终漏掉有其他class属性的元素。如果你使用 <font color=red>`contains(@class, "someclass")`</font> ，最终你可能得到比你想要数量更多的元素，因为它们有不同的class名称，但是都共有 <font color=red>`someclass`</font>。
 
 当出现这种问题，Scrapy选择器允许使用链式选择器，因此许多情况下你可以通过CSS选择器通过class名提取数据，在需要使用XPath的时候转为XPath提取：
 
@@ -484,33 +483,33 @@ C语言库 libxslt 不原生支持EXSLT正则表达式，因此 lxml 在实现�
 
 **Selector** 实例是封装响应，用来选择响应文本的某一部分。
 
-<font color=red>response</font> 是 **HtmlResponse** 或者 **XmlResponse** 对象，它将会被用来选择和提取数据。
+<font color=red>`response`</font> 是 **HtmlResponse** 或者 **XmlResponse** 对象，它将会被用来选择和提取数据。
 
-<font color=red>text</font> 是当 <font color=red>response</font>不可用这种情况发生时，选择器提取的文本内容，是一个unicode字符串或者utf-8编码的文本。<font color=red>text</font> 和 <font color=red>response</font> 一起使用是一种未定义的行为。
+<font color=red>`text`</font> 是当 <font color=red>`response`</font>不可用这种情况发生时，选择器提取的文本内容，是一个unicode字符串或者utf-8编码的文本。<font color=red>`text`</font> 和 <font color=red>`response`</font> 一起使用是一种未定义的行为。
 
-<font color=red>type</font> 定义选择器的类型，它可以是 <font color=red>"html"</font>，<font color=red>"xml"</font>，或者 <font color=red>None</font>（默认）。
+<font color=red>`type`</font> 定义选择器的类型，它可以是 <font color=red>`"html"`</font>，<font color=red>`"xml"`</font>，或者 <font color=red>`None`</font>（默认）。
 
- - 如果 <font color=red>type</font> 是 <font color=red>None</font>，选择会根据 <font color=red>response</font> 的类型自动选择最好的 <font color=red>type</font> 值，或者提供了 <font color=red>text</font> 时默认为 <font color=red>"html"</font>。
- - 如果 <font color=red>type</font> 是 <font color=red>None</font>，而且提供了 <font color=red>response</font>， 选择器会按如下规则推导出类型：
+ - 如果 <font color=red>`type`</font> 是 <font color=red>`None`</font>，选择会根据 <font color=red>`response`</font> 的类型自动选择最好的 <font color=red>`type`</font> 值，或者提供了 <font color=red>`text`</font> 时默认为 <font color=red>`"html"`</font>。
+ - 如果 <font color=red>`type`</font> 是 <font color=red>`None`</font>，而且提供了 <font color=red>`response`</font>， 选择器会按如下规则推导出类型：
  
-    1. **HtmlResponse** 为 <font color=red>"html"</font> 类型
-    2. **XmlResponse** 为 <font color=red>"xml"</font> 类型
-    3. **其他所有类型** 为 <font color=red>"html"</font> 类型
+    1. **`HtmlResponse`** 为 <font color=red>`"html"`</font> 类型
+    2. **`XmlResponse`** 为 <font color=red>`"xml"`</font> 类型
+    3. **`其他所有类型`** 为 <font color=red>`"html"`</font> 类型
  
-其他情况下，如果设定了 <font color=red>type</font> ，选择器类型将被强制设定，而不进行检测。
+其他情况下，如果设定了 <font color=red>`type`</font> ，选择器类型将被强制设定，而不进行检测。
 
-<font color=green>xpath(query)</font>：选择所有满足XPath <font color=red>query</font> 语句的节点，返回的结果是单一化的 **SelectorList** 实例。列表中的元素实现了 **Selector** 的接口。
-<font color=red>query</font>是包含XPATH查询请求的字符串。注意:为了方便，这个方法也可以这样调用 <font color=red>response.xpath()</font>。
+<font color=green>`xpath`(query)</font>：选择所有满足XPath <font color=red>`query`</font> 语句的节点，返回的结果是单一化的 **`SelectorList`** 实例。列表中的元素实现了 **`Selector`** 的接口。
+<font color=red>`query`</font>是包含XPATH查询请求的字符串。注意:为了方便，这个方法也可以这样调用 <font color=red>`response.xpath()`</font>。
 
-<font color=green>css(query)</font>：应用CSS选择器选择，返回 **SelectorList** 的实例。<font color=red>query</font> 是CSS选择器语句的字符串。在后台，CSS查询语句通过 *cssselect* 库被翻译为XPath语句，然后运行 <font color=red>.xpath()</font> 方法。注意:为了方便，这个方法也可以这样调用 <font color=red>response.css()</font>。
+<font color=green>`css(query)`</font>：应用CSS选择器选择，返回 **`SelectorList`** 的实例。<font color=red>`query`</font> 是CSS选择器语句的字符串。在后台，CSS查询语句通过 *cssselect* 库被翻译为XPath语句，然后运行 <font color=red>`.xpath()`</font> 方法。注意:为了方便，这个方法也可以这样调用 <font color=red>`response.css()`</font>。
 
-<font color=green>extract()</font>：序列化匹配结果，返回匹配节点的unicode字符串组成的列表。结尾是编码内容的百分比。
+<font color=green>`extract()`</font>：序列化匹配结果，返回匹配节点的unicode字符串组成的列表。结尾是编码内容的百分比。
 
-<font color=green>re(regex)</font>：应用给定的正则表达式选择，返回符合条件的unicode字符串。<font color=red>regex</font> 可以为编译好的正则表达式或者一个能被 <font color=red>re.compile(regex)</font> 编译为正则表达式的字符串。注意：<font color=red>re()</font> 和 <font color=red>re_first()</font> 会解码HTML实体(除了<font color=red>`&lt`;</font> 和 <font color=red>`&amp;`</font>)
+<font color=green>`re(regex)`</font>：应用给定的正则表达式选择，返回符合条件的unicode字符串。<font color=red>`regex`</font> 可以为编译好的正则表达式或者一个能被 <font color=red>`re.compile(regex)`</font> 编译为正则表达式的字符串。注意：<font color=red>`re()`</font> 和 <font color=red>`re_first()`</font> 会解码HTML实体(除了<font color=red>`&lt`;</font> 和 <font color=red>`&amp;`</font>)
 
-<font color=green>register_namespace(prefix, uri)</font>：注册给定的命名空间给 **Selector** 使用。没有注册命令空间，你不能从不标准的命名空间中选择或者提取数据。例子如下。
+<font color=green>`register_namespace(prefix, uri)`</font>：注册给定的命名空间给 **Selector** 使用。没有注册命令空间，你不能从不标准的命名空间中选择或者提取数据。例子如下。
 
-<font color=green>remove_namespace()</font>：移除所有的命名空间。允许少量命名空间的XPath遍历文档。参见下面的例子。
+<font color=green>`remove_namespace()`</font>：移除所有的命名空间。允许少量命名空间的XPath遍历文档。参见下面的例子。
 
 <font color=green>`__nonzero__()`</font>：如果选择了任意的真实文档，将返回 <font color=red>`True`</font> ，否则返回 <font color=red>`False`</font> 。 也就是说， **Selector** 的布尔值是通过它选择的内容确定的。
 
@@ -529,7 +528,7 @@ C语言库 libxslt 不原生支持EXSLT正则表达式，因此 lxml 在实现�
 
 <font color=green>`xpath(query)`</font>：为列表中的每个元素调用 <font color=red>`.xpath()`</font> 方法，返回所得结果组成另一个 `SelectorList`。</font color=red>`query`</font> 和 `Selector.xpath()`的参数一致。
 
-<font color=green>`css(query)`</font>：为列表中的每个元素调用 <font color=red>`.css()`</font> 方法，返回所得结果组成另一个 `SelectorList`。</font color=red>`query`</font> 和 `Selector.css()`的参数一致。
+<font color=green>`css(query)`</font>：为列表中的每个元素调用 <font color=red>`.css()`</font> 方法，返回所得结果组成另一个 `SelectorList`。<font color=red>`query`</font> 和 `Selector.css()`的参数一致。
 
 <font color=green>`extract()`</font>：为列表中的每个元素调用 <font color=red>`.extract()`</font> 方法，返回unicode字符串组成的列表。
 

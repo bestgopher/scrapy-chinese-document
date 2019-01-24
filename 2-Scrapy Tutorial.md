@@ -25,7 +25,7 @@ Scrapy是用python写的。如果你对这个语言不熟悉，你需要先更�
 
     scrapy startproject tutorial
 
-这将创建一个*tutorial*的目录，内容如下：
+这将创建一个 <font color=red>`tutorial`</font> 的目录，内容如下：
 
 	tutorial/
 	    scrapy.cfg            # deploy configuration file
@@ -50,7 +50,7 @@ Scrapy是用python写的。如果你对这个语言不熟悉，你需要先更�
 
 爬虫是你定义的类，Scrapy使用它从一个网站或者一组网站中爬取信息。它们必须继承自 **scrapy.Spider**，必须定义生成初始的请求，怎么定位这个页面的链接和解析下载下来的页面内容来提取数据都是随意的。
 
-这是我们第一个爬虫的代码。把它保存为一个文件，命名为 *quotes_spider.py*，放在你的项目中的   *tutorial/spiders* 目录下。
+这是我们第一个爬虫的代码。把它保存为一个文件，命名为 <font color=red>`quotes_spider.py`</font> ，放在你的项目中的   <font color=red>`tutorial/spiders`</font> 目录下。
 
 	import scrapy
 	
@@ -75,11 +75,11 @@ Scrapy是用python写的。如果你对这个语言不熟悉，你需要先更�
 
 正如你所看到的，我们的爬虫的继承自 **scrapy.Spider**，而且定义了一些属性和方法：
 
-  - **name**: 爬虫的标识。它在一个项目中必须唯一，也就是说，你不能为不同的爬虫设置相同的名字。
-  - **start_requests()**: 必须方法一个可迭代的请求对象(Requests)(可以返回请求的列表或者写一个生成器函数)，爬虫将从这些请求中开始爬取。后续的请求将从这些初始的请求中相继生成。
-  - **parse()**: 一个方法，它将被调用来处理每个请求下载获取的响应。参数 *reponse* 是一个 **TextResponse** 类的实例，保存了页面的文本内容，并且有一些好用的方法来处理它。
+  - `name`: 爬虫的标识。它在一个项目中必须唯一，也就是说，你不能为不同的爬虫设置相同的名字。
+  - `start_requests()`: 必须方法一个可迭代的请求对象(Requests)(可以返回请求的列表或者写一个生成器函数)，爬虫将从这些请求中开始爬取。后续的请求将从这些初始的请求中相继生成。
+  - `parse()`: 一个方法，它将被调用来处理每个请求下载获取的响应。参数 *reponse* 是一个 `TextResponse` 类的实例，保存了页面的文本内容，并且有一些好用的方法来处理它。
   	
-    parse()方法通常用来解析响应，提取爬取的数据生成字典，也寻找新的URLs来生成新的requests(Request).
+    `parse()` 方法通常用来解析响应，提取爬取的数据生成字典，也寻找新的URLs来生成新的requests (`Request`).
 
 ## 怎么运行爬虫(How to run spider) ##
 
@@ -87,7 +87,7 @@ Scrapy是用python写的。如果你对这个语言不熟悉，你需要先更�
 
     scrapy crawl quotes
 
-这个命令将运行我们添加的名为 *quotes* 的爬虫，它将会向域名为 *quotes.toscrape.com* 的网站发送一些请求。你将获得一些类似于这些的输出：
+这个命令将运行我们添加的名为 <font color=red>`quotes`</font> 的爬虫，它将会向域名为 <font color=red>quotes.toscrape.com`</font> 的网站发送一些请求。你将获得一些类似于这些的输出：
 
 	... (omitted for brevity)
 	2016-12-16 21:24:05 [scrapy.core.engine] INFO: Spider opened
@@ -101,7 +101,7 @@ Scrapy是用python写的。如果你对这个语言不熟悉，你需要先更�
 	2016-12-16 21:24:05 [scrapy.core.engine] INFO: Closing spider (finished)
 	...
 
-现在，检查当前目录的文件。你应该会注意到两个新文件被创建: *quotes-.html* 和 *quotes-2.html*，它们中有各自url的对应的网页内容，像我们 **parse()** 方法中所规定的一样
+现在，检查当前目录的文件。你应该会注意到两个新文件被创建: *quotes-.html* 和 *quotes-2.html*，它们中有各自url的对应的网页内容，像我们 <font color=red>`parse()`</font> 方法中所规定的一样
 
 <font color=#0099ff>
 NOTE:如果你很好奇我们为什么还没有解析页面，请继续，我们将很快介绍它。
@@ -109,11 +109,11 @@ NOTE:如果你很好奇我们为什么还没有解析页面，请继续，我们
 
 ## 在底层发生了什么(What just happend under the hood) ##
 
-Scrapy调度从爬虫的 **start_requests** 方法中返回的 **scrapy.Request** 请求对象。根据每个请求对象获得的响应，它会被 **Response** 实例化，然后把响应的实例化对象作为参数调用请求对象关联的回调方法(在此示例中，为 **parse()** 方法)。
+Scrapy调度从爬虫的 <font color=red>`start_requests`</font> 方法中返回的 `scrapy.Request` 请求对象。根据每个请求对象获得的响应，它会被 `Response` 实例化，然后把响应的实例化对象作为参数调用请求对象关联的回调方法(在此示例中，为 <font color=red>`parse()`</font> 方法)。
 
 ## start_requests方法的快捷方式(A shortcut to the start_requests method) ##
 
-你可以定义一个 **start_urls** 的类属性来绑定一个URLs的列表，来代替实现 **start_requests()** 方法通过URLs来生成scrapy.Request对象。这个列表接下会在默认实现的 **start_requests()** 方法中被使用，为你的爬虫创建初始的请求。
+你可以定义一个 `start_urls` 的类属性来绑定一个URLs的列表，来代替实现 `start_requests()` 方法通过URLs来生成 `scrapy.Request` 对象。这个列表接下会在默认实现的 `start_requests()` 方法中被使用，为你的爬虫创建初始的请求。
 
 	import scrapy
 	
@@ -131,7 +131,7 @@ Scrapy调度从爬虫的 **start_requests** 方法中返回的 **scrapy.Request*
 	        with open(filename, 'wb') as f:
 	            f.write(response.body)
 
-**parse()** 方法将会被调用来处理这URLs的响应，即使我们没有明确告知Scrapy要这样。这是因为 **parse()** 是Scrapy默认的回调方法，没有明确声明回调函数的请求获得响应时，将会调用它。
+`parse()` 方法将会被调用来处理这URLs的响应，即使我们没有明确告知Scrapy要这样。这是因为 `parse()` 是Scrapy默认的回调方法，没有明确声明回调函数的请求获得响应时，将会调用它。
 
 ## 提取数据(Extracting data) ##
 
@@ -141,8 +141,7 @@ Scrapy调度从爬虫的 **start_requests** 方法中返回的 **scrapy.Request*
 
 
 <font color=#0099ff>
-NOTE:在命令行运行scrapy shell时url要使用引号包围，否则当你的url中包含参数(即， &字符)的时候将不起作用。
-
+NOTE:</br>在命令行运行scrapy shell时url要使用引号包围，否则当你的url中包含参数(即， &字符)的时候将不起作用。</br>
 在windows中，使用双引号:
 
     scrapy shell "http://quotes.toscrape.com/page/1/"
@@ -172,7 +171,7 @@ NOTE:在命令行运行scrapy shell时url要使用引号包围，否则当你的
 	>>> response.css('title')
 	[<Selector xpath='descendant-or-self::title' data='<title>Quotes to Scrape</title>'>]
 
-运行 <font color=red>**response.css('title')**</font> 获得的结果是一个类似于列表的对象，称为 *Selectorlist*，它表示一列 *Selector* 对象的集合，*Selector* 对象包含XML/HTML节点并允许你进一步细化选择和提取数据。
+运行 <font color=red>`response.css('title')`</font> 获得的结果是一个类似于列表的对象，称为 `Selectorlist`，它表示一列 *Selector* 对象的集合，*Selector* 对象包含XML/HTML节点并允许你进一步细化选择和提取数据。
 
 为了提取上面标题的文本内容，你可以这样：
 
@@ -181,12 +180,12 @@ NOTE:在命令行运行scrapy shell时url要使用引号包围，否则当你的
 
 这里有两点需要注意：
 
-一是我们要在CSS语句中增加 <font color=red>::text</font>，这意味着我们想从<font color=red><title\></font>节点中选择文本内容。如果我们没有指定 <font color=red>::text</font>, 我们将得到整个节点，包括标签：
+一是我们要在CSS语句中增加 <font color=red>`::text`</font>，这意味着我们想从<font color=red>`<title>`</font>节点中选择文本内容。如果我们没有指定 <font color=red>`::text`</font>, 我们将得到整个节点，包括标签：
 	
 	>>> response.css('title').extract()
 	['<title>Quotes to Scrape</title>']
 
-二是调用 <font color=red>.extract()</font> 方法得到的结果是一个列表，因为我们正在处理一个 *Selectorlist* 实例。当你知道你仅仅想要第一个结果时，在这个示例中，你可以这样:
+二是调用 <font color=red>`.extract()`</font> 方法得到的结果是一个列表，因为我们正在处理一个 *Selectorlist* 实例。当你知道你仅仅想要第一个结果时，在这个示例中，你可以这样:
 
     >>> response.css('title::text').extract_first()
     'Quotes to Scrape'
@@ -196,11 +195,11 @@ NOTE:在命令行运行scrapy shell时url要使用引号包围，否则当你的
 	>>> response.css('title::text')[0].extract()
 	'Quotes to Scrape'
 
-然而，当我们没有获得满足选择的节点，使用 <font color=red>.extract_first()</font> 避免 <font color=red>IndexError</font>，会返回 <font color=red>None</font>。
+然而，当我们没有获得满足选择的节点，使用 <font color=red>`.extract_first()`</font> 避免 <font color=red>`IndexError`</font>，会返回 <font color=red>`None`</font>。
 
-这里有个教训：对于大多数代码而言，你想要弹性规避因为没有找到正确的页面或者爬取页面失败而产生错误，使用<font color=red>.extract_first()</font>至少能得到返回值(None)。
+这里有个教训：对于大多数代码而言，你想要弹性规避因为没有找到正确的页面或者爬取页面失败而产生错误，使用<font color=red>`.extract_first()`</font>至少能得到返回值(None)。
 
-除了 <font color=red>extract()</font> 和 <font color=red>extract_first()</font> 以外，你也可以通过使用 <font color=red>re()</font> 方法来使用正则表达式提取。
+除了 <font color=red>`extract()`</font> 和 <font color=red>`extract_first()`</font> 以外，你也可以通过使用 <font color=red>`re()`</font> 方法来使用正则表达式提取。
 
 	>>> response.css('title::text').re(r'Quotes.*')
 	['Quotes to Scrape']
@@ -209,7 +208,7 @@ NOTE:在命令行运行scrapy shell时url要使用引号包围，否则当你的
 	>>> response.css('title::text').re(r'(\w+) to (\w+)')
 	['Quotes', 'Scrape']
 
-为了找到合适的CSS选择器使用，你可以在shell中使用 <font color=red>view(response)</font> 命令用你的浏览器打开当前响应的页面。这样你就可以使用浏览器的开发者工具或者 *Firebug* 这样的扩展工具了。
+为了找到合适的CSS选择器使用，你可以在shell中使用 <font color=red>`view(response)`</font> 命令用你的浏览器打开当前响应的页面。这样你就可以使用浏览器的开发者工具或者 *Firebug* 这样的扩展工具了。
 
 *Seletor Gadget* 是一个可以快速寻找CSS选择器的工具，在多种浏览器中都可以使用。
 
@@ -263,7 +262,7 @@ XPath表达式是非常强大的，是Scrapy选择的基础。事实上，CSS选
 
     >>> quote = response.css("div.quote")[0]
 
-现在，我们从我们创建的quote对象中提取 <font color=red>title</font> , <font color=red>author</font> 和它的 <font color=red>tags</font> 。
+现在，我们从我们创建的 <font color=red>`quote`</font> 对象中提取 <font color=red>`title`</font> , <font color=red>`author`</font> 和它的 <font color=red>`tags`</font> 。
 
 	>>> title = quote.css("span.text::text").extract_first()
 	>>> title
@@ -272,7 +271,7 @@ XPath表达式是非常强大的，是Scrapy选择的基础。事实上，CSS选
 	>>> author
 	'Albert Einstein'
 
-得到的tags是一列字符串，我们可以使用 <font color=red>.extract()</font> 方法来获得它们：
+得到的tags是一列字符串，我们可以使用 <font color=red>`.extract()`</font> 方法来获得它们：
 	
 	>>> tags = quote.css("div.tags a.tag::text").extract()
 	>>> tags
@@ -294,7 +293,7 @@ XPath表达式是非常强大的，是Scrapy选择的基础。事实上，CSS选
 
 回到我们的爬虫。目前为止，没有提取任何数据，仅仅是在本地的文件中保存了整个HTML页面。我们将上面的提取逻辑集成到我们的爬虫中吧。
 
-一个Scrapy爬虫通常会生成许多我们提取数据组成的字典。为此，我们在回调方法中使用python的关键字 <font color=red>yield</font> ，如下所示：
+一个Scrapy爬虫通常会生成许多我们提取数据组成的字典。为此，我们在回调方法中使用python的关键字 <font color=red>`yield`</font> ，如下所示：
 
 	import scrapy
 	
@@ -329,7 +328,7 @@ XPath表达式是非常强大的，是Scrapy选择的基础。事实上，CSS选
     scrapy crawl quotes -o quotes.json
 
 
-这将会生成一个包含所有爬取到的项目的 <font color=red>quotes.json</font> 文件，通过JSON序列化。 
+这将会生成一个包含所有爬取到的项目的 <font color=red>`quotes.json`</font> 文件，通过JSON序列化。 
 
 由于历史原因，Scrapy会在给定的文件中追加内容，而不是覆盖原有的内容。如果你执行两次命令，并且在第一次命令之前没有移除这个文件，你将会得到一个损坏的JSON文件。
 
@@ -340,7 +339,7 @@ XPath表达式是非常强大的，是Scrapy选择的基础。事实上，CSS选
 
 JOSN Lines 格式很有用的，因为它是流式的。你可以很简单的追加新的记录。当你执行两次命令的时候，不会出现和JSON格式一样的问题。而且每个记录都是单独的一行，你可以不用在内容中也能处理大文件，向JQ这样的工具能帮助我们在命令行操作这些事情。
 
-在小项目(如我们教程中的项目)中，文件到处就满足需求了。然而，如果你想要使用以爬取的item做更加复杂的事情，我们可以写一个 **Item Pipeline**。当项目创建的时候，**Item Pipeline** 的占位文件就已经创建好了， 就是 <font color=red>tutorial/pipelines.py</font>。如果你仅仅只想要存储items，你不需要使用任何 **Item Pipelines**。
+在小项目(如我们教程中的项目)中，文件到处就满足需求了。然而，如果你想要使用以爬取的item做更加复杂的事情，我们可以写一个 **Item Pipeline**。当项目创建的时候，**Item Pipeline** 的占位文件就已经创建好了， 就是 <font color=red>`tutorial/pipelines.py`</font>。如果你仅仅只想要存储items，你不需要使用任何 **Item Pipelines**。
 
 ## 获取链接(Following links) ##
 
@@ -362,7 +361,7 @@ JOSN Lines 格式很有用的，因为它是流式的。你可以很简单的追
 	>>> response.css('li.next a').extract_first()
 	'<a href="/page/2/">Next <span aria-hidden="true">→</span></a>'
 
-这获得了锚节点，但是我们想要属性 <font color=red>href</font>。为此，Scrapy支持CSS扩展让我们能够得到属性的文本内容，例如：
+这获得了锚节点，但是我们想要属性 <font color=red>`href`</font>。为此，Scrapy支持CSS扩展让我们能够得到属性的文本内容，例如：
 
 	>>> response.css('li.next a::attr(href)').extract_first()
 	'/page/2/'
@@ -392,7 +391,7 @@ JOSN Lines 格式很有用的，因为它是流式的。你可以很简单的追
 	            yield scrapy.Request(next_page, callback=self.parse)
 
 
-现在，在提取完数据之后，<font color=red>parse()</font> 方法寻找下一页的链接，用  <font color=red>urljoin()</font>方法构建完整的绝对url(因为这里的url是相对的)，然后
+现在，在提取完数据之后，<font color=red>`parse()`</font> 方法寻找下一页的链接，用  <font color=red>`urljoin()`</font>方法构建完整的绝对url(因为这里的url是相对的)，然后
 yield 一个新的请求到下一页，把自己注册为下一页处理数据的回调方法，让爬虫能够遍历每一页。
 
 这里你能看到Scrapy处理链接的机制：当你在一个回调方法中yield一个请求时，Scrapy将会调度发送请求，请求结束后，注册的回调方法将被执行。
@@ -405,7 +404,7 @@ yield 一个新的请求到下一页，把自己注册为下一页处理数据�
 ## 创建请求对象的快捷方式(A shortcut for creating request) ##
 
 
-你可以使用 <font color=red>response.follow()</font> 方法快捷创建request对象。
+你可以使用 <font color=red>`response.follow()`</font> 方法快捷创建request对象。
 
 	import scrapy
 	
@@ -429,21 +428,21 @@ yield 一个新的请求到下一页，把自己注册为下一页处理数据�
 	            yield response.follow(next_page, callback=self.parse)
 
 
-与 <font color=red>scrapy.Request</font> 不同， <font color=red>reponse.follow</font> 直接支持相对url-不需要调用 <font color=red>response.urljoin()</font>。记住：<font color=red>reponse.follow</font> 仅仅是放回一个 **Request** 示例，我们仍然需要 *yield* 这个 **Request**。
+与 <font color=red>`scrapy.Request`</font> 不同， <font color=red>`reponse.follow`</font> 直接支持相对url-不需要调用 <font color=red>`response.urljoin()`</font>。记住：<font color=red>`reponse.follow`</font> 仅仅是放回一个 **Request** 示例，我们仍然需要 *yield* 这个 **Request**。
 
-你可以给 <font color=red>reponse.follow</font> 传递一个Selector对象，而不是一个字符串。这个 Selector 应该能提取有必要的属性：
+你可以给 <font color=red>`reponse.follow`</font> 传递一个Selector对象，而不是一个字符串。这个 Selector 应该能提取有必要的属性：
 
 	for href in response.css('li.next a::attr(href)'):
 	    yield response.follow(href, callback=self.parse)
 
-对于<font color=red><a\></font>标签， <font color=red>response.follow</font> 自动地使用它的 *href* 属性。因此代码可以这样进一步缩短：
+对于<font color=red>`<a>`</font>标签， <font color=red>`response.follow`</font> 自动地使用它的 *href* 属性。因此代码可以这样进一步缩短：
 
 	for a in response.css('li.next a'):
 	    yield response.follow(a, callback=self.parse)
 
 
 <font color=#0099ff>
-NOTE: <font color=red>response.follow(response.css('li.next a'))</font> 不是有效的，因为 <font color=red>reponse.css</font> 返回一个所有结果的 Selector 组成的类似列表的对象， 不是单个的 Selector 。像本例中使用for循环或者 <font color=red>response.css('li.next a')[0]</font> 就行了。
+NOTE:</br> <font color=red>`response.follow(response.css('li.next a'))`</font> 不是有效的，因为 <font color=red>`reponse.css`</font> 返回一个所有结果的 Selector 组成的类似列表的对象， 不是单个的 Selector 。像本例中使用for循环或者 <font color=red>`response.css('li.next a')[0]`</font> 就行了。
 </font>
 
 ## 更多示例和模式(More example and patterns) ##
@@ -478,11 +477,11 @@ NOTE: <font color=red>response.follow(response.css('li.next a'))</font> 不是�
 	        }
 
 
-这个爬虫从主页面开始，它将沿着所有的链接爬取作者界面，然后调用 <font color=red>parse_author</font> 回调方法，当然分页链接仍然如我们之间所看见的一样用 <font color=red>parse</font> 回调。
+这个爬虫从主页面开始，它将沿着所有的链接爬取作者界面，然后调用 <font color=red>`parse_author`</font> 回调方法，当然分页链接仍然如我们之间所看见的一样用 <font color=red>`parse`</font> 回调。
 
-这里我们把链接作为位置参数传递给 <font color=red>reponse.follow</font> 使得代码更短；当然也适用于 <font color=red>scrapy.Request</font>
+这里我们把链接作为位置参数传递给 <font color=red>`reponse.follow`</font> 使得代码更短；当然也适用于 <font color=red>`scrapy.Request`</font>
 
-<font color=red>parse\_author</font> 回调方法定义了一个函数，这个函数通过CSS提取和清洗数据，然后 <font color=red>parse_author</font> 把作者数据组成的字典yied出来。
+<font color=red>`parse_author`</font> 回调方法定义了一个函数，这个函数通过CSS提取和清洗数据，然后 <font color=red>`parse_author`</font> 把作者数据组成的字典yied出来。
 
 这个爬虫示例中另一件有趣的事情就是，即使这里有许多quotes出自相同的作者，我们不需要担心多次访问同一个作者的页面。默认的，Scrapy会筛选出已经访问过的URLs的重复请求，避免因代码问题而多次访问服务器的问题。这里可以通过设置来配置 **DUPEFILTER_CLASS**。
 
@@ -494,13 +493,13 @@ NOTE: <font color=red>response.follow(response.css('li.next a'))</font> 不是�
 
 ## 使用爬虫参数(Using spider arguments) ##
 
-当你运行爬虫的时候，你可以在命令行的时候通过 <font color=red>-a</font> 选项为你的爬虫提供参数。
+当你运行爬虫的时候，你可以在命令行的时候通过 <font color=red>`-a`</font> 选项为你的爬虫提供参数。
     
     scrapy crawl quotes -o quotes-humor.json -a tag=humor
 
-这些参数将会默认传递给 **Spider** 的 **\_\_init__** 方法，成为爬虫的属性。
+这些参数将会默认传递给 **Spider** 的 <font color=red>`__init__`</font> 方法，成为爬虫的属性。
 
-在这个示例中， <font color=red>tag</font> 的值可以在爬虫中用 <font color=red>self.tag</font> 使用。你可以使用它获取只有特殊 tag 的quotes，URL以tag构建而成。
+在这个示例中， <font color=red>`tag`</font> 的值可以在爬虫中用 <font color=red>`self.tag`</font> 使用。你可以使用它获取只有特殊 tag 的quotes，URL以tag构建而成。
 
 	import scrapy
 	
@@ -526,4 +525,4 @@ NOTE: <font color=red>response.follow(response.css('li.next a'))</font> 不是�
 	        if next_page is not None:
 	            yield response.follow(next_page, self.parse)
 
-如果这个爬虫中你添加了 <font color=red>tag=humor</font>，你会意识到只会爬取 <font color=red>humer</font> 标签的URLs， 例如：<font color=red>http://quotes.toscrape.com/tag/humor</font>。
+如果这个爬虫中你添加了 <font color=red>`tag=humor`</font>，你会意识到只会爬取 <font color=red>`humer`</font> 标签的URLs， 例如：<font color=red>`http://quotes.toscrape.com/tag/humor`</font>。
