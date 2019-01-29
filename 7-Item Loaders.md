@@ -55,7 +55,7 @@ Item Loader在每个(Item)字段中都包含了一个输入处理器和一个输
 
  1. 从 <font color=red>`xpath1`</font> 提取出的数据,传递给 输入处理器 的 <font color=red>`name`</font> 字段.输入处理器的结果被收集和保存在Item Loader中(但尚未分配给该Item)｡
  2. 从 <font color=red>`xpath2`</font> 提取出来的数据,传递给(1)中使用的相同的 输入处理器 .输入处理器的结果被附加到在(1)中收集的数据(如果有的话)。
- 3. 这种情况与前面的一个例子类似，除了数据是通过 <font color=red>`css`</font> CSS选择器提取之外，(1)和(2)使用相同的输入处理器(即 <font color=red>`xpath`</font>)。得到的结果追加到(1)和(2)的结果的集合中。
+ 3. 这种情况与前面的一个例子类似，除了数据是通过 <font color=red>`css`</font> CSS选择器提取之外，(1)和(2)使用相同的输入处理器。得到的结果追加到(1)和(2)的结果的集合中。
  4. 这情况也与前面的一个例子类似，除了值被直接声明而不是通过XPath表达式或者CSS选择器提取。然而，这个值仍然会通过了输入处理器。这种情况下，因为值是不可迭代的，在通过输入处理器之前它会被转化为一个单元素的可迭代对象，因为输入处理器总是接受可迭代对象。
  5. 数据通过(1)，(2)，(3)，(4)步收集完毕后通过输出处理器给 <font color=red>`name`</font> 字段。输出处理器的结果就是给 item 的 <font color=red>`name`</font> 字段的声明的值。
 
@@ -80,14 +80,14 @@ NOTE：
 
 你需要记住另一件事，就是输入处理器返回的值在内部被收集(列表中)，然后传递给输出处理器，构建成字段。
 
-最后，但不是最重要的，为了方便起见，Scrapy内奸了一些常用的处理器。
+最后，但不是最重要的，为了方便起见，Scrapy内建了一些常用的处理器。
 
 ##声明Item Loaders(Declaring Item Loaders)##
 
 声明 Item Loaders 就像声明 Item 一样，使用类语法。例如：
 
-from scrapy.loader import ItemLoader
-from scrapy.loader.processors import TakeFirst, MapCompose, Join
+	from scrapy.loader import ItemLoader
+	from scrapy.loader.processors import TakeFirst, MapCompose, Join
 
 	class ProductLoader(ItemLoader):
 	

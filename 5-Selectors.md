@@ -91,12 +91,12 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	 u'image4_thumb.jpg',
 	 u'image5_thumb.jpg']
 
-要提取文本数据，你必须调用选择器的 <font color=red>·.extract()·</font> 方法，如下所示：
+要提取文本数据，你必须调用选择器的 <font color=red>`.extract()`</font> 方法，如下所示：
 
 	>>> response.xpath('//title/text()').extract()
 	[u'Example website']
 
-如果你想要提取第一个匹配的元素，你可以调用 <font color=red>`.first_exctarct()`</font>
+如果你想要提取第一个匹配的元素，你可以调用 <font color=red>`.extract_first()`</font>
 
 	>>> response.xpath('//div[@id="images"]/a/text()').extract_first()
 	u'Name: My image 1 '
@@ -187,7 +187,7 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	 u'My image 4',
 	 u'My image 5']
 
-这里为 <font color=red>`.re()`</font> 额外添加了一个类似于 <font color=red>`extract\_first()`</font> 的方法，叫 <font color=red>`re_first()`</font>。用这个提取第一个匹配的字符串。
+这里为 <font color=red>`.re()`</font> 额外添加了一个类似于 <font color=red>`extract_first()`</font> 的方法，叫 <font color=red>`re_first()`</font>。用这个提取第一个匹配的字符串。
 
 	>>> response.xpath('//a[contains(@href, "image")]/text()').re_first(r'Name:\s*(.*)')
 	u'My image 1'
@@ -231,7 +231,7 @@ XPath允许在XPath中引用变量，语法是 <font color=red>`$somevariable`</
 	>>> response.xpath('//div[count(a)=$cnt]/@id', cnt=5).extract_first()
 	u'images'
 
-当调用 <font color=red>`.path()`</font> 时，所有的变量都必须绑定一个值(否则你将会得到 <font color=red>`ValueError：XPath error：`</font> 异常)。这就意味着传递一样数量的参数是必要的。
+当调用 <font color=red>`.xpath()`</font> 时，所有的变量都必须绑定一个值(否则你将会得到 <font color=red>`ValueError：XPath error：`</font> 异常)。这就意味着传递一样数量的参数是必要的。
 
 <font color=red>`parsel`</font>，一个强大的Scrapy选择器的库，有更多的细节和例子演示Xpath使用变量。
 
@@ -485,7 +485,7 @@ Warning:
 
 <font color=red>`response`</font> 是 **HtmlResponse** 或者 **XmlResponse** 对象，它将会被用来选择和提取数据。
 
-<font color=red>`text`</font> 是当 <font color=red>`response`</font>不可用这种情况发生时，选择器提取的文本内容，是一个unicode字符串或者utf-8编码的文本。<font color=red>`text`</font> 和 <font color=red>`response`</font> 一起使用是一种未定义的行为。
+<font color=red>`text`</font> 是当 <font color=red>`response`</font>不可用这种情况发生时，选择器提取的文本内容，是一个unicode字符串或者utf-8编码的文本。<font color=red>`text`</font> 和 <font color=red>`response`</font> 一起使用是一种未定义的行为(同时传入会发生异常)。
 
 <font color=red>`type`</font> 定义选择器的类型，它可以是 <font color=red>`"html"`</font>，<font color=red>`"xml"`</font>，或者 <font color=red>`None`</font>（默认）。
 
@@ -526,7 +526,7 @@ Warning:
 
 `SelectorList` 是内建的 <font color=red>`list`</font> 的子类，它还有些额外的方法。
 
-<font color=green>`xpath(query)`</font>：为列表中的每个元素调用 <font color=red>`.xpath()`</font> 方法，返回所得结果组成另一个 `SelectorList`。</font color=red>`query`</font> 和 `Selector.xpath()`的参数一致。
+<font color=green>`xpath(query)`</font>：为列表中的每个元素调用 <font color=red>`.xpath()`</font> 方法，返回所得结果组成另一个 `SelectorList`。<font color=red>`query`</font> 和 `Selector.xpath()`的参数一致。
 
 <font color=green>`css(query)`</font>：为列表中的每个元素调用 <font color=red>`.css()`</font> 方法，返回所得结果组成另一个 `SelectorList`。<font color=red>`query`</font> 和 `Selector.css()`的参数一致。
 

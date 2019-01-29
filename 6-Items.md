@@ -30,7 +30,7 @@ Item通过简单的类定义语法和 `Field` 类声明。例如:
 
 需要注意的是，用来声明item的 `Field` 对象并没有被赋值为class的属性。 不过您可以通过 `Item.fields` 属性进行访问。
 
-#与Item配合(Working with Items)#
+##与Item配合(Working with Items)##
 
 接下来以 下边声明 的 <font color=red>`Product`</font> item来演示一些item的操作。您会发现API和 dict API 非常相似。
 

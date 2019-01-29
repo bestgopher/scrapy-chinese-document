@@ -47,10 +47,10 @@ Scrapy使用 `Request` 和 `Response` 对象爬取web站点。
 
 后者允许自定义cookie的<font color=red>`domain`</font> 和 <font color=red>`path`</font>属性。这仅在保存cookie给后面的请求使用时有用。
 
-当一些网站返回cookies(reponse中)，这个返回的cookies将会保存到那个域名的cookies中，后面的请求将会发送它们。这是许多常规浏览器的特定行为。然而，如果因为某些原因，你不想与已存在的cookies合并，你可以在 `Request.meta`中设置 <font color=red>`dont_merge_cookies`</font> 为 `True`来定义Scrapy。
+当一些网站返回cookies(response中)，这个返回的cookies将会保存到那个域名的cookies中，后面的请求将会发送它们。这是许多常规浏览器的特定行为。然而，如果因为某些原因，你不想与已存在的cookies合并，你可以在 `Request.meta`中设置 <font color=red>`dont_merge_cookies`</font> 为 `True`来定义Scrapy。
 
   - **encoding**(string) - 请求的编码(默认为<font color=red>`'utf-8'`</font>)。这个编码将会被用作URL的百分号编码的编码方式，也会转换请求体(body)为 <font color=red>`str`</font>(如果给定了<font color=red>`unicode`</font>)
-  - **priority**(int) - 这个请求的优先级(默认为<font color=red>`0`</font>)。这个优先级在调度器定义处理请求的顺序时被用到。Requests的优先级越高就越早被执行。允许使用复数表示相对较低的优先级。
+  - **priority**(int) - 这个请求的优先级(默认为<font color=red>`0`</font>)。这个优先级在调度器定义处理请求的顺序时被用到。Requests的优先级越高就越早被执行。允许使用负数表示相对较低的优先级。
   - **dont_filter**(boolean) - 表明请求不能被调度器过滤。当你想执行同一个请求多次，忽略去重过滤，这个参数将会被用到。小心使用它，否则你会进入爬取循环中。默认为 <font color=red>`False`</font>
   - **errback**(可调用的) - 在处理器请求时发生任何异常将会调用此函数。包括类似于HTTP404那样的错误。它接受 Twisted Failure 实例作为第一个参数。
   - **flags(list) - 发送给请求的标志，在日志记录或者类似目的时被使用。
@@ -69,7 +69,7 @@ Scrapy使用 `Request` 和 `Response` 对象爬取web站点。
   包含请求体的字符串。</br>这个属性只读。修改请求体使用 `replace()` 方法。
 
 **meta**：</br>
-  包含此请求任意元数据的字典。这个字典对于新请求时空的，通常被不同的Scrapy组件(扩展，中间件等)填充。因此这个字典中包含的数据取决于你启用的扩展。</br>当请求被 <font color=red>`copy()`</font> 和 <font color=red>`replace()`</font> 克隆的时候，这个字典是浅拷贝，在我们的spider中，可以使用 <font color=red>response.meta</font> 存取元素。
+  包含此请求任意元数据的字典。这个字典对于新请求是空的，通常被不同的Scrapy组件(扩展，中间件等)填充。因此这个字典中包含的数据取决于你启用的扩展。</br>当请求被 <font color=red>`copy()`</font> 和 <font color=red>`replace()`</font> 克隆的时候，这个字典是浅拷贝，在我们的spider中，可以使用 <font color=red>response.meta</font> 存取元素。
 
 **copy()**：</br>
   返回通过此请求复制的一个新的请求。
@@ -215,7 +215,7 @@ FormRequest类在 `Request` 的基础上扩展了解决HTML表单的功能。它
 <table>
 <tr>
 <td>
-<font color=green>class</font> scrapy.http.FormRequest(url[, formdata,callback, method='GET', headers, body, cookies, meta, encoding='utf-8', priority=0, dont_filter=False, errback, flags])
+<font color=green>class</font> scrapy.http.FormRequest(url[, formdata,callback, method, headers, body, cookies, meta, encoding='utf-8', priority=0, dont_filter=False, errback, flags])
 </td>
 </tr>
 </table>
@@ -223,12 +223,13 @@ FormRequest类在 `Request` 的基础上扩展了解决HTML表单的功能。它
 `FormRequest` 在构造函数中增加了一个新的参数。剩下的参数和 `Request` 类的一样，这里就不列出来了。
 
 **参数**：</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**formdata**(dict或者元组组成的可迭代对象) - 这是一个字典(或者一个(键,值)元组组成的可迭代对象)，包含HTML的表单的数据，这些数据将会被 url-encoded，然后生命在请求体中。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**formdata**(dict或者元组组成的可迭代对象) - 这是一个字典(或者一个(键,值)元组组成的可迭代对象)，包含HTML的表单的数据，这些数据将会被 url-encoded，然后声明在请求体中。
 
 `FormRequest` 对象支持下面除了 `Request` 的标准方法外额外的类方法：
 
 <table><tr><td>
-@classmethod</br> <font color=red>from_response</font>(response[, formname=None, formid=None, formnumber=0, formdata=None, formxpath=None, formcss=None, clickdata=None, dont_click=False, ...])
+@classmethod</br> 
+<font color=red>from_response</font>(response[, formname=None, formid=None, formnumber=0, formdata=None, formxpath=None, formcss=None, clickdata=None, dont_click=False, ...])
 </td></tr></table>
 
 
@@ -265,7 +266,7 @@ FormRequest类在 `Request` 的基础上扩展了解决HTML表单的功能。它
 	                    formdata={'name': 'John Doe', 'age': '27'},
 	                    callback=self.after_post)]
 
-##使用FormRequest.from_response()模拟用户登录(Using FormRequest.from_response() to simulate a user login)##
+##使用FormRequest.from\_response()模拟用户登录(Using FormRequest.from_response() to simulate a user login)##
 
 通常网站通过 <font color=red>`<input type='hidden'>`</font> 元素提供了预填充的表单字段，例如会话相关数据或者身份验证令牌(为了登录)。当爬取时，你想要这些数据自动预填充，只需要覆盖用户名和密码这样的字段。你可以使用 `FormRequest.from_response()` 方法完成这个任务。这里有一个示例：
 
@@ -323,9 +324,9 @@ HTTP响应码的整数。例如：<font color=red>`200`</font>、<font color=red
 响应体。记住 `Response.body` 总是字节对象(bytes object)。如果你想要unicode，使用`TextResponse.text`(仅在 `TextResponse` 和它的子类中可用)
 
 **request**：</br>
-生成相应的`Request`对象。这个属性是在Scrapy引擎中分配，然后response和request将会床底给下载中间件。特别地，这意味着：</br>
+生成相应的`Request`对象。这个属性是在Scrapy引擎中分配，然后response和request将会传递给下载中间件。特别地，这意味着：</br>
   
-  - HTTP重定向将会造成原始request(请求重定向的url)h会分配给重定向后的response(与最终重定向后的url一起)。
+  - HTTP重定向将会造成原始request(请求重定向的url)会分配给重定向后的response(与最终重定向后的url一起)。
   - `Response.request.url` 不总是等于 `Response.url`
   - 这个属性只在spider代码和爬虫中间件中可用，下载中间件中(虽然这里你有其他方式使用Request)和`response_downloaded`信号的发送者不可用。
 

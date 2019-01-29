@@ -76,7 +76,7 @@ Scrapy是用python写的。如果你对这个语言不熟悉，你需要先更�
 正如你所看到的，我们的爬虫的继承自 **scrapy.Spider**，而且定义了一些属性和方法：
 
   - `name`: 爬虫的标识。它在一个项目中必须唯一，也就是说，你不能为不同的爬虫设置相同的名字。
-  - `start_requests()`: 必须方法一个可迭代的请求对象(Requests)(可以返回请求的列表或者写一个生成器函数)，爬虫将从这些请求中开始爬取。后续的请求将从这些初始的请求中相继生成。
+  - `start_requests()`: 必须返回一个可迭代的请求对象(Requests)(可以返回请求的列表或者写一个生成器函数)，爬虫将从这些请求中开始爬取。后续的请求将从这些初始的请求中相继生成。
   - `parse()`: 一个方法，它将被调用来处理每个请求下载获取的响应。参数 *reponse* 是一个 `TextResponse` 类的实例，保存了页面的文本内容，并且有一些好用的方法来处理它。
   	
     `parse()` 方法通常用来解析响应，提取爬取的数据生成字典，也寻找新的URLs来生成新的requests (`Request`).
@@ -111,7 +111,7 @@ NOTE:如果你很好奇我们为什么还没有解析页面，请继续，我们
 
 Scrapy调度从爬虫的 <font color=red>`start_requests`</font> 方法中返回的 `scrapy.Request` 请求对象。根据每个请求对象获得的响应，它会被 `Response` 实例化，然后把响应的实例化对象作为参数调用请求对象关联的回调方法(在此示例中，为 <font color=red>`parse()`</font> 方法)。
 
-## start_requests方法的快捷方式(A shortcut to the start_requests method) ##
+## start\_requests方法的快捷方式(A shortcut to the start_requests method) ##
 
 你可以定义一个 `start_urls` 的类属性来绑定一个URLs的列表，来代替实现 `start_requests()` 方法通过URLs来生成 `scrapy.Request` 对象。这个列表接下会在默认实现的 `start_requests()` 方法中被使用，为你的爬虫创建初始的请求。
 
@@ -339,7 +339,7 @@ XPath表达式是非常强大的，是Scrapy选择的基础。事实上，CSS选
 
 JOSN Lines 格式很有用的，因为它是流式的。你可以很简单的追加新的记录。当你执行两次命令的时候，不会出现和JSON格式一样的问题。而且每个记录都是单独的一行，你可以不用在内容中也能处理大文件，向JQ这样的工具能帮助我们在命令行操作这些事情。
 
-在小项目(如我们教程中的项目)中，文件到处就满足需求了。然而，如果你想要使用以爬取的item做更加复杂的事情，我们可以写一个 **Item Pipeline**。当项目创建的时候，**Item Pipeline** 的占位文件就已经创建好了， 就是 <font color=red>`tutorial/pipelines.py`</font>。如果你仅仅只想要存储items，你不需要使用任何 **Item Pipelines**。
+在小项目(如我们教程中的项目)中，用文件存储就能满足需求了。然而，如果你想要使用以爬取的item做更加复杂的事情，我们可以写一个 **Item Pipeline**。当项目创建的时候，**Item Pipeline** 的占位文件就已经创建好了， 就是 <font color=red>`tutorial/pipelines.py`</font>。如果你仅仅只想要存储items，你不需要使用任何 **Item Pipelines**。
 
 ## 获取链接(Following links) ##
 
@@ -428,7 +428,7 @@ yield 一个新的请求到下一页，把自己注册为下一页处理数据�
 	            yield response.follow(next_page, callback=self.parse)
 
 
-与 <font color=red>`scrapy.Request`</font> 不同， <font color=red>`reponse.follow`</font> 直接支持相对url-不需要调用 <font color=red>`response.urljoin()`</font>。记住：<font color=red>`reponse.follow`</font> 仅仅是放回一个 **Request** 示例，我们仍然需要 *yield* 这个 **Request**。
+与 <font color=red>`scrapy.Request`</font> 不同， <font color=red>`reponse.follow`</font> 直接支持相对url-不需要调用 <font color=red>`response.urljoin()`</font>。记住：<font color=red>`reponse.follow`</font> 仅仅是返回一个 **Request** 示例，我们仍然需要 *yield* 这个 **Request**。
 
 你可以给 <font color=red>`reponse.follow`</font> 传递一个Selector对象，而不是一个字符串。这个 Selector 应该能提取有必要的属性：
 

@@ -73,9 +73,9 @@ JSON 是一个简单而有弹性的格式, 但对大量数据的扩展性不是�
 
 下面用一些例子来说明:
 
-  - 存储在FTP，每个spider一个目录:
+  - 存储在FTP，每个spider一个目录:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color=red>`ftp://user:password@ftp.example.com/scraping/feeds/%(name)s/%(time)s.json`</font>
-  - 存储在S3，每一个spider一个目录：
+  - 存储在S3，每一个spider一个目录：</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color=red>`s3://mybucket/scraping/feeds/%(name)s/%(time)s.json`</font>
 
 #存储端(Storage backends)#
@@ -110,8 +110,8 @@ JSON 是一个简单而有弹性的格式, 但对大量数据的扩展性不是�
 
 您可以通过在URI中传递user/pass来完成AWS认证，或者也可以通过下列的设置来完成:</br>
 
-  - AWS_ACCESS_KEY_ID
-  - AWS_SECRET_ACCESS_KEY
+  - AWS\_ACCESS\_KEY_ID
+  - AWS\_SECRET\_ACCESS_KEY
 
 ##标准输出(Standard output)##
 
@@ -167,7 +167,7 @@ Default: <font color=red>`None`</font></br>
 
 Default: <font color=red>`0`</font>
 
-用于在输出的每个层级的缩进的空格数目。if<font color=red>`FEED\_EXPORT\_INDENT`</font>是一个非负整数，数组的元素和对象的成员将会使用这个缩进层次打印得非常美观。缩进为 <font color=red>`0`</font> 的话(默认)，或者为复数的话，每个item将会从新的一行开始打印。<font color=red>`None`</font>选择最紧凑简洁的表现形式。
+用于在输出的每个层级的缩进的空格数目。如果<font color=red>`FEED_EXPORT_INDENT`</font>是一个非负整数，数组的元素和对象的成员将会使用这个缩进层次打印得非常美观。缩进为 <font color=red>`0`</font> 的话(默认)，或者为复数的话，每个item将会从新的一行开始打印。<font color=red>`None`</font>选择最紧凑简洁的表现形式。
 
 目前只有在 `JsonItemExporter` 和 `XmlItemExporter` 即格式为 <font color=red>`.json`</font> 和 <font color=red>`.xml`</font>中使用。
 

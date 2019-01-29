@@ -45,6 +45,7 @@ URL列表。当没有制定特定的URL时，spider将从该列表中开始进�
 一个settings的字典，运行spider时将会覆盖项目的配置。这个必须定义为类属性，因为settings在spider初始化之前更新。
 
 **crawler**
+
 这个属性是在 `from_crawler()` 类方法中，实例化spider后设置的，链接spider绑定的 `Crawler` 对象。
 
 Crawler封装了许多项目中的组件(扩展，中间件，信号管理等)。
@@ -77,7 +78,7 @@ Scrapy使用这个类方法创建spider实例。
 
 默认实现为`start_urls`中的url生成 <font color=red>`Request(url, dont_filter=True)`</font> 对象。
 
-如果你想改变开始怕讯的Requests，重写这个方法。例如，如果你需要一个POST请求登录，你可以这样：
+如果你想改变开始爬取的Requests，重写这个方法。例如，如果你需要一个POST请求登录，你可以这样：
 
 	class MySpider(scrapy.Spider):
 	    name = 'myspider'
@@ -96,7 +97,7 @@ Scrapy使用这个类方法创建spider实例。
 
 当response没有指定回调函数时，该方法是Scrapy处理下载的response的默认方法。
 
-<font color=red>`parse`</font> 负责处理response并返回处理的数据以及(/或)跟进的URL。 `Spider` 对其他的Request的回调函数也有相同的要求。
+<font color=red>`parse`</font> 负责处理response并返回处理的数据以及(或)跟进的URL。 `Spider` 对其他的Request的回调函数也有相同的要求。
 
 该方法及其他的Request回调函数必须返回一个包含 Request 及(或) 字典或Item 的可迭代的对象。
 
@@ -200,7 +201,7 @@ spider在 `__init__` 方法中接受这些参数：
 	    def start_requests(self):
 	        yield scrapy.Request('http://www.example.com/categories/%s' % self.category)
 
-记住spider参数只能为字符串。spider本身不会进行任何解析。如果你在命令行设置了 `start_urls` 属性，你必须使用例如 ast.literal_eval 或者 json.loads 解析它为列表，然后设置它为一个属性。否则，你将造成对start_urls字符串进行迭代的问题(一个很常见的python陷阱)，得到的每一个字符串都被视为一个单独的url。
+记住spider参数只能为字符串。spider本身不会进行任何解析。如果你在命令行设置了 `start_urls` 属性，你必须使用例如 ast.literal\_eval 或者 json.loads 解析它为列表，然后设置它为一个属性。否则，你将造成对start_urls字符串进行迭代的问题(一个很常见的python陷阱)，得到的每一个字符串都被视为一个单独的url。
 
 一个有效的使用情况是通过`HttpAuthMiddleware`设置http认证，或者通过`UserAgentMiddleware` 使用User-Agent。
 
@@ -240,7 +241,7 @@ Scrapy附带了一些有用的通用spiders，你的spider可以继承他们。�
 
 **parse\_start_url(response)**
 
-当start_url的请求返回时，该方法被调用。 该方法分析最初的返回值并必须返回一个 Item 对象或者 一个 Request 对象或 一个包含二者的可迭代对象。
+当start_urls的请求返回时，该方法被调用。 该方法分析最初的返回值并必须返回一个 Item 对象或者 一个 Request 对象或 一个包含二者的可迭代对象。
 
 ###Crawling rules###
 

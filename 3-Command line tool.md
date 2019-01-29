@@ -30,7 +30,7 @@ Scrapy能够识别以下环境变量来设置：
 
 深入钻研命令行工具和它的子命令之前，我们先了解Scrapy项目的目录结构。
 
-虽然可能别修改，但是所有的Scrapy项目默认有着相同的目录结构，类似于：
+虽然可能被修改，但是所有的Scrapy项目默认有着相同的目录结构，类似于：
 
 	scrapy.cfg
 	myproject/
@@ -153,6 +153,7 @@ Scrapy能够识别以下环境变量来设置：
 在当前目录中创建一个新的爬虫，如果它在项目内被调用则会在当前项目的 <font color=red>`spiders`</font> 目录下创建爬虫。<font color=red>`name`</font> 参数是设置爬虫的名字，<font color=red>`domain`</font> 参数被用于生成爬虫的 <font color=red>`allowed_domains`</font> 和 <font color=red>`start_urls`</font>属性。
 
 举例：
+
 	$ scrapy genspider -l
 	Available templates:
 	  basic
