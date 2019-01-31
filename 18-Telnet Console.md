@@ -109,3 +109,15 @@ telnet终端使用的端口范围。如果设为 <font color=red>`None`</font> �
 默认：<font color=red>`'127.0.0.1'`</font>
 
 telnet终端监听的接口(interface)。
+
+<font color=green>TELNETCONSOLE_USERNAME</font>
+
+默认：<font color=red>`'scrapy'`</font>
+
+telnet终端的用户名
+
+<font color=green>TELNETCONSOLE_PASSWORD</font>
+
+默认：<font color=red>`None`</font>
+
+telnet终端的密码，默认自动生成密码。

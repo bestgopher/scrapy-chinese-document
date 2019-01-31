@@ -644,7 +644,7 @@ Twisted Reator 线程池线程数的最大数目。这是被Scrapy各种组件�
 
 定义request允许重定向的最大次数。超过该限制后该request直接返回获取到的结果。 对某些任务我们使用Firefox默认值。
 
-##REDIRECT_PRIORITY_ADJUST##
+##REDIRECT\_PRIORITY\_ADJUST##
 
 默认：<font color=red>`+2`</font>
 

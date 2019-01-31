@@ -198,7 +198,7 @@ dump到XML文件：
 
 使用XPath选择器来分析大数据源可能会有问题。选择器需要在内存中对数据建立完整的 DOM树，这过程速度很慢且消耗大量内存。
 
-为了避免一次性读取整个数据源，您可以使用 <font color=red>`scrapy.utils.iterators`</font> 中的 <font color=red>`xmliter`</font> 及 <font color=red>`csviter`</font> 方法。 实际上，这也是feed spider(参考 Spiders)中的处理方法。\
+为了避免一次性读取整个数据源，您可以使用 <font color=red>`scrapy.utils.iterators`</font> 中的 <font color=red>`xmliter`</font> 及 <font color=red>`csviter`</font> 方法。 实际上，这也是feed spider(参考 Spiders)中的处理方法。
 </br>
 
 ##Scrapy自动管理cookies么？(Does Scrapy manage cookies automatically?)##

@@ -46,10 +46,10 @@
 **参数**：
 
   - **to** (list) – email接收者
-  - **subject** (str) – email内容
+  - **subject** (str) – email主题
   - **cc**(list) – 抄送的人
   - **body** (str) – email的内容
-  - **attachs** (iterable) – 可迭代的元组 (attach_name, mimetype,  file_object)。 attach_name 是一个在email的附件中显示的名字的字符串， mimetype 是附件的mime类型， file_object 是包含附件内容的可读的文件对象。
+  - **attachs** (iterable) – 附件。可迭代的元组 <font color=red>`(attach_name, mimetype,  file_object)`</font>。 </font color=red>`attach_name`</font> 是一个在email的附件中显示的名字的字符串， <font color=red>`mimetype`</font> 是附件的mime类型， <font color=red>`file_object`</font> 是包含附件内容的可读的文件对象。
   - **mimetype** (str) – email的mime类型
   - **charset** (str) - 邮件文本使用的字符编码格式
 
