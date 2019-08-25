@@ -1,4 +1,4 @@
-#Item Loaders#
+# Item Loaders #
 
 Item Loaders 提供了一个便捷的机制装载抓取的 Items。 虽然Items可以从它自己的类似字典（dictionary-like）的API得到所需信息 ,不过 Item Loaders提供了许多更加方便的API，这些API通过自动完成那些具有共通性的任务，可从抓取进程中得到这些信息, 比如预先解析提取到的原生数据。
 
@@ -6,7 +6,7 @@ Item Loaders 提供了一个便捷的机制装载抓取的 Items。 虽然Items�
 
 Item Loaders 被设计用来提供一个既弹性又高效简便的构件， 以扩展或重写爬虫或源格式(HTML, XML之类的)等区域的解析规则， 这将不再是后期维护的噩梦。
 
-#用Item Loaders装载Items(Using Item Loaders to populate items)#
+# 用Item Loaders装载Items(Using Item Loaders to populate items) #
 
 要使用Item Loader, 你必须先将它实例化. 你可以使用类似字典的对象(例如: Item or dict)来进行实例化, 或者不使用对象也可以, 当不用对象进行实例化的时候,Item会自动使用 `ItemLoader.default_item_class` 属性中指定的Item 类在Item Loader constructor中实例化。
 
@@ -38,7 +38,7 @@ Item Loaders 被设计用来提供一个既弹性又高效简便的构件， 以
 
 最终, 当所有数据被收集起来之后, 调用 `ItemLoader.load_item()` 方法, 实际上填充并且返回了之前通过调用 `add_xpath()`, `add_css()`, `and add_value()` 所提取和收集到的数据的 Item。
 
-#Input and Output processors#
+# Input and Output processors #
 
 Item Loader在每个(Item)字段中都包含了一个输入处理器和一个输出处理器｡ 输入处理器收到数据时立刻提取数据 (通过 `add_xpath()`, `add_css()` 或者 `add_value()` 方法) 之后输入处理器的结果被收集起来并且保存在ItemLoader内. 收集到所有的数据后, 调用 `ItemLoader.load_item()` 方法来填充,并得到填充后的 Item 对象. 这时当输出处理器被和之前收集到的数据(和用输入处理器处理的)被调。输出处理器的结果是被分配到Item的最终值｡
 
@@ -82,7 +82,7 @@ NOTE：
 
 最后，但不是最重要的，为了方便起见，Scrapy内建了一些常用的处理器。
 
-##声明Item Loaders(Declaring Item Loaders)##
+## 声明Item Loaders(Declaring Item Loaders) ##
 
 声明 Item Loaders 就像声明 Item 一样，使用类语法。例如：
 
@@ -102,7 +102,7 @@ NOTE：
 
 正如你看见的一样，输入处理器使用 <font color=red>`_in`</font> 后缀声明，输出处理器使用 <font color=red>`_out`</font> 后缀声明。你也可以声明默认的输入/输出处理器，通过使用`ItemLoader.default_input_processor` 和 `ItemLoader.default_output_processor` 属性。
 
-##声明输入和输出处理器(Declaring Input and Output Processors)##
+## 声明输入和输出处理器(Declaring Input and Output Processors) ##
 
 如上一节所示，输入和输出处理器可以在Item Loader的定义域中声明，这是一种非常常见声明处理器的方式。然而，还有一个地方你可以指定输入和输入处理器：在Item Field元数据(metadata)中。例如：
 
@@ -139,7 +139,7 @@ NOTE：
   2. 字段元数据(<font color=red>`input_processor`</font> 和 <font color=red>`output_processor`</font> 键)。
   3. Item Loader默认的处理器：`ItemLoader.default_input_processor`()和`ItemLoader.default_output_processor()`(最低优先级)。
 
-##Item Loader上下文##
+## Item Loader上下文 ##
 
 Item Loader的上下文是一个任意的键值对的字典，在Item Loader的任意输入和输出处理器中共享。它在Item Loader的声明，实例化和使用的时候传递。他们被用来改变输入和输出处理器的行为。
 
@@ -168,7 +168,7 @@ Item Loader的上下文是一个任意的键值对的字典，在Item Loader的�
 	class ProductLoader(ItemLoader):
     	length_out = MapCompose(parse_length, unit='cm')
 
-##ItemLoader对象(ItemLoader objects)##
+## ItemLoader对象(ItemLoader objects) ##
 
 <table>
 <tr>
@@ -345,7 +345,7 @@ item，selector，response和其余的关键字参数分配到Item Loader上下�
 &nbsp;&nbsp;&nbsp;提取数据的`Selector`对象。它是构造Item Loader给定的selector参数，如果只给定了response参数的话，它是`default_selector_class`通过response得到的selector。
 这个属性应该是只读的(别修改)。
 
-##内嵌Loader(Nested Loaders)##
+## 内嵌Loader(Nested Loaders) ##
 
 当从一批文档中提取相关值的时候，可以创建一个内嵌Loader。想象以下你从网页的footer中提取数据的时候，就像下面的情况一样:
 
@@ -379,7 +379,7 @@ item，selector，response和其余的关键字参数分配到Item Loader上下�
 
 你可以随意创建内嵌Loader，通过它使用XPath或者CSS选择器工作。作为一般的准则，使用内嵌的Loader是为了让你的代码更加简单，但是不能再这个上面走极端，或者让你的解析语句变得很难去阅读。
 
-#重用和扩展Item Loaders(Reusing and extending Item Loader)#
+# 重用和扩展Item Loaders(Reusing and extending Item Loader) #
 
 当你的项目变得越来越大，爬虫也越来越多，维护变成一个基本的问题，特别是你不得不为每个爬虫处理许多不同的解析规则，有许多异常，但是也想要重用常用的处理器。
 
@@ -413,7 +413,7 @@ Item Loader被设计减轻解析规则的维护负担，同时不失去灵活性
 
 还有一些其他的方式扩展、继承和重写你的Item Loaders,不同种类的Item Loader适合不同的项目。Scrapy只提供了这样的机制；它不是必须强加的Loader的特定部分-它视你和你的项目而定。
 
-##可用的内建处理器(Available built-in processors)##
+## 可用的内建处理器(Available built-in processors) ##
 
 即便你可以使用任何可调用的函数最为输入和输出处理器，Scrapy还是提供了一些常用的处理器，如下描述所示。他们中，像`MapCompose`(通常作为输入处理器)把几个函数组合起来，按顺序执行这些函数，产生最终解析的值。
 

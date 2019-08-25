@@ -1,4 +1,4 @@
-#选择器(Selectors)#
+# 选择器(Selectors) #
 
 当你爬取网页时，你需要指定的最常见的任务是从HTML源码中提取数据。有几个能实现此功能的库。
 
@@ -13,9 +13,9 @@ Scrapy选择器(selectors)是在lxml库上建立的，这意味着它们在解�
 
 这章将解释这些选择器怎样使用，描述那些小而简单的API，不像lxml的API那样大，因为lxm库除了选择文档标签之外还能被用来其他工作。
 
-#使用选择器(Using selectors)#
+# 使用选择器(Using selectors) #
 
-##构造选择器(Constructing selectors)##
+## 构造选择器(Constructing selectors) ##
 
 Scrapy选择器是用 **text** 或者 **TextResponse** 对象构建的 <font color=red>`Selector`</font> 类的实例。它会根据输入的格式自动选择最好的解析规则(XML vs HTML)。
 
@@ -39,7 +39,7 @@ Scrapy选择器是用 **text** 或者 **TextResponse** 对象构建的 <font col
 	>>> response.selector.xpath('//span/text()').extract()
 	[u'good']
 
-##使用选择器(Using selectors)##
+## 使用选择器(Using selectors) ##
 
 为了解释怎么使用选择器，我们将在 Scrapy shell(提供了交互式测试) 中演示，测试的网页在Scrapy文档服务器中:
 https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
@@ -152,7 +152,7 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	 u'image4_thumb.jpg',
 	 u'image5_thumb.jpg']
 
-##嵌套选择(Nesting selectors)##
+## 嵌套选择(Nesting selectors) ##
 
 选择器方法 <font color=red>`.xpath()`</font> 和 <font color=red>`.css()`</font> 返回选择器对象的列表，因此你也可以用这些选择器对象调用选择器方法。例如：
 
@@ -174,7 +174,7 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	Link number 3 points to url [u'image4.html'] and image [u'image4_thumb.jpg']
 	Link number 4 points to url [u'image5.html'] and image [u'image5_thumb.jpg']
 
-##选择器和正则结合(Using selectors with regular expressions)##
+## 选择器和正则结合(Using selectors with regular expressions) ##
 
 **selector** 还有一个 <font color=red>`.re()`</font> 方法，通过正则表达式提取数据。然而，与 <font color=red>`.xpath()`</font> 和 <font color=red>`.css()`</font> 方法不同， <font color=red>`.re()`</font> 返回一个unicode字符串的列表。因此你不能构建嵌套式的 <font color=red>`.re()`</font> 调用。
 
@@ -192,7 +192,7 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	>>> response.xpath('//a[contains(@href, "image")]/text()').re_first(r'Name:\s*(.*)')
 	u'My image 1'
 
-##使用相对xpath(Working with relative XPahts)##
+## 使用相对xpath(Working with relative XPahts) ##
 
 记住，你调用内嵌式选择器时XPath以 <font color=red>`/`</font> 开始，Xpath将从文档的绝对路径而不是相对路径开始选择。
 
@@ -216,7 +216,7 @@ https://doc.scrapy.org/en/latest/_static/selectors-sample1.html
 	>>> for p in divs.xpath('p'):
 	...     print p.extract()
 
-##XPath表达式中的变量(Variables in XPath expressions)##
+## XPath表达式中的变量(Variables in XPath expressions) ##
 
 XPath允许在XPath中引用变量，语法是 <font color=red>`$somevariable`</font>。这就像SQL中的参数化查询或者预准备语句，你可以在使用占位符 <font color=red>`?`</font> 的地方用一些参数替换，这样就可以在查询用用这些值替换。
 
@@ -235,7 +235,7 @@ XPath允许在XPath中引用变量，语法是 <font color=red>`$somevariable`</
 
 <font color=red>`parsel`</font>，一个强大的Scrapy选择器的库，有更多的细节和例子演示Xpath使用变量。
 
-#使用EXSLT扩展(Using EXSLT extensions)#
+# 使用EXSLT扩展(Using EXSLT extensions) #
 
 因为Scrapy selectors是建立在lxml之上的，因此也支持一些EXSLT扩展，可以在XPath表达式中使用这些预先制定的命名空间：
 
@@ -257,7 +257,7 @@ XPath允许在XPath中引用变量，语法是 <font color=red>`$somevariable`</
 </tr>
 </table>
 
-##正则表达式(Regular expressions)##
+## 正则表达式(Regular expressions) ##
 
 当 <font color=red>`starts-with()`</font> 或者 <font color=red>`contains()`</font> 不能满足要求时，<font color=red>`test()`</font> 函数能够提供很大的作用。
 
@@ -287,7 +287,7 @@ Warning:
 </br>C语言库 libxslt 不原生支持EXSLT正则表达式，因此 lxml 在实现时使用了Python re 模块的钩子。 因此，在XPath表达式中使用regexp函数可能会牺牲少量的性能。
 </font>
 
-##集合操作(Set operations)##
+## 集合操作(Set operations) ##
 
 集合操作可以方便地用于在提取文字元素前从文档树中去除一些部分。
 
@@ -377,11 +377,11 @@ Warning:
 
 在这里，我们首先在 itemscope 元素上迭代，对于其中的每一个元素，我们寻找所有的 itemprops 元素，并排除那些本身在另一个 itemscope 内的元素。
 
-#一些XPath小技巧(some XPath tips)#
+# 一些XPath小技巧(some XPath tips) #
 
 根据这篇文章(https://blog.scrapinghub.com/2014/07/17/xpath-tips-from-the-web-scraping-trenches)，在通过Scrapy选择器使用XPath时有一些很好用的小技巧。如果你对XPath不是很熟悉，你可以先看看XPath教程。
 
-##在条件中使用文本节点(Using text nodes in a condition)##
+## 在条件中使用文本节点(Using text nodes in a condition) ##
 
 当你需要通过Xpath字符串函数提取文本内容时，避免使用 <font color=red>`.//text()`</font>，而是使用 <font color=red>`.`</font> 代替。
 
@@ -416,7 +416,7 @@ Warning:
 	>>> sel.xpath("//a[contains(., 'Next Page')]").extract()
 	[u'<a href="#">Click here to go to the <strong>Next Page</strong></a>']
 
-##警惕 //node[1] 和 (//node)[1] 的区别##
+## 警惕 //node[1] 和 (//node)[1] 的区别 ##
 
 <font color=red>`//node[1]`</font> 提取的是每个父节点下的第一个节点。
 
@@ -452,7 +452,7 @@ Warning:
 	>>> xp("(//ul/li)[1]")
 	[u'<li>1</li>']
 
-##当通过class属性提取元素，考虑使用CSS##
+## 当通过class属性提取元素，考虑使用CSS ##
 
 因为一个元素能有多个class属性，因此使用XPath通过class属性提取元素就显得冗长：
 
@@ -469,9 +469,9 @@ Warning:
 
 这样比上面显示的使用冗长的XPath更加清晰。只需要记住在后面的XPath表达式中使用 <font color=red>**.**</font>。
 
-#内建选择器参考#
+# 内建选择器参考 #
 
-##Selector类##
+## Selector类 ##
 
 <table>
 <tr>
@@ -513,7 +513,7 @@ Warning:
 
 <font color=green>`__nonzero__()`</font>：如果选择了任意的真实文档，将返回 <font color=red>`True`</font> ，否则返回 <font color=red>`False`</font> 。 也就是说， **Selector** 的布尔值是通过它选择的内容确定的。
 
-##SelectorList 对象##
+## SelectorList 对象 ##
 
 
 <table>
@@ -534,7 +534,7 @@ Warning:
 
 <font color=green>`re()`</font>：为列表中的每个元素调用 <font color=red>`.re()`</font> 方法，返回unicode字符串组成的列表。
 
-##通过HTML响应演示Selector##
+## 通过HTML响应演示Selector ##
 
 这有两三个例子来阐明几个概念。在所有的示例中，我们假设有一个已经通过 `HtmlResponse` 实例化的 `Selector` 对象，就像：
 	
@@ -554,7 +554,7 @@ Warning:
 	for node in sel.xpath("//p"):
 	    print node.xpath("@class").extract() 
 
-##通过XML响应演示Selector##
+## 通过XML响应演示Selector ##
 
 这有两三个例子来阐明几个概念。在所有的示例中，我们假设有一个已经通过 `XmlResponse` 实例化的 `Selector` 对象，就像：
 
@@ -570,7 +570,7 @@ Warning:
 	sel.register_namespace("g", "http://base.google.com/ns/1.0")
 	sel.xpath("//g:price").extract()
 
-##移除命名空间##
+## 移除命名空间 ##
 
 在处理爬虫项目时，完全去掉命名空间而仅仅处理元素名字，写更多简单/实用的XPath会方便很多。你可以为此使用 Selector.remove_namespaces() 方法。
 

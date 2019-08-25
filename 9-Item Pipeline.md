@@ -1,4 +1,4 @@
-#Item Pipeline#
+# Item Pipeline #
 
 当Item在Spider中被收集之后，它将会被传递到Item Pipeline，一些组件会按照一定的顺序执行对Item的处理。
 
@@ -11,7 +11,7 @@
   - 查重(并丢弃)
   - 将爬取结果保存到数据库中
 
-#编写你自己的item pipeline(Writing your own item)#
+# 编写你自己的item pipeline(Writing your own item) #
 
 每个item pipiline组件是一个独立的Python类，同时必须实现以下方法:
 
@@ -66,9 +66,9 @@
 参数:</br>
 &nbsp;&nbsp;**crawler**(`Crawler`对象) - 使用这个pipeline的crawler。
 
-#Item pipeline样例(Item pipeline example)#
+# Item pipeline样例(Item pipeline example) #
 
-##验证价格，同时丢弃没有价格的item(Price validation and dropping items with no prices)##
+## 验证价格，同时丢弃没有价格的item(Price validation and dropping items with no prices) ##
 
 让我们来看一下以下这个假设的pipeline，它为那些不含税(<font color=red>`price_excludes_vat`</font> 属性)的item调整了 <font color=red>`price`</font> 属性，同时丢弃了那些没有价格的item:
 
@@ -86,7 +86,7 @@
 	        else:
 	            raise DropItem("Missing price in %s" % item)
 
-##将item写入JSON文件(Write items to a JSON file)##
+## 将item写入JSON文件(Write items to a JSON file) ##
 
 以下pipeline将所有(从所有spider中)爬取到的item，存储到一个独立地 items.jl 文件，每行包含一个序列化为JSON格式的item:
 
@@ -110,7 +110,7 @@ NOTE：</br>
 JsonWriterPipeline的目的只是为了介绍怎样编写item pipeline，如果你想要将所有爬取的item都保存到同一个JSON文件， 你需要使用 Feed exports 。
 </font>
 
-##截屏item(Take screenshot of item)##
+## 截屏item(Take screenshot of item) ##
 
 这个例子演示了怎么从`process_item()`方法中返回Deferred。它使用的是Splash渲染item中url的截取画面。pipeline向本地运行的Splash实例发送请求。然后请求被下载，Deffered回调fires，它保存item到一个文件中，向item添加文件名。
 
@@ -149,7 +149,7 @@ JsonWriterPipeline的目的只是为了介绍怎样编写item pipeline，如果�
 	        item["screenshot_filename"] = filename
 	        return item
 
-##去重(Duplicates filter)##
+## 去重(Duplicates filter) ##
 
 一个用于去重的过滤器，丢弃那些已经被处理过的item。让我们假设我们的item有一个唯一的id，但是我们spider返回的多个item中包含有相同的id：
 
@@ -167,7 +167,7 @@ JsonWriterPipeline的目的只是为了介绍怎样编写item pipeline，如果�
 	            self.ids_seen.add(item['id'])
             return item
 
-##启用一个Item Pipeline组件(Activating an Item Pipeline component)##
+## 启用一个Item Pipeline组件(Activating an Item Pipeline component) ##
 
 为了启用一个Item Pipeline组件，你必须将它的类添加到 ITEM_PIPELINES 配置，就像下面这个例子:
 

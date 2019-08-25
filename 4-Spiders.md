@@ -1,4 +1,4 @@
-#Spiders#
+# Spiders #
 
 Spider类定义了如何爬取某个(或某些)网站。包括了爬取的动作(例如:是否跟进链接)以及如何从网页的内容中提取结构化数据(爬取item)。 换句话说，Spider就是您定义爬取的动作及分析某个网页(或者是有些网页)的地方。
 
@@ -11,7 +11,7 @@ Spider类定义了如何爬取某个(或某些)网站。包括了爬取的动作
 
 虽然该循环对任何类型的spider都(多少)适用，但Scrapy仍然为了不同的需求提供了多种默认spider。 之后将讨论这些spider。
 
-##scrapy.Spider##
+## scrapy.Spider ##
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.spiders.Spider
@@ -171,7 +171,7 @@ Scrapy使用这个类方法创建spider实例。
 	        for url in response.xpath('//a/@href').extract():
 	            yield scrapy.Request(url, callback=self.parse)
 
-##Spider参数(Spider arguments)##
+## Spider参数(Spider arguments) ##
 
 Spider可以通过接受参数来修改其功能。 spider参数一般用来定义初始URL或者指定限制爬取网站的部分。 您也可以使用其来配置spider的任何功能。
 
@@ -209,7 +209,7 @@ spider在 `__init__` 方法中接受这些参数：
 
 Spider参数也可以通过Scrapyd的 <font color=red>`schedule.json`</font> API来传递。
 
-##通用spiders(Generic Spiders)##
+## 通用spiders(Generic Spiders) ##
 
 Scrapy附带了一些有用的通用spiders，你的spider可以继承他们。他们的目的是为一个共同的爬取场景提供便利的方法，例如，跟踪一个网站中满足某一规则的所有链接，从网站导航中爬取，或者解析为XML/CSV feed。
 
@@ -223,7 +223,7 @@ Scrapy附带了一些有用的通用spiders，你的spider可以继承他们。�
 	    name = scrapy.Field()
 	    description = scrapy.Field()
 
-##CrawlSpider##
+## CrawlSpider ##
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.spiders.CrawlSpider
@@ -243,7 +243,7 @@ Scrapy附带了一些有用的通用spiders，你的spider可以继承他们。�
 
 当start_urls的请求返回时，该方法被调用。 该方法分析最初的返回值并必须返回一个 Item 对象或者 一个 Request 对象或 一个包含二者的可迭代对象。
 
-###Crawling rules###
+### Crawling rules ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.spiders.Rule(link_extractor, callback=None, cb_kwargs=None, follow=None, process_links=None, process_request=None)
@@ -267,7 +267,7 @@ Scrapy附带了一些有用的通用spiders，你的spider可以继承他们。�
 
 <font color=red>`process_request`</font> 是一个callable或string(该spider中同名的函数将会被调用)。 该规则提取到每个request时都会调用该函数。该函数必须返回一个request或者None。 (用来过滤request)
 
-###CrawlSpider样例(CrawlSpider example)###
+### CrawlSpider样例(CrawlSpider example) ###
 
 接下来给出配合rule使用CrawlSpider的例子：
 
@@ -299,7 +299,7 @@ Scrapy附带了一些有用的通用spiders，你的spider可以继承他们。�
 
 该spider将从example.com的首页开始爬取，获取category以及item的链接并对后者使用 <font color=red>`parse_item`</font> 方法。 当item获得返回(response)时，将使用XPath处理HTML并生成一些数据填入 `Item` 中。
 
-##XMLFeedSpider##
+## XMLFeedSpider ##
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.spiders.XMLFeedSpider
@@ -353,7 +353,7 @@ XMLFeedSpider被设计用于通过迭代各个节点来分析XML源(XML feed)。
 
 当spider返回结果(item或request)时该方法被调用。 设定该方法的目的是在结果返回给框架核心(framework core)之前做最后的处理， 例如设定item的ID。其接受一个结果的列表(list of results)及对应的response。 其结果必须返回一个结果的列表(list of results)(包含Item或者Request对象)。
 
-###XMLFeedSpider例子(XMLFeedSpider example)###
+### XMLFeedSpider例子(XMLFeedSpider example) ###
 
 该spider十分易用。下边是其中一个例子:
 
@@ -378,7 +378,7 @@ XMLFeedSpider被设计用于通过迭代各个节点来分析XML源(XML feed)。
 
 简单来说，我们在这里创建了一个spider，从给定的 <font color=red>`start_urls`</font> 中下载feed， 并迭代feed中每个 <font color=red>`item`</font> 标签，输出，并在 Item 中存储有些随机数据。
 
-###CSVFeedSpider###
+### CSVFeedSpider ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.spiders.CSVFeedSpider
@@ -402,7 +402,7 @@ CSV文件列名的列表。
 
 该方法接收一个response对象及一个以提供或检测出来的header为键的字典(代表每行)。 该spider中，您也可以覆盖 <font color=red>`adapt_response`</font> 及 <font color=red>`process_results`</font> 方法来进行预处理(pre-processing)及后(post-processing)处理。
 
-###CSVFeedSpider例子(CSVFeedSpider example)###
+### CSVFeedSpider例子(CSVFeedSpider example) ###
 
 下面的例子和之前的例子很像，但使用了 `CSVFeedSpider`:
 
@@ -426,7 +426,7 @@ CSV文件列名的列表。
 	        item['description'] = row['description']
 	        return item
 
-###SitemapSpider###
+### SitemapSpider ###
 
 
 <table><tr><td>
@@ -476,7 +476,7 @@ SitemapSpider使您爬取网站时可以通过 Sitemaps 来发现爬取的URL。
 
 默认 <font color=red>`sitemap_alternate_links`</font> 关闭。
 
-###SitemapSpider示例(SitemapSpider examples)###
+### SitemapSpider示例(SitemapSpider examples) ###
 
 简单的例子: 使用 <font color=red>`parse`</font> 处理通过sitemap发现的所有url:
 

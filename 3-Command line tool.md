@@ -133,7 +133,7 @@ Scrapy能够识别以下环境变量来设置：
  - `bench`
 
 
-##startproject ##
+## startproject ##
  
  - 语法：<font color=red>`scrapy startproject <project_name> [project_dir]`</font>
  - 是否需要项目：不需要
@@ -145,7 +145,7 @@ Scrapy能够识别以下环境变量来设置：
 
 	$ scrapy startproject myproject
 
-##genspider##
+## genspider ##
 
  - 语法： <font color=red>`scrapy genspider [-t template] <name> <domain>`</font>
  - 是否需要项目：不需要
@@ -181,7 +181,7 @@ Scrapy能够识别以下环境变量来设置：
 	$ scrapy crawl myspider
 	[ ... myspider starts crawling ... ]
 
-##check##
+## check ##
 
  - 语法：<font color=red>`scrapy check [-l] <spider>`</font>
  - 是否需要项目：需要
@@ -205,7 +205,7 @@ Scrapy能够识别以下环境变量来设置：
 	[FAILED] first_spider:parse
 	>>> Returned 92 requests, expected 0..4
 
-##list##
+## list ##
  - 语法：<font color=red>`scrapy list`</font>
  - 是否需要项目：需要
 
@@ -217,7 +217,7 @@ Scrapy能够识别以下环境变量来设置：
 	spider1
 	spider2
 
-##edit##
+## edit ##
  - 语法：<font color=red>`scrapy edit <spider>`</font>
  - 是否需要项目：需要
 
@@ -229,7 +229,7 @@ Scrapy能够识别以下环境变量来设置：
 
     $ scrapy edit spider1
 
-##fetch##
+## fetch ##
 
  - 语法：<font color=red>`scrapy fetch <url>`</font>
  - 是否需要项目：不需要
@@ -265,7 +265,7 @@ Scrapy能够识别以下环境变量来设置：
 	 'Server': ['Apache/2.2.3 (CentOS)']}
 
 
-##view##
+## view ##
 
  - 语法：<font color=red>`scrapy view <url>`</font>
  - 是否需要项目：不需要
@@ -283,7 +283,7 @@ Scrapy能够识别以下环境变量来设置：
 	[ ... browser starts ... ]
 
 
-##shell##
+## shell ##
 
  - 语法：<font color=red>`scrapy shell [url]`</font>
  - 是否需要项目：不需要
@@ -313,7 +313,7 @@ Scrapy能够识别以下环境变量来设置：
 	$ scrapy shell --no-redirect --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c '(response.status, response.url)'
 	(302, 'http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F')
 
-##parse##
+## parse ##
 
  - 语法：<font color=red>`scrapy parse <url> [option]`</font>
  - 是否需要项目：需要
@@ -349,7 +349,7 @@ Scrapy能够识别以下环境变量来设置：
 	[]
 
 
-##settings##
+## settings ##
 
  - 语法：<font color=red>`scrapy settings [options]`</font>
  - 是否需要项目：不需要
@@ -365,7 +365,7 @@ Scrapy能够识别以下环境变量来设置：
 	$ scrapy settings --get DOWNLOAD_DELAY
 	0
 
-##runspider##
+## runspider ##
 
  - 语法：<font color=red>`scrapy runspider <spider_file.py>`</font>
  - 是否需要项目：不需要
@@ -377,14 +377,14 @@ Scrapy能够识别以下环境变量来设置：
 	$ scrapy runspider myspider.py
 	[ ... spider starts crawling ... ]
 
-##version##
+## version ##
 
  - 语法：<font color=red>`scrapt version [-v]`</font>
  - 是否需要项目：不需要
 
 打印Scrapy的版本。使用 <font color=red>`-v`</font> 选项，也会打印Python、Twisted和Platform信息。在bug报告中非常有用。
 
-##bench##
+## bench ##
 
 版本0.17中新加
 
@@ -393,11 +393,11 @@ Scrapy能够识别以下环境变量来设置：
 
 运行快速基准测试。Benchmarking.
 
-##自定义项目命令(Custom project commands)##
+## 自定义项目命令(Custom project commands) ##
 
 你也可以通过使用 <font color=red>`COMMANDS_MODULE`</font> 设置添加自定义项目命令。
 
-##COMMANDS_MODULE##
+## COMMANDS_MODULE ##
 
 默认：<font color=red>`''`</font> 空字符串
 
@@ -407,7 +407,7 @@ Scrapy能够识别以下环境变量来设置：
 	
 	COMMANDS_MODULE = 'mybot.commands'
 
-##通过setup.py入口点注册命令(Register commands via setup.py entry points)##
+## 通过setup.py入口点注册命令(Register commands via setup.py entry points) ##
 
 
 <font color=#0099ff>

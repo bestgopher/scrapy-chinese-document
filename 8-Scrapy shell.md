@@ -1,4 +1,4 @@
-#Scrapy终端(Scrapy shell)#
+# Scrapy终端(Scrapy shell) #
 
 Scrapy终端是一个交互终端，供您在未启动spider的情况下尝试及调试您的爬取代码。 其本意是用来测试提取数据的代码，不过您可以将其作为正常的Python终端，在上面测试任何的Python代码。
 
@@ -6,7 +6,7 @@ Scrapy终端是一个交互终端，供您在未启动spider的情况下尝试�
 
 一旦熟悉了Scrapy终端后，您会发现其在开发和调试spider时发挥的巨大作用。
 
-##配置终端(Configuring the shell)##
+## 配置终端(Configuring the shell) ##
 
 如果你安装了Ipython，Scrapy终端将会使用它(而不是标准python控制台)。Ipython控制台更加强大，在标准控制台的基础上提供了灵巧的自动补全和彩色输出。
 
@@ -19,7 +19,7 @@ Scrapy也支持bpython，Ipython不能用时就会使用它。
 	[settings]
 	shell = bpython
 
-##开启终端(Launch the shell)##
+## 开启终端(Launch the shell) ##
 
 开启Scrapy终端，你可以使用 `shell` 命令，就像这样：
 
@@ -51,17 +51,17 @@ NOTE:</br>当使用相对路径的时候，明确在前面添加 <font color=red
 `shell` 不会事先查看本地目录中是否存在叫 <font color=red>`index.html`</font> 的文件。在此提醒，明确本地路径。
 </font>
 
-#使用终端(Using the shell)#
+# 使用终端(Using the shell) #
 
 Scrapy终端仅仅是一个普通的Python终端(或 IPython )。其提供了一些额外的快捷方式。
 
-##可用的快捷方式(Available Shortcuts)##
+## 可用的快捷方式(Available Shortcuts) ##
   - <font color=red>`shelp()`</font> - 打印可用对象及快捷命令的帮助列表
   - <font color=red>`fetch(url[, redirect=True])`</font> -  根据给定的请求(request)或URL获取一个新的response，并更新相关的对象。你可以定义 <font color=red>`redirect=False`</font> 来关闭请求重定向。
   - <font color=red>`fetch(request)`</font> - 从给定的request对象中获取新的response，并更新相关的对象。
   - <font color=red>`view(response)`</font> - 在本机的浏览器打开给定的response。 其会在response的body中添加一个 <base> tag ，使得外部链接(例如图片及css)能正确显示。 注意，该操作会在本地创建一个临时文件，且该文件不会被自动删除。
 
-##可用的Scrapy对象(Available Scrapy objects)##
+## 可用的Scrapy对象(Available Scrapy objects) ##
 
 Scrapy终端根据下载的页面会自动创建一些方便使用的对象，例如 Response 对象及 Selector 对象(对HTML及XML内容)。
 
@@ -73,7 +73,7 @@ Scrapy终端根据下载的页面会自动创建一些方便使用的对象，�
   - <font color=red>`response`</font> - 包含最近获取到的页面的 Response 对象。
   - <font color=red>`settings`</font> - 当前的 Scrapy settings
 
-##终端会话例子(Example of shell session)##
+## 终端会话例子(Example of shell session) ##
 
 下面给出一个典型的终端会话的例子。 在该例子中，我们首先爬取了 http://scarpy.org 的页面，而后接着爬取 http://slashdot.org 的页面。 最后，我们修改了(Slashdot)的请求，将请求设置为POST并重新获取， 得到HTTP 405(不允许的方法)错误。 之后通过Ctrl-D(Unix)或Ctrl-Z(Windows)关闭会话。
 
@@ -143,7 +143,7 @@ Scrapy终端根据下载的页面会自动创建一些方便使用的对象，�
 	 'X-Xss-Protection': ['1; mode=block']}
 	>>>
 
-##在spider中启动shell来查看response(Invoking the shell from spiders to inspect responses)##
+## 在spider中启动shell来查看response(Invoking the shell from spiders to inspect responses) ##
 
 有时您想在spider的某个位置中查看被处理的response， 以确认您期望的response到达特定位置。
 

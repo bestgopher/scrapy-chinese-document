@@ -1,4 +1,4 @@
-#Items#
+# Items #
 
 爬取的目的是从非结构化的资源中(网页)提取出结构化的数据。Scrapy能像Python字典一样返回提取的数据。虽然字典对我来说熟悉和方便，但是它缺少结构：很容易在字段名字上出错，或者返回不一致的数据，尤其是在有许多spider的大型项目中。
 
@@ -6,7 +6,7 @@
 
 Scrapy的各个组件使用Items提供的额外信息：exporters通过声明的字段以确定要导出的列，可以自定义用来序列化字段元数据的方法，`trackref` 跟踪Item实例以帮助寻找内存泄漏。
 
-##声明Items##
+## 声明Items ##
 
 Item通过简单的类定义语法和 `Field` 类声明。例如:
 
@@ -22,7 +22,7 @@ Item通过简单的类定义语法和 `Field` 类声明。例如:
 `注意：熟悉Django的人会注意到Scrapy Item的声明类似于Django Models的声明，除此之外，Scrapy Items更加简单，因为没有各种不同字段类型的概念。
 `</font>
 
-##Item 字段(Item Fields)##
+## Item 字段(Item Fields) ##
 
 **`Field`** 对象指明了每个字段的元数据(metadata)。例如下面例子中 <font color=red>`last_updated`</font> 中指明了该字段的序列化函数。
 
@@ -30,17 +30,17 @@ Item通过简单的类定义语法和 `Field` 类声明。例如:
 
 需要注意的是，用来声明item的 `Field` 对象并没有被赋值为class的属性。 不过您可以通过 `Item.fields` 属性进行访问。
 
-##与Item配合(Working with Items)##
+## 与Item配合(Working with Items) ##
 
 接下来以 下边声明 的 <font color=red>`Product`</font> item来演示一些item的操作。您会发现API和 dict API 非常相似。
 
-##创建Items(Creating items)##
+## 创建Items(Creating items) ##
 
 	>>> product = Product(name='Desktop PC', price=1000)
 	>>> print product
 	Product(name='Desktop PC', price=1000)
 
-##获取字段值(Getting field values)##
+## 获取字段值(Getting field values) ##
 
 	>>> product['name']
 	Desktop PC
@@ -78,7 +78,7 @@ Item通过简单的类定义语法和 `Field` 类声明。例如:
 	>>> 'lala' in product.fields  # is lala a declared field?
 	False
 
-##设置字段值(Setting field values)##
+## 设置字段值(Setting field values) ##
 
 	>>> product['last_updated'] = 'today'
 	>>> product['last_updated']
@@ -89,7 +89,7 @@ Item通过简单的类定义语法和 `Field` 类声明。例如:
 	    ...
 	KeyError: 'Product does not support field: lala'
 
-##获取所有获取到的值(Accessing all populated values)##
+## 获取所有获取到的值(Accessing all populated values) ##
 
 您可以使用 `dict API` 来获取所有的值：
 
@@ -99,7 +99,7 @@ Item通过简单的类定义语法和 `Field` 类声明。例如:
 	>>> product.items()
 	[('price', 1000), ('name', 'Desktop PC')]
 
-##其他常用任务(Other common tasks)##
+## 其他常用任务(Other common tasks) ##
 
 复制items
 	
@@ -126,7 +126,7 @@ Item通过简单的类定义语法和 `Field` 类声明。例如:
 	    ...
 	KeyError: 'Product does not support field: lala'
 
-##扩展Item(Extending Items)##
+## 扩展Item(Extending Items) ##
 
 您可以通过继承原始的Item来扩展item(添加更多的字段或者修改某些字段的元数据)。
 
@@ -142,8 +142,8 @@ Item通过简单的类定义语法和 `Field` 类声明。例如:
 	    name = scrapy.Field(Product.fields['name'], serializer=my_serializer)
 
 这段代码在保留所有原来的元数据值的情况下添加(或者覆盖)了 name 字段的 serializer 。
-
-#Item对象(Item object)#
+ 
+# Item对象(Item object) #
 
 <table>
 <tr>
@@ -160,7 +160,7 @@ Item复制了标准的 dict API 。包括初始化函数也相同。Item唯一�
 
 一个包含了item所有声明的字段的字典，而不仅仅是获取到的字段。该字典的key是字段(field)的名字，值是 Item 声明中使用到的 `Field` 对象。
 
-##Field对象(Field object)##
+## Field对象(Field object) ##
 
 <table>
 <tr>
