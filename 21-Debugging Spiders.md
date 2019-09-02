@@ -1,4 +1,4 @@
-#Debugging Spiders#
+# Debugging Spiders#
 
 本篇介绍了调试spider的常用技术。 考虑下面的spider：
 
@@ -30,7 +30,7 @@
 
 简单地说，该spider分析了两个包含item的页面(start_urls)。Item有详情页面， 所以我们使用 `Request` 的 <font color=red>`meta`</font> 功能来传递已经部分获取的item。
 
-##Parse命令(Parse Command)##
+## Parse命令(Parse Command)##
 
 检查spier输出的最基本方法是使用 `parse` 命令。这能让你在函数层(method level)上检查spider 各个部分的效果。其十分灵活并且易用，不过不能在代码中调试。
 
@@ -71,7 +71,7 @@
 
 	$ scrapy parse --spider=myspider -d 3 'http://example.com/page1'
 
-##Scrapy终端(Scrapy Shell)##
+## Scrapy终端(Scrapy Shell)##
 
 尽管 `parse` 命令对检查spider的效果十分有用，但除了显示收到的response及输出外， 其对检查回调函数内部的过程并没有提供什么便利。 如何调试 <font color=red>`parse_detail`</font> 没有收到item的情况呢？
 
@@ -87,7 +87,7 @@
 	    else:
 	        inspect_response(response, self)
 
-##在浏览器中打开(Open in browser)##
+## 在浏览器中打开(Open in browser)##
 
 有时候您想查看某个response在浏览器中显示的效果，这是可以使用 <font color=red>`open_in_browser`</font> 功能。下面是使用的例子:
 
@@ -99,7 +99,7 @@
 
 <font color=red>`open_in_browser`</font> 将会使用Scrapy获取到的response来打开浏览器，并且调整 base tag 使得图片及样式(style)能正常显示。
 
-##Logging##
+## Logging##
 
 记录(logging)是另一个获取到spider运行信息的方法。虽然不是那么方便， 但好处是log的内容在以后的运行中也可以看到:
 
