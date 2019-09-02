@@ -1,4 +1,4 @@
-#Logging#
+# Logging #
 
 <font color=orange>
 NOTE:</br>
@@ -11,7 +11,7 @@ Logging开箱即用，你可以在Scrapy settings中配置日志的级别。
 
 当运行命令时，Scrapy调用 `scrapy.utils.log.config_logging()` 设置一些合理的默认值，处理Logging settings中的设置，因此如果你通过脚本运行Scrapy，推荐手动调用日志。
 
-##Log levels##
+## Log levels ##
 
 Python的内建logging定义了5个不同的级别来指明给定日志信息的严重性。如下所示：
 
@@ -21,7 +21,7 @@ Python的内建logging定义了5个不同的级别来指明给定日志信息的
   4. <font color=red>`logging.INFO`</font> - 一般信息
   5. <font color=red>`logging.DEBUG`</font> - 调试信息(严重性程度最低)
 
-##怎么记录信息(How to log messages)##
+## 怎么记录信息(How to log messages) ##
 
 以下是怎么使用 <font color=red>`logging.WARNING`</font> 级别记录信息的快速示例：
 
@@ -53,7 +53,7 @@ Python的内建logging定义了5个不同的级别来指明给定日志信息的
 	logger = logging.getLogger(__name__)
 	logger.warning("This is a warning")
 
-##在Spider中添加log(Logging from Spiders)##
+## 在Spider中添加log(Logging from Spiders) ##
 
 Scrapy在每个spider实例内部提供一个 `logger`，可以这样使用它：
 
@@ -82,13 +82,13 @@ Scrapy在每个spider实例内部提供一个 `logger`，可以这样使用它�
 	    def parse(self, response):
 	        logger.info('Parse function called on %s', response.url)
 
-##(配置log)Logging configuration##
+## 配置log(Logging configuration) ##
 
 Loggers本身不会管理那些显示的消息怎么发送的。对于这个任务，不同的'处理器(handlers)'依附在logger实例中，它们将重定向这些信息到合适的目的地，例如标准输出，文件，邮箱等。
 
 默认情况下，Scrapy为root loggers配置了一个处理器，基于下面的设置。
 
-##log设置(Logging settings)##
+## log设置(Logging settings) ##
 
 这些设置用来配置logging：
 
@@ -110,7 +110,7 @@ Loggers本身不会管理那些显示的消息怎么发送的。对于这个任�
 如果 `LOG_SHORT_NAMES` 设置了，打印log时将不会显示scrapy组件。
 默认没有设置，因此log输出时包含了scrapy的组件的。
 
-##命令行选项(Command-line options）##
+## 命令行选项(Command-line options）##
 
 这里有一些适用于**所有命令**的命令行选项，你可以使用它们重写一些Scrapy关于log的设置。
  
@@ -118,7 +118,7 @@ Loggers本身不会管理那些显示的消息怎么发送的。对于这个任�
   - <font color=red>`--loglevel/-L LEVEL`</font>：重写 `LOG_LEVEL`
   - <font color=red>`--nolog`</font>：设置 `LOG_ENABLED`为<font color=red>`False`</font>
 
-##高级定制(Advanced customization)##
+## 高级定制(Advanced customization) ##
 
 因为Scrapy使用的是标准库logging模块，你可以使用所有标准库logging中所有的特性来定制scrapy的logging。
 
@@ -146,7 +146,7 @@ Loggers本身不会管理那些显示的消息怎么发送的。对于这个任�
 
 如果你再一次运行spider，从 <font color=red>`[scrapy.spidermiddlewares.httperror]`</font>logger发出的INFO消息将会被隐藏。
 
-#scrapy.utils.log module#
+# scrapy.utils.log module #
 
 <table><tr><td>
 scrapy.utils.log.configure_logging(settings=None, install_root_handler=True)

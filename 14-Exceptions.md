@@ -1,10 +1,10 @@
-#异常(Exceptions)#
+# 异常(Exceptions) #
 
-#内置异常参考手册(Built-in Exceptions reference)#
+# 内置异常参考手册(Built-in Exceptions reference) #
 
 下面是Scrapy提供的异常及其用法。
 
-##DropItem##
+## DropItem ##
 
 <table><tr><td>
 <font color=green>exception</font> scrapy.exceptions.DropItem
@@ -12,7 +12,7 @@
 
 该异常由item pipeline抛出，用于停止处理item。详细内容请参考 Item Pipeline 。
 
-##CloseSpider##
+## CloseSpider ##
 
 <table><tr><td>
 <font color=green>exception</font> scrapy.exceptions.CloseSpider(reason='cancelled')
@@ -26,7 +26,7 @@
 	    if 'Bandwidth exceeded' in response.body:
 	        raise CloseSpider('bandwidth_exceeded')
 
-##DontCloseSpider##
+## DontCloseSpider ##
 
 <table><tr><td>
 <font color=green>exception</font> scrapy.exceptions.DontCloseSpider
@@ -34,7 +34,7 @@
 
 这个异常可以在 `spider_idle` 信号处理器中抛出，阻止spider被关闭。
 
-##IgnoreRequest##
+## IgnoreRequest ##
 
 <table><tr><td>
 <font color=green>exception</font> scrapy.exceptions.IgnoreRequest
@@ -42,7 +42,7 @@
 
 该异常由调度器(Scheduler)或其他下载中间件抛出，声明忽略该request。
 
-##NotConfigured##
+## NotConfigured ##
 
 <table><tr><td>
 <font color=green>exception</font> scrapy.exceptions.NotConfigured
@@ -57,7 +57,7 @@
 
 该异常必须由组件的 <font color=red>`__init__`</font> 抛出。
 
-##NotSupported##
+## NotSupported ##
 
 <table><tr><td>
 <font color=green>exception</font>  scrapy.exceptions.NotSupported

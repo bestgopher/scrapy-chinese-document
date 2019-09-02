@@ -1,10 +1,10 @@
-#Telnet Console#
+# Telnet Console #
 
 Scrapy提供了内置的telnet终端，以供检查，控制Scrapy运行的进程。 telnet仅仅是一个运行在Scrapy进程中的普通python终端。因此您可以在其中做任何事。
 
 telnet终端是一个 自带的Scrapy扩展 。 该扩展默认为启用，不过您也可以关闭。 关于扩展的更多内容请参考 Telnet console 扩展(Telnet console Extension) 。
 
-##如何访问telnet终端(How to access the telnet console)##
+## 如何访问telnet终端(How to access the telnet console) ##
 
 telnet终端监听设置中定义的 `TELNETCONSOLE_PORT` ，默认为 <font color=red>`6023`</font> 。 访问telnet请输入:
 
@@ -13,7 +13,7 @@ telnet终端监听设置中定义的 `TELNETCONSOLE_PORT` ，默认为 <font col
 
 Windows及大多数Linux发行版都自带了所需的telnet程序。
 
-##telnet终端中可用的变量(Available variables in the telnet console)##
+## telnet终端中可用的变量(Available variables in the telnet console) ##
 
 telnet仅仅是一个运行在Scrapy进程中的普通python终端。因此您可以做任何事情，甚至是导入新终端。
 
@@ -32,11 +32,11 @@ telnet为了方便提供了一些默认定义的变量：
   - **hpy** - 	针对内存调试 (参考 调试内存溢出)
 
 
-#Telnet console 使用示例(Telnet console usage examples)#
+# Telnet console 使用示例(Telnet console usage examples) #
 
 下面是使用telnet终端的一些例子:
 
-##查看引擎状态(View engine status)##
+## 查看引擎状态(View engine status) ##
 
 在终端中您可以使用Scrapy引擎的 <font color=red>`est()`</font> 方法来快速查看状态:
 
@@ -61,7 +61,7 @@ telnet为了方便提供了一些默认定义的变量：
 	engine.scraper.slot.needs_backout()             : False
 
 
-##暂停，恢复和停止Scrapy引擎(Pause, resume and stop the Scrapy engine)##
+## 暂停，恢复和停止Scrapy引擎(Pause, resume and stop the Scrapy engine) ##
 
 暂停:
 
@@ -81,7 +81,7 @@ telnet为了方便提供了一些默认定义的变量：
 	>>> engine.stop()
 	Connection closed by foreign host.
 
-#Telnet终端信号(Telnet Console signals)#
+# Telnet终端信号(Telnet Console signals) #
 
 <table><tr><td>
 scrapy.extensions.telnet.update_telnet_vars(telnet_vars)
@@ -94,7 +94,7 @@ scrapy.extensions.telnet.update_telnet_vars(telnet_vars)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**telnet_vars**(dict)： telnet变量的字典
 
 
-##Telnet settings##
+##Telnet settings ##
 
 以下是终端的一些设定：
 

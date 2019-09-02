@@ -1,8 +1,8 @@
-#Sending e-mail#
+# Sending e-mail #
 
 虽然Python通过 smtplib 库使得发送email变得很简单，Scrapy仍然提供了自己的实现。 该功能十分易用，同时由于采用了 Twisted非阻塞式(non-blocking)IO ，其避免了对爬虫的非阻塞式IO的影响。 另外，其也提供了简单的API来发送附件。 通过一些 settings 设置，您可以很简单的进行配置。
 
-#快速示例(Quick example)#
+# 快速示例(Quick example) #
 
 有两种方法可以创建邮件发送器(mail sender)。 您可以通过标准构造器(constructor)创建:
 
@@ -18,7 +18,7 @@
 	mailer.send(to=["someone@example.com"], subject="Some subject", body="Some body", cc=["another@example.com"])
 
 
-##MailSender类参考手册(MailSender class reference)##
+## MailSender类参考手册(MailSender class reference) ##
 
 在Scrapy中发送email推荐使用MailSender。其同框架中其他的部分一样，使用了 Twisted非阻塞式(non-blocking)IO 。
 
@@ -53,11 +53,11 @@
   - **mimetype** (str) – email的mime类型
   - **charset** (str) - 邮件文本使用的字符编码格式
 
-#Mail settings#
+# Mail settings #
 
 这些设置定义了 `MailSender` 构造器的默认值。其使得在您不编写任何一行代码的情况下，为您的项目配置实现email通知的功能。
 
-##MAIL_FROM##
+## MAIL_FROM ##
 
 默认值: <font color=red>`'scrapy@localhost'`</font>
 
@@ -69,31 +69,31 @@
 
 发送email的SMTP主机
 
-##MAIL_PORT##
+## MAIL_PORT ##
 
 默认值: <font color=red>`25`</font>
 
 发用邮件的SMTP端口。
 
-##MAIL_USER##
+## MAIL_USER ##
 
 默认值: <font color=red>`None`</font>
 
 SMTP用户。如果未给定，则将不会进行SMTP认证(authentication)。
 
-##MAIL_PASS##
+## MAIL_PASS ##
 
 默认值: <font color=red>`None`</font>
 
 用于SMTP认证，与 MAIL_USER 配套的密码。
 
-##MAIL_TLS##
+## MAIL_TLS ##
 
 默认值: <font color=red>`False`</font>
 
 强制使用STARTTLS。STARTTLS能使得在已经存在的不安全连接上，通过使用SSL/TLS来实现安全连接。
 
-##MAIL_SSL##
+## MAIL_SSL ##
 
 默认值: <font color=red>`False`</font>
 

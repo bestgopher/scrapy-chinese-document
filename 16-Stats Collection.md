@@ -1,4 +1,4 @@
-#Stats Collection#
+# Stats Collection #
 
 Scrapy提供了方便的收集数据的机制。数据以key/value方式存储，值大多是计数值。 该机制叫做数据收集器(Stats Collector)，可以通过 Crawler API 的属性 `stats` 来使用。在下面的章节 常见数据收集器使用方法 将给出例子来说明。
 
@@ -8,7 +8,7 @@ Scrapy提供了方便的收集数据的机制。数据以key/value方式存储�
 
 数据收集器对每个spider保持一个状态表。当spider启动时，该表自动打开，当spider关闭时，自动关闭。
 
-##常见数据收集器使用方法(Common Stats Collector uses)##
+## 常见数据收集器使用方法(Common Stats Collector uses) ##
 
 通过 `stats` 属性来使用数据收集器。 下面是在扩展中使用状态的例子:
 
@@ -47,11 +47,11 @@ Scrapy提供了方便的收集数据的机制。数据以key/value方式存储�
 	>>> stats.get_stats()
 	{'custom_count': 1, 'start_time': datetime.datetime(2009, 7, 14, 21, 47, 28, 977139)}
 
-##可用的数据收集器(Available Stats Collectors)##
+## 可用的数据收集器(Available Stats Collectors) ##
 
 除了基本的 `StatsCollector` ，Scrapy也提供了基于 `StatsCollector` 的数据收集器。 您可以通过 `STATS_CLASS` 设置来选择。默认使用的是 `MemoryStatsCollector` 。
 
-##MemoryStatsCollector##
+## MemoryStatsCollector ##
 
 <table><tr><td>
 <font color=green>scrapy</font>  &nbsp;scrapy.statscollectors.MemoryStatsCollector
@@ -65,7 +65,7 @@ Scrapy提供了方便的收集数据的机制。数据以key/value方式存储�
 
 **spider_stats** ： 保存了每个spider最近一次爬取的状态的字典(dict)。该字典以spider名字为键，值也是字典。
 
-##DummyStatsCollector##
+## DummyStatsCollector ##
 
 <table><tr><td>
 <font color=green>scrapy</font>  &nbsp;scrapy.statscollectors.DummyStatsCollector
