@@ -1,4 +1,4 @@
-#Settings#
+# Settings #
 
 Scrapy设定(settings)提供了定制Scrapy组件的方法。您可以控制包括核心(core)，插件(extension)，pipeline及spider组件。
 
@@ -8,13 +8,13 @@ Scrapy设定(settings)提供了定制Scrapy组件的方法。您可以控制包�
 
 内置设定列表请参考 内置设定参考手册 。
 
-#指定设定(Designating the settings)#
+# 指定设定(Designating the settings) #
 
 当您使用Scrapy时，您需要声明您所使用的设定。这可以通过使用环境变量: <font color=red>`SCRAPY_SETTINGS_MODULE`</font> 来完成。
 
 <font color=red>`SCRAPY_SETTINGS_MODULE`</font> 必须以Python路径语法编写, 如 <font color=red>`myproject.settings`</font> 。 注意，设定模块应该在 Python `import search path` 中。
 
-#获取设定值(Populating the settings)#
+# 获取设定值(Populating the settings) #
 
 设定可以通过多种方式设置，每个方式具有不同的优先级。 下面以优先级降序的方式给出方式列表:
 
@@ -28,7 +28,7 @@ Scrapy设定(settings)提供了定制Scrapy组件的方法。您可以控制包�
 
 这些机制将在下面详细介绍。
 
-##1. 命令行选项(Command line options)##
+## 1. 命令行选项(Command line options) ##
 
 命令行传入的参数具有最高的优先级。 您可以使用command line 选项 -<font color=red>`s`</font> (或 <font color=red>`--set`</font>) 来覆盖一个(或更多)选项。
 
@@ -36,7 +36,7 @@ Scrapy设定(settings)提供了定制Scrapy组件的方法。您可以控制包�
 
 	scrapy crawl myspider -s LOG_FILE=scrapy.log
 
-##2. 为每个spider设置(Settings per-spider)##
+## 2. 为每个spider设置(Settings per-spider) ##
 
 Spider可以定义自己的设置，这些设置的优先级最高，会覆盖项目的设置。它们可以通过 `custom_settings` 属性定义：
 
@@ -47,19 +47,19 @@ Spider可以定义自己的设置，这些设置的优先级最高，会覆盖�
 	        'SOME_SETTING': 'some value',
 	    }
 
-##3. 项目设定模块(Project settings module)##
+## 3. 项目设定模块(Project settings module) ##
 
 项目设定模块是您Scrapy项目的标准配置文件。 其是获取大多数设定的方法。对于一个标准的Scrapy项目，这就意味着你添加或者修改这些设置在为你项目创建的 <font color=red>`settings.py`</font> 文件中。
 
-##4. 命令默认设定(Default settings per-command)##
+## 4. 命令默认设定(Default settings per-command) ##
 
 每个 `Scrapy tool` 命令拥有其默认设定，并覆盖了全局默认的设定。 这些设定在命令的类的 <font color=red>`default_settings`</font> 属性中指定。
 
-##5. 默认全局设置(Default global settings)##
+## 5. 默认全局设置(Default global settings) ##
 
 全局默认设定存储在  <font color=red>`scrapy.settings.default_setting`s</font> 模块， 并在 内置设定参考手册 部分有所记录。
 
-#如何访问设定(How to access settings)#
+# 如何访问设定(How to access settings) #
 
 在spider中，设置key通过 <font color=red>`self.settings`</font> 获得。
 
@@ -89,7 +89,7 @@ NOTE:</br>
 
 settings对象可以像字典一样使用(例如: <font color=red>`settings['LOG_ENABLED']`</font>)，但是通常优先使用 `Settings` API提供的方法来按格式获取你需要的setting，从而避免类型错误(type errors)。
 
-#设定名字的命名规则(Rationale for setting names)#
+# 设定名字的命名规则(Rationale for setting names) #
 
 设定的名字以要配置的组件作为前缀。 例如，一个robots.txt插件的合适设定应该为 <font color=red>`ROBOTSTXT_ENABLED`</font>, <font color=red>`ROBOTSTXT_OBEY`</font>, <font color=red>`ROBOTSTXT_CACHEDIR`</font> 等等。
 
@@ -98,19 +98,19 @@ settings对象可以像字典一样使用(例如: <font color=red>`settings['LOG
 如果给出可用范围，并绑定了特定的组件，则说明了该设定使用的地方。 这种情况下将给出该组件的模块，通常来说是插件、中间件或pipeline。 同时也意味着为了使设定生效，该组件必须被启用。
 
 
-##AWS\_ACCESS\_KEY\_ID##
+## AWS\_ACCESS\_KEY\_ID ##
 
 默认: <font color=red>`None`</font>
 
 连接 Amazon Web services 的AWS access key。 S3 feed storage backend 中使用.
 
-##AWS_SECRET\_ACCESS\_KEY##
+## AWS_SECRET\_ACCESS\_KEY ##
 
 默认: <font color=red>`None`</font>
 
 连接 Amazon Web services 的AWS secret key。 S3 feed storage backend 中使用。
 
-##BOT_NAME##
+## BOT_NAME ##
 
 默认: <font color=red>`scrapybot`</font>
 
@@ -118,19 +118,19 @@ Scrapy项目实现的bot的名字(也为项目名称)。 这将用来构造默�
 
 当您使用 `startproject` 命令创建项目时其也被自动赋值。
 
-##CONCURRENT_ITEMS##
+## CONCURRENT_ITEMS ##
 
 默认: <font color=red>`100`</font>
 
 Item Processor(即 Item Pipeline) 同时并行处理(每个response的)item的最大值。
 
-##CONCURRENT_REQUESTS##
+## CONCURRENT_REQUESTS ##
 
 默认: <font color=red>`16`</font>
 
 Scrapy downloader 并发请求(concurrent requests)的最大值。
 
-##CONCURRENT\_REQUESTS\_PER\_DOMAIN##
+## CONCURRENT\_REQUESTS\_PER\_DOMAIN ##
 
 
 默认: <font color=red>`8`</font>
@@ -139,7 +139,7 @@ Scrapy downloader 并发请求(concurrent requests)的最大值。
 
 另请查阅：AutoThrottle extension和它的`AUTOTHROTTLE_TARGET_CONCURRENCY`选项。
 
-##CONCURRENT\_REQUESTS\_PER\_IP##
+## CONCURRENT\_REQUESTS\_PER\_IP ##
 
 默认: <font color=red>`0`</font>
 
@@ -147,13 +147,13 @@ Scrapy downloader 并发请求(concurrent requests)的最大值。
 
 该设定也影响 `DOWNLOAD_DELAY`和AutoThrottle extension: 如果 `CONCURRENT_REQUESTS_PER_IP` 非0，下载延迟应用在IP而不是网站上。
 
-##DEFAULT\_ITEM\_CLASS##
+## DEFAULT\_ITEM\_CLASS ##
 
 默认: <font color=red>`'scrapy.item.Item'`</font>
 
 the Scrapy shell 中实例化item使用的默认类。
 
-##DEFAULT\_REQUEST\_HEADERS##
+## DEFAULT\_REQUEST\_HEADERS ##
 默认：
 	{
 	    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -162,7 +162,7 @@ the Scrapy shell 中实例化item使用的默认类。
 
 Scrapy HTTP Request使用的默认header。由 `DefaultHeadersMiddleware` 产生。
 
-##DEPTH_LIMIT##
+## DEPTH_LIMIT ##
 
 默认: <font color=red>`0`</font>
 
@@ -170,7 +170,7 @@ Scrapy HTTP Request使用的默认header。由 `DefaultHeadersMiddleware` 产生
 
 爬取网站最大允许的深度(depth)值。如果为0，则没有限制。
 
-##DEPTH_PRIORITY##
+## DEPTH_PRIORITY ##
 
 默认: <font color=red>`0`</font>
 
@@ -187,7 +187,7 @@ NOTE:</br>
 这个设置优先级相较于其他优先级设置 `REDIRECT_PRIORITY_ADJUST` 和 `RETRY_PRIORITY_ADJUST`，使用的相反的方式。
 </font>
 
-##DEPTH_STATS##
+## DEPTH_STATS ##
 
 默认: <font color=red>True</font>
 
@@ -195,7 +195,7 @@ NOTE:</br>
 
 是否收集最大深度数据。
 
-##DEPTH\_STATS\_VERBOSE##
+## DEPTH\_STATS\_VERBOSE ##
 
 默认: <font color=red>False</font>
 
@@ -203,31 +203,31 @@ NOTE:</br>
 
 是否收集详细的深度数据。如果启用，每个深度的请求数将会被收集在数据中。
 
-##DNSCACHE_ENABLED##
+## DNSCACHE_ENABLED ##
 
 默认: <font color=red>True</font>
 
 是否启用DNS内存缓存(DNS in-memory cache)。
 
-##DNSCACHE_SIZE##
+## DNSCACHE_SIZE ##
 
 默认: <font color=red>10000</font>
 
 DNS内存缓存大小。
 
-##DNS_TIMEOUT##
+## DNS_TIMEOUT ##
 
 默认: <font color=red>60</font>
 
 处理DNS查询时，超时的秒数。支持浮点数。
 
-##DOWNLOADER##
+## DOWNLOADER ##
 
 默认: <font color=red>`'scrapy.core.downloader.Downloader'`</font>
 
 用于crawl的下载器(downloader).
 
-##DOWNLOADER_HTTPCLIENTFACTORY##
+## DOWNLOADER_HTTPCLIENTFACTORY ##
 
 默认: <font color=red>`'scrapy.core.downloader.webclient.ScrapyHTTPClientFactory'`</font>
 
@@ -238,7 +238,7 @@ NOTE：</br>
 今天HTTP/1.0已经很少使用了，因此你可以安全地忽略这个选项，除非你使用的Twisted<11.1，或者你真的想使用HTTP/1.0，为<font color=red>`http(s)`</font>相应的机制重写了 `DOWNLOAD_HANDLERS_BASE`
 </font>，即 <font color=red>`'scrapy.core.downloader.handlers.http.HTTP10DownloadHandler'`</font>
 
-##DOWNLOADER_CLIENTCONTEXTFACTORY##
+## DOWNLOADER_CLIENTCONTEXTFACTORY ##
 
 默认: <font color=red>`'scrapy.core.downloader.contextfactory.ScrapyClientContextFactory'`</font>
 
@@ -255,7 +255,7 @@ Scrapy默认的上下文工厂**不会执行远程服务器的证书验证**。�
 
 如果你使用自定义的ContextFactory，确保在init中能够接受<font color=red>`method`</font> 参数(这是 <font color=red>`OpenSSL.SSL`</font>方法的映射 `DOWNLOADER_CLIENT_TLS_METHOD`)
 
-##DOWNLOADER\_CLIENT\_TLS\_METHOD##
+## DOWNLOADER\_CLIENT\_TLS\_METHOD ##
 
 默认：<font color=red>`TLS`</font>
 
@@ -274,13 +274,13 @@ NOTE：</br>
 我们建议您使用PyOpenSSL> = 0.13和Twisted> = 0.13或更高（如果可以，Twisted> = 14.0）。
 </font>
 
-##DOWNLOADER_MIDDLEWARES##
+## DOWNLOADER_MIDDLEWARES ##
 
 默认: <font color=red>`{}`</font>
 
 保存项目中启用的下载中间件及其顺序的字典。
 
-##DOWNLOADER\_MIDDLEWARES\_BASE##
+## DOWNLOADER\_MIDDLEWARES\_BASE ##
 
 默认：
 
@@ -303,13 +303,13 @@ NOTE：</br>
 
 包含Scrapy默认启用的下载中间件的字典。低序更靠近引擎，高序更靠近下载器。永远不要在项目中修改该设定，而是修改 `DOWNLOADER_MIDDLEWARES`。
 
-##DOWNLOADER_STATS##
+## DOWNLOADER_STATS ##
 
 默认：<font color=red>`True`</font>
 
 是否收集下载器数据。
 
-##DOWNLOAD_DELAY##
+## DOWNLOAD_DELAY ##
 
 默认：<font color=red>`0`</font>
 
@@ -323,13 +323,13 @@ NOTE：</br>
 
 另外您可以通过spider的 <font color=red>`download_delay`</font> 属性为每个spider设置该设定。
 
-##DOWNLOAD_HANDLERS##
+## DOWNLOAD_HANDLERS ##
 
 默认：<font color=red>`{}`</font>
 
 保存项目中启用的下载处理器(request downloader handler)的字典。 例子请查看 `DOWNLOAD_HANDLERS_BASE` 。
 
-##DOWNLOAD\_HANDLERS\_BASE##
+## DOWNLOAD\_HANDLERS\_BASE ##
 
 默认：
 	
@@ -349,7 +349,7 @@ NOTE：</br>
 	    'ftp': None,
 	}
 
-##DOWNLOAD_TIMEOUT##
+## DOWNLOAD_TIMEOUT ##
 
 默认：<font color=red>`100`</font>
 
@@ -360,7 +360,7 @@ NOTE：</br>
 这个超时时间可以使用`download_timeout`属性为每个spider设置，也可以使用`download_timeout`作为Request.meta.key为每个Request设置。
 </font>
 
-##DOWNLOAD_MAXSIZE##
+## DOWNLOAD_MAXSIZE ##
 
 默认：<font color=red>`1073741824 (1024MB)`</font>
 
@@ -374,7 +374,7 @@ NOTE：</br>
 这需要Twisted>=11.1
 </font>
 
-##DOWNLOAD_WARNSIZE##
+## DOWNLOAD_WARNSIZE ##
 
 默认：<font color=red>`33554432 (32MB)`</font>
 
@@ -389,7 +389,7 @@ NOTE：</br>
 
 </font>
 
-##DOWNLOAD\_FAIL\_ON\_DATALOSS##
+## DOWNLOAD\_FAIL\_ON\_DATALOSS ##
 
 默认：<font color=red>`True`</font>
 
@@ -402,7 +402,7 @@ NOTE：</br>
 不完整响应，或者数据丢失错误，可能发生在以下几种情况，服务器错误配置、网络错误、数据损坏。考虑到不完整的repsonse可能包含部分或者不完整的文本，所以由用户决定处理不完整response是否有意义。如果 `RETRY_ENABLED` 是 <font color=red>`True`</font> ，而且这个选项也设置为 <font color=red>`True`</font> ，<font color=red>`ResponseFailed([_DataLoss])`</font> 错误通常将会再次请求。
 </font>
 
-##DUPEFILTER_CLASS##
+## DUPEFILTER_CLASS ##
 
 默认：<font color=red>`'scrapy.dupefilters.RFPDupeFilter'`</font>
 
@@ -412,25 +412,25 @@ NOTE：</br>
 
 你可以通过设置 `DUPEFILTER_CLASS` 为 <font color=red>`scrapy.dupefilters.BaseDupeFilter`</font> 来禁用重复过滤。你需要小心这样设置，因为你可能进入爬取循环中。更好的方法是设置 <font color=red>`dont_filter`</font> 为 <font color=red>`True`</font> 来为特定的 `Request` 设置不去重。
 
-##DUPEFILTER_DEBUG##
+## DUPEFILTER_DEBUG ##
 
 默认：<font color=red>`False`</font>
 
 默认情况下， <font color=red>`RFPDupeFilter`</font> 只记录第一次重复的请求。 设置 `DUPEFILTER_DEBUG` 为 <font color=red>`True`</font> 将会使其记录所有重复的requests。
 
-##EDITOR##
+## EDITOR ##
 
 默认：<font color=red>`vi`</font>(Unix 系统)，<font color=red>`IDLE`</font>(windows)
 
 执行 `edit` 命令编辑spider时使用的编辑器。此外，如果设置了 <font color=red>`EDITOR`</font> 环境变量，`edit` 命令将优先使用这个设置的编辑器。
 
-##EXTENSIONS##
+## EXTENSIONS ##
 
 默认：<font color=red>`{}`</font>
 
 保存项目中启用的插件及其顺序的字典。
 
-##EXTENSIONS_BASE##
+## EXTENSIONS_BASE ##
 
 默认：
 
@@ -450,17 +450,17 @@ NOTE：</br>
 
 更多内容请参考 extensions用户手册 及 所有可用的插件 。
 
-##FEED_TEMPDIR##
+## FEED_TEMPDIR ##
 
 Feed Temp目录允许你自定义在使用FTP feed storage和Amazon S3下载的时候，保存的文件的临时文件夹。
 
-##FTP\_PASSIVE\_MODE##
+## FTP\_PASSIVE\_MODE ##
 
 默认：<font color=red>`True`</font>
 
 启动FTP传输时是否启用被动模式。
 
-##FTP_PASSWORD##
+## FTP_PASSWORD ##
 
 默认：<font color=red>`"guest"`</font>
 
@@ -471,13 +471,13 @@ NOTE：</br>
 根据RFC 1635解释，虽然通常使用密码'guest'或者某个匿名FTP的邮箱地址，一些FTP服务器明确询问用户的邮箱地址，而且将不允许使用'guest'密码登录。
 </font>
 
-##FTP_USER##
+## FTP_USER ##
 
 默认：<font color=red>`"anonymous"`</font>
 
 <font color=red>`Resquest.meta`</font> 中没有 <font color=red>`"ftp_user"`</font> 时，使用这个作为FTP连接的用户名。
 
-##ITEM_PIPELINES##
+## ITEM_PIPELINES ##
 
 默认：<font color=red>`{}`</font>
 
@@ -490,68 +490,68 @@ NOTE：</br>
 	    'mybot.pipelines.validate.StoreMyItem': 800,
 	}
 
-##ITEM\_PIPELINES\_BASE##
+## ITEM\_PIPELINES\_BASE ##
 
 默认：<font color=red>`{}`</font>
 
 保存项目中默认启用的pipeline的字典。 永远不要在项目中修改该设定，而是修改 `ITEM_PIPELINES` 。
 
-##LOG_ENABLED##
+## LOG_ENABLED ##
 
 默认：<font color=red>`True`</font>
 
 是否启用logging。
 
-##LOG_ENCODING##
+## LOG_ENCODING ##
 
 默认：<font color=red>`'utf-8'`</font>
 
 logging使用的编码。
 
-##LOG_FILE##
+## LOG_FILE ##
 
 默认：<font color=red>`None`</font>
 
 logging输出的文件名。如果为<font color=red>`'None'`</font>，则使用标准错误输出(standard error)。
 
-##LOG_FORMAT##
+## LOG_FORMAT ##
 
 默认：<font color=red>`'%(asctime)s [%(name)s] %(levelname)s: %(message)s'`</font>
 
 定义日志信息格式的字符串。
 
-##LOG_DATEFORMAT##
+## LOG_DATEFORMAT ##
 
 默认：<font color=red>`'%Y-%m-%d %H:%M:%S'`</font>
 
 定义日期/时间的字符串，也就是 `LOG_FORMAT` 中 <font color=red>`'%(asctime)s'`</font> 的占位符。
 
-##LOG_LEVEL##
+## LOG_LEVEL ##
 
 默认：<font color=red>`'DEBUG'`</font>
 
 log的最低级别。可选的级别有: CRITICAL、 ERROR、WARNING、INFO、DEBUG。
 
-##LOG_STDOUT##
+## LOG_STDOUT ##
 
 
 默认：<font color=red>`False`</font>
 
 如果为 <font color=red>`True`</font> ，进程所有的标准输出(及错误)将会被重定向到log中。例如， 执行 <font color=red>`print 'hello'</font> ，其将会在Scrapy log中显示。
 
-##LOG\_SHORT\_NAMES##
+## LOG\_SHORT\_NAMES ##
 
 默认：<font color=red>`False`</font>
 
 如果 <font color=red>`True`</font>，日志将只包含根路径。如果设置为 <font color=red>`False`</font> 则显示负责日志输出的组件
 
-##MEMDEBUG_ENABLED##
+## MEMDEBUG_ENABLED ##
 
 默认：<font color=red>`False`</font>
 
 是否启用内存调试(memory debugging)。
 
-##MEMDEBUG_NOTIFY##
+## MEMDEBUG_NOTIFY ##
 
 默认：<font color=red>`[]`</font>
 
@@ -563,7 +563,7 @@ log的最低级别。可选的级别有: CRITICAL、 ERROR、WARNING、INFO、DE
 
 ==================
 
-##MEMUSAGE_ENABLED##
+## MEMUSAGE_ENABLED ##
 
 默认：<font color=red>`True`</font>
 
@@ -571,7 +571,7 @@ log的最低级别。可选的级别有: CRITICAL、 ERROR、WARNING、INFO、DE
 
 是否启用内存使用量监控扩展。此扩展程序跟踪进程使用的内存峰值（将其写入统计信息）。它还可以选择在超出内存限制时关闭Scrapy进程（请参阅参考资料`MEMUSAGE_LIMIT_MB`），并在发生时通过电子邮件通知（请参阅参考资料`MEMUSAGE_NOTIFY_MAIL`）
 
-##MEMUSAGE\_LIMIT\_MB##
+## MEMUSAGE\_LIMIT\_MB ##
 
 默认：<font color=red>`0`</font>
 
@@ -579,7 +579,7 @@ log的最低级别。可选的级别有: CRITICAL、 ERROR、WARNING、INFO、DE
 
 在关闭Scrapy之前所允许使用的最大内存数(单位: MB)(如果 `MEMUSAGE_ENABLED`为True)。 如果为0，将不做限制。
 
-##MEMUSAGE\_CHECK\_INTERVAL\_SECONDS##
+## MEMUSAGE\_CHECK\_INTERVAL\_SECONDS ##
 
 默认：<font color=red>`60.0`</font>
 
@@ -589,7 +589,7 @@ log的最低级别。可选的级别有: CRITICAL、 ERROR、WARNING、INFO、DE
 
 这个设置间隔时间的长度，单位为秒。
 
-##MEMUSAGE\_NOTIFY\_MAIL##
+## MEMUSAGE\_NOTIFY\_MAIL ##
 
 
 默认：<font color=red>`False`</font>
@@ -602,7 +602,7 @@ log的最低级别。可选的级别有: CRITICAL、 ERROR、WARNING、INFO、DE
 
 	MEMUSAGE_NOTIFY_MAIL = ['user@example.com']
 
-##MEMUSAGE\_WARNING\_MB##
+## MEMUSAGE\_WARNING\_MB ##
 
 默认：<font color=red>`0`</font>
 
@@ -610,7 +610,7 @@ log的最低级别。可选的级别有: CRITICAL、 ERROR、WARNING、INFO、DE
 
 在发送警告email前所允许的最大内存数(单位: MB)(如果 `MEMUSAGE_ENABLED`为True)。 如果为0，将不发送警告。
 
-##NEWSPIDER_MODULE##
+## NEWSPIDER_MODULE ##
 
 默认：<font color=red>`''`</font>
 
@@ -620,7 +620,7 @@ log的最低级别。可选的级别有: CRITICAL、 ERROR、WARNING、INFO、DE
 
 	NEWSPIDER_MODULE = 'mybot.spiders_dev'
 
-##RANDOMIZE\_DOWNLOAD\_DELAY##
+## RANDOMIZE\_DOWNLOAD\_DELAY ##
 
 默认：<font color=red>`True`</font>
 
@@ -632,19 +632,19 @@ log的最低级别。可选的级别有: CRITICAL、 ERROR、WARNING、INFO、DE
 
 若 `	DOWNLOAD_DELAY` 为0(默认值)，该选项将不起作用。
 
-##REACTOR\_THREADPOOL\_MAXSIZE##
+## REACTOR\_THREADPOOL\_MAXSIZE ##
 
 默认：<font color=red>`10`</font>
 
 Twisted Reator 线程池线程数的最大数目。这是被Scrapy各种组件使用的常见的多目的线程池。单线程DNS解析器，BlockingFeedStorage， S3FilesStore 等等。如果阻塞IO不足请增大这个值。
 
-##REDIRECT\_MAX\_TIMES##
+## REDIRECT\_MAX\_TIMES ##
 
 默认：<font color=red>`20`</font>
 
 定义request允许重定向的最大次数。超过该限制后该request直接返回获取到的结果。 对某些任务我们使用Firefox默认值。
 
-##REDIRECT\_PRIORITY\_ADJUST##
+## REDIRECT\_PRIORITY\_ADJUST ##
 
 默认：<font color=red>`+2`</font>
 
@@ -655,7 +655,7 @@ Twisted Reator 线程池线程数的最大数目。这是被Scrapy各种组件�
   - 数值为正(默认)意味着更高的优先级
   - 数值为负意味着更低的优先级
 
-##RETRY\_PRIORITY\_ADJUST##
+## RETRY\_PRIORITY\_ADJUST ##
 
 默认：<font color=red>`-1`</font>
 
@@ -667,7 +667,7 @@ Twisted Reator 线程池线程数的最大数目。这是被Scrapy各种组件�
   - 数值为负意味着更低的优先级
 
 
-##ROBOTSTXT_OBEY##
+## ROBOTSTXT_OBEY ##
 
 默认：<font color=red>`False`</font>
 
@@ -680,13 +680,13 @@ NOTE：</br>
 默认值为<font color=red>`False`</font>是因为历史原因。但是在 <font color=red>`scrapy startproject`</font> 命令生成的 settings.py 文件中，此选项是启用的。
 </font>
 
-##SCHEDULER##
+## SCHEDULER ##
 
 默认：<font color=red>`'scrapy.core.scheduler.Scheduler'`</font>
 
 用于爬取的调度器。
 
-##SCHEDULER_DEBUG##
+## SCHEDULER_DEBUG ##
 
 默认：<font color=red>`False`</font>
 
@@ -699,33 +699,33 @@ NOTE：</br>
 	(type Request)> - no more unserializable requests will be logged
 	(see 'scheduler/unserializable' stats counter)
 
-##SCHEDULER\_DISK\_QUEUE##
+## SCHEDULER\_DISK\_QUEUE ##
 
 默认：<font color=red>`'scrapy.squeues.PickleLifoDiskQueue'`</font>
 
 调度器使用的磁盘队列的类型。其他可用的类型有：
 <font color=red>`scrapy.squeues.PickleFifoDiskQueue`</font>，<font color=red>`scrapy.squeues.MarshalFifoDiskQueue`</font><font color=red>`scrapy.squeues.MarshalLifoDiskQueue`</font>
 
-##SCHEDULER\_MEMORY\_QUEUE##
+## SCHEDULER\_MEMORY\_QUEUE ##
 
 默认：<font color=red>`'scrapy.squeues.LifoMemoryQueue'`</font>
 
 调度器使用的内存队列的类型。其他可用的类型有：
 <font color=red>`scrapy.squeues.FifoMemoryQueue`</font>
 
-##SCHEDULER\_PRIORITY\_QUEUE##
+## SCHEDULER\_PRIORITY\_QUEUE ##
 
 默认：<font color=red>`'queuelib.PriorityQueue'`</font>
 
 调度器使用的优先级队列的类型。
 
-##SPIDER_CONTRACTS##
+## SPIDER_CONTRACTS ##
 
 默认：<font color=red>`{}`</font>
 
 保存项目中启用用于测试spider的scrapy contract及其顺序的字典。 更多内容请参考 Spiders Contracts 。
 
-##SPIDER\_CONTRACTS\_BASE##
+## SPIDER\_CONTRACTS\_BASE ##
 
 默认：
 
@@ -743,13 +743,13 @@ NOTE：</br>
 	    'scrapy.contracts.default.ScrapesContract': None,
 	}
 
-##SPIDER\_LOADER\_CLASS##
+## SPIDER\_LOADER\_CLASS ##
 
 默认：<font color=red>`'scrapy.spiderloader.SpiderLoader'`</font>
 
 这个类将会被用作加载spiders，必须实现 SpiderLoader API。
 
-##SPIDER\_LOADER\_WARN\_ONLY##
+## SPIDER\_LOADER\_WARN\_ONLY ##
 
 
 默认：<font color=red>`Flase`</font>
@@ -760,13 +760,13 @@ NOTE：</br>
 NOTE：</br>
 一些Scrapy命令运行时已经设置这个为 <font color=red>`True`</font>了(即它们只会警告不会失败)，因为实际上它们工作不需要加载spider类：`scrapy runspider`，`scrapy startproject`，`scrapy settings`，`scrapy vesion`</font>
 
-##SPIDER_MIDDLEWARES##
+## SPIDER_MIDDLEWARES ##
 
 默认：<font color=red>`{}`</font>
 
 保存项目中启用的下载中间件及其顺序的字典。
 
-##SPIDER\_MIDDLEWARES\_BASE##
+## SPIDER\_MIDDLEWARES\_BASE ##
 
 默认：
 
@@ -780,7 +780,7 @@ NOTE：</br>
 
 保存项目中默认启用的spider中间件的字典。 永远不要在项目中修改该设定，而是修改 `SPIDER_MIDDLEWARES`。
 
-##SPIDER_MODULES##
+## SPIDER_MODULES ##
 
 默认：<font color=red>`{}`</font>
 
@@ -790,32 +790,32 @@ Scrapy搜索spider的模块列表
 
 	SPIDER_MODULES = ['mybot.spiders_prod', 'mybot.spiders_dev']
 
-##STATS_CLASS##
+## STATS_CLASS ##
 
 默认：<font color=red>`'scrapy.statscollectors.MemoryStatsCollector'`</font>
 
 收集数据的类。该类必须实现 状态收集器(Stats Collector) API.
 
-##STATSMAILER_RCPTS##
+## STATSMAILER_RCPTS ##
 
 
 默认：<font color=red>`[]`</font>(空列表)
 
 spider完成爬取后发送Scrapy数据。更多内容请查看 `StatsMailer`。
 
-##TELNETCONSOLE_ENABLED##
+## TELNETCONSOLE_ENABLED ##
 
 默认：<font color=red>`True`</font>
 
 表明 telnet 终端 (及其插件)是否启用的布尔值。
 
-##TELNETCONSOLE_PORT##
+## TELNETCONSOLE_PORT ##
 
 默认：<font color=red>`[6023, 6073]`</font>
 
 telnet终端使用的端口范围。如果设置为 <font color=red>`None`</font> 或 <font color=red>`0`</font> ， 则使用动态分配的端口。更多内容请查看 Telnet终端(Telnet Console) 。
 
-##TEMPLATES_DIR##
+## TEMPLATES_DIR ##
 
 默认：scrapy模块内部的<font color=red>`templates`</font>
 
@@ -824,7 +824,7 @@ telnet终端使用的端口范围。如果设置为 <font color=red>`None`</font
 
 项目名称不得与<font color=red>`project`</font>子目录中的自定义文件或目录的名称冲突。
 
-##URLLENGTH_LIMIT##
+## URLLENGTH_LIMIT ##
 
 默认：<font color=red>`2083`</font>
 
@@ -832,13 +832,13 @@ telnet终端使用的端口范围。如果设置为 <font color=red>`None`</font
 
 爬取URL的最大长度。更多关于该设定的默认值信息请查看: http://www.boutell.com/newfaq/misc/urllength.html
 
-##USER_AGENT##
+## USER_AGENT ##
 
 默认：<font color=red>`"Scrapy/VERSION (+https://scrapy.org)"`</font>
 
 爬取的默认User-Agent，除非被覆盖。
 
-#其他地方settings#
+# 其他地方settings #
 
   - AJAXCRAWL_ENABLED
   - AUTOTHROTTLE_DEBUG

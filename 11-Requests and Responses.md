@@ -1,4 +1,4 @@
-#Requests and Responses#
+# Requests and Responses #
 
 Scrapy使用 `Request` 和 `Response` 对象爬取web站点。
 
@@ -6,7 +6,7 @@ Scrapy使用 `Request` 和 `Response` 对象爬取web站点。
 
 所有 `Request` 和 `Response` 的子类都会实现一些在基类中非必要的 功能。它们会在 Request subclasses 和 Response subclasses 两部分进行详细的说明。
 
-##Request对象(Request objects)##
+## Request对象(Request objects) ##
 
 <table>
 <tr>
@@ -164,7 +164,7 @@ Scrapy使用 `Request` 和 `Response` 对象爬取web站点。
 	            request = failure.request
 	            self.logger.error('TimeoutError on %s', request.url)
 
-##Request.meta特殊的键(Request.meta special keys)##
+## Request.meta特殊的键(Request.meta special keys) ##
 
 `Request.meta` 属性可以包含任意数据，但是有一些特别的键能被Scrapy识别，作为其内置的扩展。
 
@@ -190,26 +190,26 @@ Scrapy使用 `Request` 和 `Response` 对象爬取web站点。
   - `referrer_policy`
   - `max_retry_times`
 
-##bindaddress##
+## bindaddress ##
 作为执行请求的传出地址的IP
 
-##download_timeout##
+## download_timeout ##
 下载器超时之前的等待时间(s)。只为单个请求设置超时等待时间。详情查看setting中<font color=red>`DOWNLOAD_TIMEOUT`</font>
 
-##download_latency##
+## download_latency ##
 请求开始到接受请求花费的时间，即HTTP消息在网络中传输的时间(请求到获取响应所花费的时间)。这个meta键只有在下载完毕response才能生效。虽然大多数meta键用作控制Scrapy的行为，这个我认为是只读的。
 
-##download\_fail\_on\_dataloss##
+## download\_fail\_on\_dataloss ##
  用来控制当接收到的 response 头信息中的 Content-Length 和内容不匹配或者response chunk 未正确结束时的时所采取的操作。详情查看setting中<font color=red>`DOWNLOAD_FAIL_ON_DATALOSS`</font>
 
-##max\_retry\_times##
+## max\_retry\_times ##
 设置重复请求的次数。初始化时，meta键`max_retry_times`的优先级高于设置中的<font color=red>`RETRY_TIMES`</font>
 
-#Request子类(Request subclasses)#
+# Request子类(Request subclasses) #
 
 这里列出了内置的 `Request` 子类。你也可以自己定义子类以实现你想要的功能。
 
-##FormRequest对象(FormRequest objects)##
+## FormRequest对象(FormRequest objects) ##
 FormRequest类在 `Request` 的基础上扩展了解决HTML表单的功能。它使用 `lxml.html` 的表单的方法从 `Response` 对象中提取数据，预构建表单的字段。
 
 <table>
@@ -256,9 +256,9 @@ FormRequest类在 `Request` 的基础上扩展了解决HTML表单的功能。它
 
 这个类方法的其他参数将会被直接传递到 `FormRequest` 的构造函数中。
 
-#Request使用实例(Request usage examples)#
+# Request使用实例(Request usage examples) #
 
-##使用FormRequest通过HTTP POST方法发送数据(Using FormRequest to send data via HTTP POST)##
+## 使用FormRequest通过HTTP POST方法发送数据(Using FormRequest to send data via HTTP POST) ##
 
 如果你想在你spider中模拟POST表单，发送几个key-value字段，你可以从你的spider中返回一个 `FormRequest` 对象，就像这样：
 
@@ -266,7 +266,7 @@ FormRequest类在 `Request` 的基础上扩展了解决HTML表单的功能。它
 	                    formdata={'name': 'John Doe', 'age': '27'},
 	                    callback=self.after_post)]
 
-##使用FormRequest.from\_response()模拟用户登录(Using FormRequest.from_response() to simulate a user login)##
+## 使用FormRequest.from\_response()模拟用户登录(Using FormRequest.from_response() to simulate a user login) ##
 
 通常网站通过 <font color=red>`<input type='hidden'>`</font> 元素提供了预填充的表单字段，例如会话相关数据或者身份验证令牌(为了登录)。当爬取时，你想要这些数据自动预填充，只需要覆盖用户名和密码这样的字段。你可以使用 `FormRequest.from_response()` 方法完成这个任务。这里有一个示例：
 
@@ -292,7 +292,7 @@ FormRequest类在 `Request` 的基础上扩展了解决HTML表单的功能。它
 	        # continue scraping with authenticated session...
 
 
-#Response对象(Response objects)#
+# Response对象(Response objects) #
 
 <table><tr><td>
 <font color=green>class</font> scrapy.http.Response(url[, status=200, headers=None, body=b'', flags=None, request=None])
@@ -354,11 +354,11 @@ HTTP响应码的整数。例如：<font color=red>`200`</font>、<font color=red
 
 `TextResponse` 通过了 `follow()` 方法除了支持相对/绝对/Link对象之外，还支持选择器。
 
-#Reponse子类(Response subclass)#
+# Reponse子类(Response subclass) #
 
 这里列出了内置可用的Response子类。也可以自己定义子类。
 
-##TextResponse对象(TextResponse objects)##
+## TextResponse对象(TextResponse objects) ##
 
 <table><tr><td>
 <font color=green>class</font> scrapy.http.TextResponse(url[,  encoding, status=200, headers=None, body=b'', flags=None, request=None])
@@ -417,7 +417,7 @@ reponse的编码方式。按照顺序通过以下机制解决获得encoding的�
 **body\_as\_unicode()**：</br>
 与`text`一样，但是作为一个方法使用。保留此方法是为了向后兼容；更喜欢：<font color=red>`response.text`</font>
 
-##HtmlResponse对象(HtmlResponse objects)##
+## HtmlResponse对象(HtmlResponse objects) ##
 
 <table><tr><td>
 <font color=green>class</font> scrapy.http.HtmlResponse(url[,  encoding, status=200, headers=None, body=b'', flags=None, request=None])
@@ -425,7 +425,7 @@ reponse的编码方式。按照顺序通过以下机制解决获得encoding的�
 
 `HtmlResponse`是`TextResponse`的子类，增加了支持在HTML meta http-equiv属性中自动寻找编码方式。
 
-##XmlResponse对象(XmlResponse objects)##
+## XmlResponse对象(XmlResponse objects) ##
 
 <table><tr><td>
 <font color=green>class</font> scrapy.http.XmlResponse(url[,  encoding, status=200, headers=None, body=b'', flags=None, request=None])

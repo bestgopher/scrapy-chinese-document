@@ -1,4 +1,4 @@
-#Link Extractors#
+# Link Extractors #
 
 Link Extractors 是用于从网页(`scrapy.http.Response` 对象 )中抽取会被follow的链接的对象。
 
@@ -8,7 +8,7 @@ Scrapy中有个 <font color=red>`scrapy.linkextractors.LinkExtractor`</font>类�
 
 Link Extractors在 `CrawlSpider` 类(在Scrapy可用)中使用, 通过一套规则,但你也可以用它在你的Spider中,即使你不是从 `CrawlSpider` 继承的子类, 因为它的目的很简单: 提取链接｡
 
-#内置Link Extractor 参考(Built-in link extractors reference)#
+# 内置Link Extractor 参考(Built-in link extractors reference) #
 
 Scrapy 自带的Link Extractors类在 `scrapy.contrib.linkextractors` 模块提供｡
 
@@ -18,7 +18,7 @@ Scrapy 自带的Link Extractors类在 `scrapy.contrib.linkextractors` 模块提�
 
 以前的版本有其他link extractor类，但如今被弃用了。
 
-##LxmlLinkExtractor##
+## LxmlLinkExtractor ##
 
 <table>
 <tr>
