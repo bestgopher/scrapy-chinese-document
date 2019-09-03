@@ -1,13 +1,13 @@
-#自动限速(AutoThrottle)扩展(AutoThrottle extension)#
+# 自动限速(AutoThrottle)扩展(AutoThrottle extension) #
 
 该扩展能根据Scrapy服务器及您爬取的网站的负载自动限制爬取速度。
 
-##设计目的(Design goals)##
+## 设计目的(Design goals) ##
 
   1. 更友好的对待网站，而不使用默认的下载间隔：<font color=red>`0`</font>。
   2. 自动调整scrapy来优化下载速度，使得用户不用调节下载间隔来找到优化的值。用户只需指定允许的最大并发请求数，剩下的都交给扩展来完成。
 
-##它怎样工作?(How it works)##
+## 它怎样工作?(How it works) ##
 
 AutoThrottle扩展调整动态地调整下载间隔，使得spider把发送的 `AUTOTHROTTLE_TARGET_CONCURRENCY`个并行请求平均到每个远程网站上。
 
@@ -20,7 +20,7 @@ AutoThrottle扩展调整动态地调整下载间隔，使得spider把发送的 `
 
 AutoThrottle没有这些问题。
 
-##限流算法(Throttling algorithm)##
+## 限流算法(Throttling algorithm) ##
 
 AutoThrottle算法调整下载延迟基于以下几个规则：
 
@@ -39,7 +39,7 @@ AutoThrottle扩展尊重Scrapy并行和间隔的标准设置。这意味着它�
 
 记住这个延迟时间在一个合作多任务的环境中非常难精确地测量，因为Scrapy忙于处理Spider的回调，例如，不能参与下载。然而，这些延迟时间仍然合理地估计Scrapy(最终估算服务器)的繁忙程度，这个扩展也是在这个前提上创建的。
 
-##设置(Settings)##
+## 设置(Settings) ##
 
 这些设置用来控制AutoThrottle：
  

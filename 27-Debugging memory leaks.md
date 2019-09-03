@@ -1,4 +1,4 @@
-#调试内存溢出(Debugging memory leaks)#
+# 调试内存溢出(Debugging memory leaks) #
 
 在Scrapy中，类似Requests, Response及Items的对象具有有限的生命周期: 他们被创建，使用，最后被销毁。
 
@@ -8,7 +8,7 @@
 
 为了帮助调试内存泄露，Scrapy提供了跟踪对象引用的机制，叫做 trackref ， 或者您也可以使用第三方提供的更先进内存调试库 Guppy (更多内容请查看下面)。而这都必须在 Telnet终端 中使用。
 
-##(Common causes of memory leaks)##
+## (Common causes of memory leaks) ##
 
 内存泄露经常是由于Scrapy开发者在Requests中(有意或无意)传递对象的引用(例如，使用 meta 属性或request回调函数)，使得该对象的生命周期与 Request的生命周期所绑定。这是目前为止最常见的内存泄露的原因， 同时对新手来说也是一个比较难调试的问题。
 
@@ -16,11 +16,11 @@
 
 内存泄露可能存在与一个您编写的中间件，管道(pipeline) 或扩展，在代码中您没有正确释放 (之前分配的)资源。例如，在`spider_opened`分配资源，但是没有在`spider_closed`释放资源，在你在单一进程运行多个spider时可能会造成问题。
 
-##请求太多了?(Too Many Requests?)##
+## 请求太多了?(Too Many Requests?) ##
 
 默认情况下，Scrapy把请求队列放在内存中；它包含了`Request`对象和Request对象属性(例如`meta`中的对象)关联的对象。虽然不一定会溢出，但是可能会占用很多内存。启用 persistent job queue 可以帮助控制内存的使用。
 
-##使用 <font color=red>`trackref`</font> 调试内存泄露(Debugging memory leaks with <font color=red>`trackref`</font>)##
+## 使用 <font color=red>`trackref`</font> 调试内存泄露(Debugging memory leaks with <font color=red>`trackref`</font>) ##
 
 `trackref` 是Scrapy提供用于调试大部分内存泄露情况的模块。 简单来说，其追踪了所有活动(live)的Request, Request, Item及Selector对象的引用。
 
@@ -39,7 +39,7 @@
 正如所见，报告也展现了每个类中最老的对象的时间(age)。
 如果您有内存泄露，那您能找到哪个spider正在泄露的机会是查看最老的request或response。 您可以使用 `get_oldest()` 方法来获取每个类中最老的对象， 正如此所示(在终端中)(原文档没有样例)。
 
-##哪些对象被追踪了?(Which objects are tracked?)##
+## 哪些对象被追踪了?(Which objects are tracked?) ##
 
 <font color=red>`trackref`</font> 追踪的对象包括以下类(及其子类)的对象:
 
@@ -49,7 +49,7 @@
   - `scrapy.selector.Selector`
   - `scrapy.spiders.Spider`
 
-##真实例子(A real example)##
+## 真实例子(A real example) ##
 
 让我们来看一个假设的具有内存泄露的准确例子。
 假如我们有些spider的代码中有一行类似于这样的代码:
@@ -88,14 +88,14 @@
 	 'http://www.somenastyspider.com/product.php?pid=584',
 	...
 
-##很多spider?(Too many spiders?)##
+## 很多spider?(Too many spiders?) ##
 
 如果您的项目有很多的spider在并行执行，`prefs()` 的输出会变得很难阅读。针对于此， 该方法具有 ignore 参数，用于忽略特定的类(及其子类)。例如，将不会展现任何spider类的活跃引用。
 	
 	>>> from scrapy.spiders import Spider
 	>>> prefs(ignore=Spider)
 
-###scrapy.utils.trackref module###
+### scrapy.utils.trackref module ###
 以下是 trackref 模块中可用的方法。
 
 <table><tr><td>
@@ -119,7 +119,7 @@ scrapy.utils.trackref.get_oldest(class_name)
 
 返回给定类名的最老活跃(alive)对象，如果没有则返回 <font color=red>`None`</font> 。首先使用 `print_live_refs()` 来获取每个类所跟踪的所有活跃(live)对象的列表。
 
-##使用Guppy调试内存泄露(Debugging memory leaks with Guppy)##
+## 使用Guppy调试内存泄露(Debugging memory leaks with Guppy) ##
 
 <font color=red>`trackref`</font> 提供了追踪内存泄露非常方便的机制，其仅仅追踪了比较可能导致内存泄露的对象 (Requests, Response, Items及Selectors)。然而，内存泄露也有可能来自其他(更为隐蔽的)对象。 如果是因为这个原因，通过 <font color=red>`trackref`</font> 则无法找到泄露点，您仍然有其他工具: Guppy library 。如果你使用的是python3，请看 Debugging memory leaks with muppy。
 
@@ -164,7 +164,7 @@ telnet终端也提供了快捷方式(<font color=red>`hpy`</font>)来访问Guppy
 
 如上所示，Guppy模块十分强大，不过也需要一些关于Python内部的知识。关于Guppy的更多内容请参考 [Guppy documentation](http://guppy-pe.sourceforge.net/).
 
-###使用muppy调试内存泄露(Debugging memory leaks with muppy)###
+### 使用muppy调试内存泄露(Debugging memory leaks with muppy) ###
 
 如果你使用的是Python3，你可以从 [Pympler](https://pypi.org/project/Pympler/) 中使用muppy。
 
@@ -201,7 +201,7 @@ telnet终端也提供了快捷方式(<font color=red>`hpy`</font>)来访问Guppy
 	
 关于muppy的更多信息，参考[muppy文档](https://pythonhosted.org/Pympler/muppy.html)。
 
-##Leaks without leaks##
+## Leaks without leaks ##
 
 有时候，您可能会注意到Scrapy进程的内存占用只在增长，从不下降。不幸的是， 有时候这并不是Scrapy或者您的项目在泄露内存。这是由于一个已知(但不有名)的Python问题。 Python在某些情况下可能不会返回已经释放的内存到操作系统。关于这个问题的更多内容请看:
 

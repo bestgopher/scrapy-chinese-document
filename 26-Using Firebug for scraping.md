@@ -1,11 +1,11 @@
-#使用Firebug进行爬取(Using Firebug for scraping)#
+# 使用Firebug进行爬取(Using Firebug for scraping) #
 
 <font color=orange>
 NOTE:</br>
 本教程所使用的样例站Google Directory已经 被Google关闭 了。不过教程中的概念任然适用。 如果您打算使用一个新的网站来更新本教程，您的贡献是再欢迎不过了。 详细信息请参考 Contributing to Scrapy 。
 </font>
 
-##介绍(Introduction)##
+## 介绍(Introduction) ##
 
 本文档介绍了如何使用 Firebug (一个Firefox的插件)来使得爬取更为简单，有趣。 更多有意思的Firefox插件请参考 对爬取有帮助的实用Firefox插件 。 使用Firefox插件检查页面需要有些注意事项: 在浏览器中检查DOM的注意事项 。
 

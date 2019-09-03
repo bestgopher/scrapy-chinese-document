@@ -1,4 +1,4 @@
-#部署Spiders(Deploying Spiders)#
+# 部署Spiders(Deploying Spiders) #
 
 这一节介绍了部署你的Scrapy爬虫，定期运行它们的不同选项。在(早期)开发阶段在你本地机器上运行spider是非常方便的，但是当你需要执行长时间运行的spiders或者移动spider到生产环境运行时，本地机器就不够了。
 这是解决部署spider的问题。
@@ -8,7 +8,7 @@
   - Scrapyd(开源)
   - Scrapy Cloud(基于云)
 
-##部署到Scrapyd服务器上(Deploying to a Scrapyd Server)##
+## 部署到Scrapyd服务器上(Deploying to a Scrapyd Server) ##
 
 Scrapyd是一个运行Scrapy Spider的开源的应用程序。它提供了具有HTTP API的服务器，能够运行和监控Scrapy spiders。
 
@@ -16,7 +16,7 @@ Scrapyd是一个运行Scrapy Spider的开源的应用程序。它提供了具有
 
 Scrapyd被一些Scrapy开发者维护着。
 
-##部署到Scrapy Cloud上(Deploying to Scrapy Cloud)##
+## 部署到Scrapy Cloud上(Deploying to Scrapy Cloud) ##
 
 [Scrapy Cloud](https://scrapinghub.com/scrapy-cloud?_ga=2.149222832.723751010.1547428575-445645531.1543541242)是scrapy背后的公司Scrapinghub提供的基于云的托管服务。
 

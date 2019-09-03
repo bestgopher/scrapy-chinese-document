@@ -1,8 +1,8 @@
-#通用实践(Common Practices)#
+# 通用实践(Common Practices) #
 
 本节介绍使用Scrapy时的常见做法。这些内容涉及许多主题，并且通常不属于任何其他特定部分。
 
-##在脚本中运行Scrapy(Run Scrapy from a script)##
+## 在脚本中运行Scrapy(Run Scrapy from a script) ##
 
 除了常用的 <font color=red>`scrapy crawl`</font> 来启动Scrapy，您也可以使用 API 在脚本中启动Scrapy。
 
@@ -65,7 +65,7 @@
 	d.addBoth(lambda _: reactor.stop())
 	reactor.run() # the script will block here until the crawling is finished
 
-##在同一进程中运行多个spider(Running multiple spiders in the same process)##
+## 在同一进程中运行多个spider(Running multiple spiders in the same process) ##
 
 默认情况下，当你运行<font color=red>`scrapy crawl`</font>命令时，Scrapy中一个进程运行一个单独的spider。然而，通过使用内部API，Scrapy支持一个进程运行多个spider。
 
@@ -139,7 +139,7 @@
 
 
 
-##分布式爬取(Distributed crawls)##
+## 分布式爬取(Distributed crawls) ##
 
 Scrapy并没有提供内置的机制支持分布式(多服务器)爬取。不过还是有办法进行分布式爬取， 取决于您要怎么分布了。
 
@@ -160,7 +160,7 @@ Scrapy并没有提供内置的机制支持分布式(多服务器)爬取。不过
 	curl http://scrapy3.mycompany.com:6800/schedule.json -d project=myproject -d spider=spider1 -d part=3
 
 
-##避免被禁止(ban)(Avoiding getting banned)##
+## 避免被禁止(ban)(Avoiding getting banned) ##
 
 有些网站实现了特定的机制，以一定规则来避免被爬虫爬取。 与这些规则打交道并不容易，需要技巧，有时候也需要些特别的基础。 如果有疑问请考虑联系 商业支持 。
 

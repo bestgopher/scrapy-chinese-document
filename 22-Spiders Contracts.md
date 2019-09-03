@@ -1,4 +1,4 @@
-#Spiders Contracts#
+# Spiders Contracts #
 
 <font color=orange>
 NOTE:</br>
@@ -47,7 +47,7 @@ NOTE:</br>
 
 使用 `check` 命令来运行contract检查。
 
-##自定义Contracts(Custom Contracts)##
+## 自定义Contracts(Custom Contracts) ##
 
 如果您想要比内置scrapy contract更为强大的功能，可以在您的项目里创建并设置您自己的 contract，并使用 `SPIDER_CONTRACTS` 设置来加载:
 

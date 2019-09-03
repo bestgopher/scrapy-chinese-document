@@ -1,4 +1,4 @@
-#下载和处理文件和图片(Downloading and processing files and images)#
+# 下载和处理文件和图片(Downloading and processing files and images) #
 
 Scrapy提供了一个 item pipeline ，来下载属于某个特定项目的文件(比如，当你抓取产品时，也想把它们的图片下载到本地)。这些pipelines共享一些功能和结构(我们把它们称作media pipelines)，你通常使用 Files Pipeline 或者 Images Pipeline。
 
@@ -15,7 +15,7 @@ Images Pipeline有一些额外的功能来处理图片：
 
 这个管道也会为那些当前安排好要下载的媒体保留一个内部队列，并将那些到达的包含相同媒体的项目连接到那个队列中。 这可以避免多次下载几个项目共享的同一个媒体。
 
-##使用Files Pipeline(Using the Files Pipeline)##
+## 使用Files Pipeline(Using the Files Pipeline) ##
 
 当使用 `FilesPipeline` ，典型的工作流程如下所示:
 
@@ -24,7 +24,7 @@ Images Pipeline有一些额外的功能来处理图片：
   3. 当项目进入 `FilesPipeline`，<font color=red>`files_urls`</font> 组内的URLs将被Scrapy的调度器和下载器（这意味着调度器和下载器的中间件可以复用）安排下载，当优先级更高，会在其他页面被抓取前处理。项目会在这个特定的管道阶段保持“locker”的状态，直到完成文件的下载（或者由于某些原因未完成下载）。
   4. 当文件下载完，item另一个字段(<font color=red>`files`</font>)将被更新到结构中。这个字段将包含一个字典列表，其中包括下载文件的信息，比如下载路径、源抓取地址（从 <font color=red>`file_urls`</font> 组获得）和文件的校验码。 <font color=red>`files`</font> 列表中的文件顺序将和源 <font color=red>`file_urls`</font> 字段保持一致。如果某个文件下载失败，将会记录下错误信息，文件也不会出现在 <font color=red>`files`</font> 字段中
 
-##使用Images Pipeline(Using the Images Pipelines)##
+## 使用Images Pipeline(Using the Images Pipelines) ##
 
 使用 `ImagesPipeline` 与使用 `FilesPipeline` 很多相同点，除了使用的字段名不同：item的<font color=red>`image_urls`</font>字段用来存储图片的URLs，<font color=red>`images`</font>字段存储下载图片的信息。
 
@@ -32,7 +32,7 @@ Images Pipeline有一些额外的功能来处理图片：
 
 Images Pipeline使用 [Pillow](https://github.com/python-pillow/Pillow) 库来生成缩略图和转化图片为JPEG/RGB格式的，因此你需要安装这个库。 [Python Imaging Library](http://www.pythonware.com/products/pil/) (PIL) 在很多情况下也能工作，但是做所周知的是在安装的时候会有许多问题，因此我们建议使用 Pillow 而不是 PIL。
 
-##开启你的媒体管道(Enabling your Media Pipeline)##
+## 开启你的媒体管道(Enabling your Media Pipeline) ##
 
 为了开启你的图片管道，你首先需要在项目中添加它 `ITEM_PIPELINES `setting。
 
@@ -56,11 +56,11 @@ Images Pipeline使用 [Pillow](https://github.com/python-pillow/Pillow) 库来�
 
 	IMAGES_STORE = '/path/to/valid/dir'
 
-##支持的存储方式(Supported Storage)##
+## 支持的存储方式(Supported Storage) ##
 
 文件系统是目前官方唯一支持的存储方式，但是也支持在Amazon S3和Google云上存储文件。
 
-###文件系统存储(File system storage)###
+### 文件系统存储(File system storage) ###
 
 文件使用 URLs的 [SHA1 hash](https://en.wikipedia.org/wiki/Secure_Hash_Algorithms)值作为文件名来保存的。
 
@@ -81,7 +81,7 @@ Images Pipeline使用 [Pillow](https://github.com/python-pillow/Pillow) 库来�
   - <font color=red>`<IMAGES_STORE>`</font> 是为 Images Pipeline定义的目录，值为 `IMAGES_STORE` 设置定义的值。
   - <font color=red>`full`</font> 是一个子目录。用于将完整图片和缩略图(如果使用)分开。
 
-###Amazon s3###
+### Amazon s3 ###
 
 `FILES_STORE`和`IMAGES_STORE`可以为Amazon s3存储平台。Scrapy能够自动上传文件到这个存储平台。
 
@@ -93,7 +93,7 @@ Images Pipeline使用 [Pillow](https://github.com/python-pillow/Pillow) 库来�
 
 	IMAGES_STORE_S3_ACL = 'public-read'
 
-###Google云存储(Google Cloud Storage)###
+### Google云存储(Google Cloud Storage) ###
 
 `FILES_STORE`和`IMAGES_STORE`可以为Google云存储平台。Scrapy能够自动上传文件到这个存储平台。
 
@@ -103,7 +103,7 @@ Images Pipeline使用 [Pillow](https://github.com/python-pillow/Pillow) 库来�
 	IMAGES_STORE = 'gs://bucket/images/'
 	GCS_PROJECT_ID = 'project_id'
 
-##使用举例(Usage example)##
+## 使用举例(Usage example) ##
 
 为了使用媒体pipeline，首先开启它。
 
@@ -135,9 +135,9 @@ Images Pipeline使用 [Pillow](https://github.com/python-pillow/Pillow) 库来�
 
 如果你有许多继承自ImagePipeline的image pipeline，并且你想要不同的pipelines有着不同的设置。你可以设置键以pipeline类的大写类名开头。例如，如果你的pipeline名为MyPipeline，而且你想要定义IMAGES_URLS_FIELD，你可以定义MYPIPELINE_IMAGES_URLS_FIELD，这个设置将会作为使用的设置。
 
-##额外的特性(Additional features##
+## 额外的特性(Additional features ##
 
-###文件到期(File expiration)###
+### 文件到期(File expiration) ###
 
 File Pipeline避免下载最近已经下载的图片。使用 `FILES_EXPIRES`(Image Pipeline情况下使用`IMAGES_EXPIRES`) 设置可以调整失效期限，可以用天数来指定:
 
@@ -155,7 +155,7 @@ File Pipeline避免下载最近已经下载的图片。使用 `FILES_EXPIRES`(Im
 
 MyPipeline将会设置180为生存时间。
 
-###图片生成缩略图(Thumbnail generation for images)###
+### 图片生成缩略图(Thumbnail generation for images) ###
 
 图片管道可以自动创建下载图片的缩略图。
 
@@ -185,7 +185,7 @@ MyPipeline将会设置180为生存时间。
 
 第一个是从网站下载的完整图片。
 
-###滤出小图片(Filtering out small images)###
+### 滤出小图片(Filtering out small images) ###
 
 当使用Images Pipeline时，你可以丢掉那些过小的图片，只需在`IMAGES_MIN_HEIGHT` 和 `IMAGES_MIN_WIDTH` 设置中指定最小允许的尺寸。
 
@@ -200,7 +200,7 @@ MyPipeline将会设置180为生存时间。
 
 默认情况下，没有尺寸限制，因此所有图片都将处理。
 
-###允许重定向(Allowing redirections)###
+### 允许重定向(Allowing redirections) ###
 
 默认情况下媒体pipelines忽略重定向，即HTTP重定向到媒体文件URL请求将意味着媒体下载被视为失败。
 
@@ -208,7 +208,7 @@ MyPipeline将会设置180为生存时间。
 
 	MEDIA_ALLOW_REDIRECTS = True
 
-##扩展媒体pipelines(Extending the Media Pipelines)##
+## 扩展媒体pipelines(Extending the Media Pipelines) ##
 
 下面是你可以在定制的图片管道里重写的方法：
 
@@ -285,7 +285,7 @@ item_completed() 方法需要返回一个输出，其将被送到随后的项目
 
 默认情况下， `item_completed()` 方法返回item。
 
-##定制图片管道的例子(Custom Images pipeline example)##
+## 定制图片管道的例子(Custom Images pipeline example) ##
 
 下面是一个图片管道的完整例子，其方法如上所示：
 
