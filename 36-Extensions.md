@@ -1,16 +1,16 @@
-#Extensions#
+# Extensions #
 
 扩展框架提供一个机制，使得你能将自定义功能绑定到Scrapy。
 
 扩展只是正常的类，它们在Scrapy启动时被实例化、初始化。
 
-##扩展设置(Extension settings)##
+## 扩展设置(Extension settings) ##
 
 扩展使用 Scrapy settings 管理它们的设置，这跟其他Scrapy代码一样。
 
 通常扩展需要给它们的设置加上前缀，以避免跟已有(或将来)的扩展冲突。 比如，一个扩展处理 Google Sitemaps， 则可以使用类似 `GOOGLESITEMAP_ENABLED`、`GOOGLESITEMAP_DEPTH` 等设置。
 
-##加载和激活扩展(Loading & activating extensions)##
+## 加载和激活扩展(Loading & activating extensions) ##
 
 扩展在扩展类被实例化时加载和激活。 因此，所有扩展的实例化代码必须在类的构造函数(<font color=red>`__init__`</font>)中执行。
 
@@ -25,11 +25,11 @@
 
 由于扩展通常不相互依赖，因此在大多数情况下，它们的加载顺序无关紧要。这就是EXTENSIONS_BASE设置定义所有扩展具有相同order(<font color=red>`0`</font>)的原因。但是，如果您需要添加依赖于已加载的其他扩展的扩展，则可以利用此功能。
 
-##可用，启用和禁用的扩展(Available, enabled and disabled extensions)##
+## 可用，启用和禁用的扩展(Available, enabled and disabled extensions) ##
 
 并不是所有可用的扩展都会被开启。一些扩展经常依赖一些特别的配置。 比如，HTTP Cache扩展是可用的但默认是禁用的，除非 `HTTPCACHE_ENABLED` 配置项设置了。
 
-##禁用扩展(Disabling an extension)##
+## 禁用扩展(Disabling an extension) ##
 
 为了禁用一个默认开启的扩展(比如，包含在 EXTENSIONS_BASE 中的扩展)， 需要将其顺序(order)设置为 <font color=red>`None`</font> 。比如:
 
@@ -37,7 +37,7 @@
 	    'scrapy.extensions.corestats.CoreStats': None,
 	}
 
-##编写你的扩展(Writing your own extension)##
+## 编写你的扩展(Writing your own extension) ##
 
 每个扩展都是一个Python类。Scrapy扩展(包括middlewares和pipelines)的主要入口是 from_crawler 类方法， 它接收一个 Crawler 类的实例。你可以通过这个对象访问settings，signals，stats，控制爬虫的行为。
 
@@ -45,7 +45,7 @@
 
 最后，如果 <font color=red>`from_crawler`</font> 方法抛出  `NotConfigured` 异常， 扩展会被禁用。否则，扩展会被开启。
 
-##扩展例子(Sample extension)##
+## 扩展例子(Sample extension) ##
 
   - spider被打开
   - spider被关闭
@@ -106,24 +106,24 @@
 	        if self.items_scraped % self.item_count == 0:
 	            spider.log("scraped %d items" % self.items_scraped)
 
-##内置扩展介绍(Built-in extensions reference)##
+## 内置扩展介绍(Built-in extensions reference) ##
 
-###通用扩展(General purpose extensions)###
+### 通用扩展(General purpose extensions) ###
 
-#####记录统计扩展(Log Stats extension)#####
+##### 记录统计扩展(Log Stats extension) #####
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.extensions.logstats.LogStats
 </td></tr></table>
 记录基本的统计信息，比如爬取的页面和条目(items)。
 
-#####核心统计扩展(Core Stats extension)#####
+##### 核心统计扩展(Core Stats extension) #####
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.extensions.corestats.CoreStats
 </td></tr></table>
 如果统计收集器(stats collection)启用了，该扩展开启核心统计收集(参考 数据收集(Stats Collection))。
 
-#####Telnet console 扩展(Telnet console extension)#####
+##### Telnet console 扩展(Telnet console extension) #####
 
 
 <table><tr><td>
@@ -135,7 +135,7 @@
 telnet控制台通过 `TELNETCONSOLE_ENABLED` 配置项开启， 服务器会监听 `TELNETCONSOLE_PORT` 指定的端口。
 
 
-#####内存使用扩展(Memory usage extension)#####
+##### 内存使用扩展(Memory usage extension) #####
 
 
 <table><tr><td>
@@ -161,7 +161,7 @@ telnet控制台通过 `TELNETCONSOLE_ENABLED` 配置项开启， 服务器会监
 
 
 
-#####内存调试扩展(Memory debugger extension)#####
+##### 内存调试扩展(Memory debugger extension) #####
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.extensions.memdebug.MemoryDebugger
@@ -174,7 +174,7 @@ telnet控制台通过 `TELNETCONSOLE_ENABLED` 配置项开启， 服务器会监
 
 开启该扩展，需打开 `MEMDEBUG_ENABLED` 配置项。 信息将会存储在统计信息(stats)中。
 
-#####关闭spider扩展(Close spider extension)#####
+##### 关闭spider扩展(Close spider extension) #####
 
 
 <table><tr><td>
@@ -216,7 +216,7 @@ telnet控制台通过 `TELNETCONSOLE_ENABLED` 配置项开启， 服务器会监
 一个整数值，指定spider可以接受的最大错误数。 如果spider生成多于该数目的错误，它将以 <font color=red>`closespider_errorcount`</font> 的原因关闭。 如果设置为0（或者未设置），spiders不会因为发生错误过多而关闭。
 
 
-#####(StatsMailer extension)#####
+##### (StatsMailer extension) #####
 
 
 <table><tr><td>
@@ -225,9 +225,9 @@ telnet控制台通过 `TELNETCONSOLE_ENABLED` 配置项开启， 服务器会监
 
 这个简单的扩展可用来在一个域名爬取完毕时发送提醒邮件， 包含Scrapy收集的统计信息。 邮件会发送个通过 `STATSMAILER_RCPTS` 指定的所有接收人。
 
-##Debugging extensions##
+## Debugging extensions ##
 
-#####Stack trace dump extension#####
+##### Stack trace dump extension #####
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.extensions.debug.StackTraceDump
@@ -250,7 +250,7 @@ telnet控制台通过 `TELNETCONSOLE_ENABLED` 配置项开启， 服务器会监
 
 		kill -QUIT <pid>
 
-#####调试扩展Debugger extension#####
+##### 调试扩展Debugger extension #####
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.extensions.debug.Debugger

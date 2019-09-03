@@ -1,4 +1,4 @@
-#Signals#
+# Signals #
 
 Scrapy使用信号来通知事情发生。您可以在您的Scrapy项目中捕捉一些信号(使用 extension)来完成额外的工作或添加额外的功能，扩展Scrapy。
 
@@ -35,14 +35,14 @@ class DmozSpider(Spider):
     def parse(self, response):
         pass
 
-##延迟的信号处理器(Deferred signal handlers)##
+## 延迟的信号处理器(Deferred signal handlers) ##
 
 有些信号支持从处理器返回 Twisted deferreds ，参考下边的 内置信号参考手册(Built-in signals reference) 来了解哪些支持。
 
-##内置信号参考手册(Built-in signals reference)##
+## 内置信号参考手册(Built-in signals reference) ##
 以下给出Scrapy内置信号的列表及其意义。
 
-####engine_started####
+#### engine_started ####
 
 <table><tr><td>
 scrapy.signals.engine_started()
@@ -57,7 +57,7 @@ NOTE:</br>
 该信号可能会在信号 spider_opened 之后被发送，取决于spider的启动方式。 所以不要 依赖 该信号会比 spider-opened 更早被发送。
 </font>
 
-####engine_stopped####
+#### engine_stopped ####
 <table><tr><td>
 scrapy.signals.engine_stopped()
 </td></tr></table>
@@ -66,7 +66,7 @@ scrapy.signals.engine_stopped()
 
 该信号支持返回deferreds。
 
-####item_scraped####
+#### item_scraped ####
 <table><tr><td>
 scrapy.signals.item_scraped(item, response, spider)
 </td></tr></table>
@@ -80,7 +80,7 @@ scrapy.signals.item_scraped(item, response, spider)
   - **item** (`Item` 对象) – 爬取到的item
   - **spider** (`Spider` 对象) – 爬取item的spider
   - **response** (`Response` 对象) – 提取item的response
-####item_dropped####
+#### item_dropped ####
 <table><tr><td>
 scrapy.signals.engine_stopped()
 </td></tr></table>
@@ -98,7 +98,7 @@ scrapy.signals.engine_stopped()
 
 
 
-####spider_closed####
+#### spider_closed ####
 <table><tr><td>
 scrapy.signals.spider_closed(spider, reason)
 </td></tr></table>
@@ -113,7 +113,7 @@ scrapy.signals.spider_closed(spider, reason)
   - **spider** (`Spider` 对象) – 关闭的spider
   - **reason** (str) – 描述spider被关闭的原因的字符串。如果spider是由于完成爬取而被关闭，则其为 <font color-red>`'finished'`</font> 。否则，如果spider是被引擎的 <font color=red>`close_spider`</font> 方法所关闭，则其为调用该方法时传入的<font color=red>`reason`</font> 参数(默认为 <font color=red>`'cancelled'`</font>)。如果引擎被关闭(例如， 输入Ctrl-C)，则其为 <font color=red>`'shutdown'`</font> 。
 
-####spider_opened####
+#### spider_opened ####
 <table><tr><td>
 scrapy.signals.spider_opened(spider)
 </td></tr></table>
@@ -126,7 +126,7 @@ scrapy.signals.spider_opened(spider)
 
   - **spider** (`Spider` 对象) – 开启的spider
 
-####spider_idle####
+#### spider_idle ####
 <table><tr><td>
 scrapy.signals.spider_idle(spider)
 </td></tr></table>
@@ -147,7 +147,7 @@ scrapy.signals.spider_idle(spider)
 
   - **spider**(`Spider` 对象) – 空闲的spider
 
-####spider_error####
+#### spider_error ####
 <table><tr><td>
 scrapy.signals.spider_error(failure, response, spider)
 </td></tr></table>
@@ -163,7 +163,7 @@ scrapy.signals.spider_error(failure, response, spider)
   - **response** (`Response` 对象) – 当异常被抛出时被处理的response
   - **spider** (`Spider` 对象) – 抛出异常的spider
 
-####request_scheduled####
+#### request_scheduled ####
 <table><tr><td>
 scrapy.signals.request_scheduled(request, spider)
 </td></tr></table>
@@ -178,7 +178,7 @@ scrapy.signals.request_scheduled(request, spider)
   - **spider** (`Spider` 对象) – 产生该request的spider
 
 
-####request_dropped####
+#### request_dropped ####
 <table><tr><td>
 scrapy.signals.request_dropped(request, spider)
 </td></tr></table>
@@ -192,7 +192,7 @@ scrapy.signals.request_dropped(request, spider)
   - **request** (`Request` 对象) – 到达调度器的request
   - **spider** (`Spider` 对象) – 产生该request的spider
 
-####response_received####
+#### response_received ####
 <table><tr><td>
 scrapy.signals.response_received(response, request, spider)
 </td></tr></table>
@@ -207,7 +207,7 @@ scrapy.signals.response_received(response, request, spider)
   - request (`Request`对象) – 生成response的request
   - spider (`Spider`对象) – response所对应的spider
 
-####response_downloaded####
+#### response_downloaded ####
 <table><tr><td>
 scrapy.signals.response_downloaded(response, request, spider)
 </td></tr></table>

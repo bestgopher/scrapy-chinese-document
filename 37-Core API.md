@@ -1,7 +1,7 @@
-#Core API#
+# Core API #
 该节文档讲述Scrapy核心API，目标用户是开发Scrapy扩展(extensions)和中间件(middlewares)的开发人员。
 
-##Crawler API##
+## Crawler API ##
 Scrapy API的主要入口是 `Crawler` 的实例对象， 通过类方法 <font color=red>`from_crawler`</font> 将它传递给扩展(extensions)。 该对象提供对所有Scrapy核心组件的访问， 也是扩展访问Scrapy核心组件和挂载功能到Scrapy的唯一途径。
 
 Extension Manager负责加载和跟踪已经安装的扩展， 它通过 EXTENSIONS 配置，包含一个所有可用扩展的字典， 字典的顺序跟你在 configure the downloader middlewares 配置的顺序一致。
@@ -185,7 +185,7 @@ CrawlerProcess对象必须通过 `Settings` 对象实例化。
 
 返回在它们全部结束时触发的deferred。
 
-#Settings API#
+# Settings API #
  <table><tr><td>
 scrapy.settings.SETTINGS_PRIORITIES
 </td></tr></table>
@@ -379,7 +379,7 @@ return False 将某项配置的值以布尔值形式返回。比如，<font colo
   - **priiority**(字符串或者整数) - 设置的优先级。应该是 `SETTINGS_PRIORITIES` 的键或者一个整数。
 
 
-##SpiderLoader API##
+## SpiderLoader API ##
 
  <table><tr><td>
 <font color=green>class</font>    scrapy.loader.SpiderLoader
@@ -420,7 +420,7 @@ return False 将某项配置的值以布尔值形式返回。比如，<font colo
   - **request**(`Request` 实例) - 需要的请求。
 
 
-##Signals API##
+## Signals API ##
 
  <table><tr><td>
 <font color=green>class</font>    scrapy.signalmanager.SignalManager(sender=_Anonymous)
@@ -464,7 +464,7 @@ signal可以是任何对象，虽然Scrapy提供了一些预先定义好的信�
 
 关键字参数会传递给信号处理者(signal handlers)(通过方法 `connect()` 关联)。
 
-##Stats Collector API##
+## Stats Collector API ##
 
 模块 `scrapy.statscollectors` 下有好几种状态收集器， 它们都实现了状态收集器API对应的类 `StatsCollector` (即它们都继承至该类)。
 
@@ -504,7 +504,7 @@ signal可以是任何对象，虽然Scrapy提供了一些预先定义好的信�
 
 清除所有统计信息。
 
-###以下方法不是统计收集api的一部分，但实现自定义的统计收集器时会使用到：###
+### 以下方法不是统计收集api的一部分，但实现自定义的统计收集器时会使用到： ###
 
 **open_spider(spider)**
 

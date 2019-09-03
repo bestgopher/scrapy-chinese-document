@@ -1,8 +1,8 @@
-#Spider Middleware#
+# Spider Middleware #
 
 Spider中间件是介入到Scrapy的spider处理机制的钩子框架，您可以添加代码来处理发送给 Spiders 的response及spider产生的item和request。
 
-##激活spider中间件(Activating a spider middleware)##
+## 激活spider中间件(Activating a spider middleware) ##
 
 要启用spider中间件，您可以将其加入到 SPIDER_MIDDLEWARES 设置中。 该设置是一个字典，键位中间件的路径，值为中间件的顺序(order)。
 
@@ -25,7 +25,7 @@ Spider中间件是介入到Scrapy的spider处理机制的钩子框架，您可�
 
 最后，请注意，有些中间件需要通过特定的设置来启用。更多内容请查看相关中间件文档。
 
-##编写您自己的spider中间件(Writing your own spider middleware)##
+## 编写您自己的spider中间件(Writing your own spider middleware) ##
 
 每个中间件组件是一个定义了以下一个或多个方法的Python类：
 
@@ -104,13 +104,13 @@ NOTE：</br>
 
   - **crawler**('Crawler'对象) - 使用中间件的crawler。
 
-##内置spider中间件参考手册(Built-in spider middleware reference)##
+## 内置spider中间件参考手册(Built-in spider middleware reference) ##
 
 本页面介绍了Scrapy自带的所有spider中间件。关于如何使用及编写您自己的中间件，请参考 spider middleware usage guide.
 
 关于默认启用的中间件列表(及其顺序)请参考 `SPIDER_MIDDLEWARES_BASE` 设置。
 
-##DepthMiddleware##
+## DepthMiddleware ##
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.spidermiddlewares.depth.DepthMiddleware
@@ -128,7 +128,7 @@ DepthMiddleware是一个用于追踪每个Request在被爬取的网站的深度�
   - **DEPTH_PRIORITY** - 是否根据其深度对requet安排优先级
 
 
-##HttpErrorMiddleware##
+## HttpErrorMiddleware ##
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.spidermiddlewares.httperror.HttpErrorMiddleware
@@ -149,21 +149,21 @@ DepthMiddleware是一个用于追踪每个Request在被爬取的网站的深度�
 
 不过请记住，除非您知道您在做什么，否则处理非200返回一般来说是个糟糕的决定。
 
-###HttpErrorMiddleware settings###
+### HttpErrorMiddleware settings ###
 
-#####HTTPERROR_ALLOWED\_CODES#####
+##### HTTPERROR_ALLOWED\_CODES #####
 
 默认：<font color=red>`[]`</font>
 
 忽略该列表中所有非200状态码的response。
 
-#####HTTPERROR_ALLOW\_ALL#####
+##### HTTPERROR_ALLOW\_ALL #####
 
 默认：<font color=red>`False`</font>
 
 忽略所有response，不管其状态值。
 
-##OffsiteMiddleware##
+## OffsiteMiddleware ##
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.contrib.spidermiddleware.offsite.OffsiteMiddleware
@@ -184,7 +184,7 @@ DepthMiddleware是一个用于追踪每个Request在被爬取的网站的深度�
 
 如果request设置了 `dont_filter` 属性， 即使该request的网站不在允许列表里，则offsite中间件将会允许该request
 
-##RefererMiddleware##
+## RefererMiddleware ##
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.spidermiddlewares.referer.RefererMiddleware
@@ -192,15 +192,15 @@ DepthMiddleware是一个用于追踪每个Request在被爬取的网站的深度�
 
 根据生成Request的Response的URL来设置Request <font color=red>`Referer`</font> 字段。
 
-###RefererMiddleware settings###
+### RefererMiddleware settings ###
 
-#####REFERER_ENABLED#####
+##### REFERER_ENABLED #####
 
 默认：<font color=red>`True`</font>
 
 是否启用referer中间件。
 
-#####REFERRER_POLICY#####
+##### REFERRER_POLICY #####
 
 默认：<font color=red>`'scrapy.spidermiddlewares.referer.DefaultReferrerPolicy'`</font>
 
@@ -211,7 +211,7 @@ NOTE：</br>
 你可以为每个请求设置Referer Policy，使用指定的Request.meta键 <font color=red>`referrer_policy`</font>，接受 <font color=red>`REFERRER_POLICY`</font> 一样的值。
 </font>
 
-#####REFERRER_POLICY的可接受值(Acceptable values for REFERRER_POLICY)#####
+##### REFERRER_POLICY的可接受值(Acceptable values for REFERRER_POLICY) #####
 
   - 要么是 <font color=red>`scrapy.spidermiddlewares.referer.ReferrerPolicy`</font> 子类的路径(自定义)，要么是内置的中的一个。
   - 或者标准W3C定义的字符串值。
@@ -273,7 +273,7 @@ Scrapy的默认referrer策略 - 与 'no-referrer-when-downgrade' ，这个W3C为
 <font color=green>class</font>   &nbsp;scrapy.spidermiddlewares.referer.UnsafeUrlPolicy
 </td></tr></table>
 
-##UrlLengthMiddleware##
+## UrlLengthMiddleware ##
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.spidermiddlewares.urllength.UrlLengthMiddleware

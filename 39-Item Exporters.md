@@ -1,10 +1,10 @@
-#Item Exporters#
+# Item Exporters #
 
 当你抓取了你要的数据(Items)，你就会想要将他们持久化或导出它们，并应用在其他的程序。这是整个抓取过程的目的。
 
 为此，Scrapy提供了Item Exporters 来创建不同的输出格式，如XML，CSV或JSON。
 
-##使用 Item Exporter(Using Item Exporters)##
+## 使用 Item Exporter(Using Item Exporters) ##
 
 如果你很忙，只想使用 Item Exporter 输出数据，请查看 Feed exports. 相反，如果你想知道Item Exporter 是如何工作的，或需要更多的自定义功能（不包括默认的 exports），请继续阅读下文。
 
@@ -43,14 +43,14 @@
 	        exporter.export_item(item)
 	        return item
 
-##序列化 item fields(Serialization of item fields)##
+## 序列化 item fields(Serialization of item fields) ##
 默认情况下，该字段值将不变的传递到序列化库，如何对其进行序列化的决定被委托给每一个特定的序列化库。
 
 但是，你可以自定义每个字段值如何序列化在它被传递到序列化库中之前。
 
 有两种方法可以自定义一个字段如何被序列化，请看下文。
 
-####1. 在 field 类中声明一个 serializer(1. Declaring a serializer in the field)####
+#### 1. 在 field 类中声明一个 serializer(1. Declaring a serializer in the field) ####
 
 如果你使用 `item` 您可以在 field metadata 声明一个 serializer。该 serializer 必须可调用，并返回它的序列化形式。
 
@@ -65,7 +65,7 @@
 	    name = scrapy.Field()
 	    price = scrapy.Field(serializer=serialize_price)
 
-##2. 覆盖(overriding) serialize_field() 方法(Overriding the serialize_field() method)##
+## 2. 覆盖(overriding) serialize\_field() 方法(Overriding the serialize_field() method) ##
 
 你可以覆盖 `serialize_field()` 方法来自定义如何输出你的数据。
 
@@ -82,14 +82,14 @@
 	            return '$ %s' % str(value)
 	        return super(Product, self).serialize_field(field, name, value)
 
-##内置Item Exporters 参考资料(Built-in Item Exporters reference)##
+## 内置Item Exporters 参考资料(Built-in Item Exporters reference) ##
 
 下面是一些Scrapy内置的 Item Exporters类. 其中一些包括了实例, 假设你要输出以下2个Items:
 
 	Item(name='Color TV', price='1200')
 	Item(name='DVD player', price='200')
 
-####BaseItemExporter####
+#### BaseItemExporter ####
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.contrib.exporter.BaseItemExporter(fields_to_export=None, export_empty_fields=False, encoding='utf-8')
@@ -151,7 +151,7 @@ Encoding 属性将用于编码 unicode 值. (仅用于序列化字符串).其他
   -  <font color=red>`indent>0`</font> -  每个item在其自己的行上，使用提供的数值缩进
 
 
-###XmlItemExporter###
+### XmlItemExporter ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.exporters.XmlItemExporter(file, item_element='item', root_element='items', **kwargs)
@@ -200,7 +200,7 @@ Encoding 属性将用于编码 unicode 值. (仅用于序列化字符串).其他
 	  </item>
 	</items>
 
-###CsvItemExporter###
+### CsvItemExporter ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.exporters.CsvItemExporter(file, include_headers_line=True, join_multivalued=', ', **kwargs)
@@ -222,7 +222,7 @@ Encoding 属性将用于编码 unicode 值. (仅用于序列化字符串).其他
 	Color TV,1200
 	DVD player,200
 
-###PickleItemExporter###
+### PickleItemExporter ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.exporters.PickleItemExporter(file, protocol=0, **kwargs)
@@ -243,7 +243,7 @@ Encoding 属性将用于编码 unicode 值. (仅用于序列化字符串).其他
 
 Pickle 不是可读的格式，这里不提供实例.
 
-###PprintItemExporter###
+### PprintItemExporter ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.contrib.exporter.PprintItemExporter(file, **kwargs)
@@ -262,7 +262,7 @@ Pickle 不是可读的格式，这里不提供实例.
 
 此格式会根据行的长短进行调整.
 
-###JsonItemExporter###
+### JsonItemExporter ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.exporters.JsonItemExporter(file, **kwargs)
@@ -285,7 +285,7 @@ WARNING:</br>
 JSON 是一个简单而有弹性的格式, 但对大量数据的扩展性不是很好，因为这里会将整个对象放入内存. 如果你要JSON既强大又简单,可以考虑 `JsonLinesItemExporter` , 或把输出对象分为多个块.
 </font>
 
-###JsonLinesItemExporter###
+### JsonLinesItemExporter ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.exporters.JsonLinesItemExporter(file, **kwargs)

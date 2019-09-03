@@ -1,8 +1,8 @@
-#下载中间件(Downloader Middleware)#
+# 下载中间件(Downloader Middleware) #
 
 下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
 
-##激活下载器中间件(Activating a downloader middleware)##
+## 激活下载器中间件(Activating a downloader middleware) ##
 
 要激活下载器中间件组件，将其加入到 `DOWNLOADER_MIDDLEWARES` 设置中。 该设置是一个字典(dict)，键为中间件类的路径，值为其中间件的顺序(order)。
 
@@ -25,7 +25,7 @@
 
 最后，请注意，有些中间件需要通过特定的设置来启用。更多内容请查看相关中间件文档。
 
-##编写您自己的下载器中间件(Writing your own downloader middleware)##
+## 编写您自己的下载器中间件(Writing your own downloader middleware) ##
 
 每个中间件组件是一个定义了以下一个或多个方法的Python类:
 
@@ -94,14 +94,14 @@
 
   - **crawler**('Crawler'对象) - 使用中间件的crawler。
 
-##内置的下载中间件参考(Built-in downloader middleware reference)##
+## 内置的下载中间件参考(Built-in downloader middleware reference) ##
 
 本页面介绍了Scrapy自带的所有下载中间件。关于如何使用及编写您自己的中间件，请参考 downloader middleware usage guide。
 
 
 关于默认启用的中间件列表(及其顺序)请参考 `DOWNLOADER_MIDDLEWARES_BASE` 设置。
 
-###CookiesMiddleware###
+### CookiesMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.cookies.CookiesMiddleware
@@ -114,7 +114,7 @@ The following settings can be used to configure the cookie middleware:
   - `COOKIES_ENABLED`
   - `COOKIES_DEBUG`
 
-#####Multiple cookie sessions per spider#####
+##### Multiple cookie sessions per spider #####
 
 Scrapy通过使用 `cookiejar` Request meta key来支持单spider追踪多cookie session。 默认情况下其使用一个cookie jar(session)，不过您可以传递一个标示符来使用多个。
 
@@ -132,7 +132,7 @@ Scrapy通过使用 `cookiejar` Request meta key来支持单spider追踪多cookie
 	        meta={'cookiejar': response.meta['cookiejar']},
 	        callback=self.parse_other_page)
 
-#####COOKIES_ENABLED#####
+##### COOKIES_ENABLED #####
 
 默认：<font color=red>`True`</font>
 
@@ -141,7 +141,7 @@ Scrapy通过使用 `cookiejar` Request meta key来支持单spider追踪多cookie
 注意尽管 `COOKIES_ENABLED` 设置了值，但是如果 <font color=red>`Request.meta['dont_merge_cookies']`</font>的值为 <font color=red>`True`</font>，请求的cookies将不会发送给web server，`Response` 收到的cookies 也不会与已存在的cookies合并。
 
 
-#####COOKIES_DEBUG#####
+##### COOKIES_DEBUG #####
 
 默认：<font color=red>`True`</font>
 
@@ -159,7 +159,7 @@ Scrapy通过使用 `cookiejar` Request meta key来支持单spider追踪多cookie
 	2011-04-06 14:49:50-0300 [scrapy.core.engine] DEBUG: Crawled (200) <GET http://www.diningcity.com/netherlands/index.html> (referer: None)
 	[...]
 
-###DefaultHeadersMiddleware###
+### DefaultHeadersMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware
@@ -167,7 +167,7 @@ Scrapy通过使用 `cookiejar` Request meta key来支持单spider追踪多cookie
 
 该中间件使用 `DEFAULT_REQUEST_HEADERS` 设置指定值为所有request设置默认request header。
 
-###DownloadTimeoutMiddleware###
+### DownloadTimeoutMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware
@@ -179,7 +179,7 @@ Scrapy通过使用 `cookiejar` Request meta key来支持单spider追踪多cookie
 注意：</br>你也可以通过 `download_timeout` Request.meta key为每个请求设置下载超时时间；这个在 `DownloadTimeoutMiddleware` 被禁用的情况下也能使用。
 </font>
 
-###HttpAuthMiddleware###
+### HttpAuthMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware
@@ -202,7 +202,7 @@ Scrapy通过使用 `cookiejar` Request meta key来支持单spider追踪多cookie
 	    # .. rest of the spider code omitted ...
 
 
-###HttpCacheMiddleware###
+### HttpCacheMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.httpcache.HttpCacheMiddleware
@@ -227,7 +227,7 @@ Scrapy提供了两种了缓存策略:
 
 你可以使用 `dont_cache` meta键设置为 `True` 来避免在每个策略上都缓存响应。
 
-#####Dummy policy (default)#####
+##### Dummy policy (default) #####
 
 该策略不考虑任何HTTP Cache-Control指令。每个request及其对应的response都被缓存。 当相同的request发生时，其不发送任何数据，直接返回response。
 
@@ -238,7 +238,7 @@ Dummpy策略对于测试spider十分有用。其能使spider运行更快(不需�
   - `HTTPCACHE_POLICY` 为 <font color=red>`scrapy.extensions.httpcache.DummyPolicy`</font>
 
 
-#####RFC2616 policy#####
+##### RFC2616 policy #####
 
 该策略提供了符合RFC2616的HTTP缓存，例如符合HTTP Cache-Control， 针对生产环境并且应用在持续性运行环境所设置。该策略能避免下载未修改的数据(来节省带宽，提高爬取速度)。
 
@@ -268,7 +268,7 @@ Dummpy策略对于测试spider十分有用。其能使spider运行更快(不需�
 
   - `HTTPCACHE_POLICY` 为 <font color=red>`scrapy.extensions.httpcache.RFC2616Policy`</font>
 
-#####Filesystem storage backend (default)#####
+##### Filesystem storage backend (default) #####
 
 文件系统存储后端可以用于HTTP缓存中间件。
 
@@ -289,7 +289,7 @@ Dummpy策略对于测试spider十分有用。其能使spider运行更快(不需�
 
 	/path/to/cache/dir/example.com/72/72811f648e718090f041317756c03adb0ada46c7
 
-#####DBM storage backend#####
+##### DBM storage backend #####
 
 同时也有 DBM 存储后端可以用于HTTP缓存中间件。
 
@@ -300,7 +300,7 @@ Dummpy策略对于测试spider十分有用。其能使spider运行更快(不需�
   - `HTTPCACHE_STORAGE` 为 <font color=red>`scrapy.contrib.httpcache.DbmCacheStorage`</font>
 
 
-#####LevelDB storage backend#####
+##### LevelDB storage backend #####
 
 
 LevelDB 存储后端可以用于HTTP缓存中间件。
@@ -313,11 +313,11 @@ LevelDB 存储后端可以用于HTTP缓存中间件。
   - 设置 `HTTPCACHE_STORAGE` 为  <font color=red>`scrapy.extensions.httpcache.LeveldbCacheStorage`</font>
   - 安装 LevelDB python bindings： <font color=red>`pip install leveldb`</font>
 
-###HTTPCache middleware settings###
+### HTTPCache middleware settings ###
 
 `HttpCacheMiddleware` 可以通过以下设置进行配置:
 
-#####HTTPCACHE_ENABLED#####
+##### HTTPCACHE_ENABLED #####
 
 默认：<font color=red>`False`</font>
 
@@ -325,7 +325,7 @@ HTTP缓存是否开启。
 
 在 0.11 版更改: 在0.11版本前，是使用 `HTTPCACHE_DIR` 来开启缓存。
 
-#####HTTPCACHE_EXPIRATION\_SECS#####
+##### HTTPCACHE_EXPIRATION\_SECS #####
 
 默认：<font color=red>`0`</font>
 
@@ -337,14 +337,14 @@ HTTP缓存是否开启。
 在 0.11 版更改: 在0.11版本前，0的意义是缓存的request永远超时。
 
 
-#####HTTPCACHE_DIR#####
+##### HTTPCACHE_DIR #####
 
 默认：<font color=red>`'httpcache'`</font>
 
 存储(低级的)HTTP缓存的目录。如果为空，则HTTP缓存将会被关闭。 如果为相对目录，则相对于项目数据目录(project data dir)
 
 
-#####HTTPCACHE\_IGNORE_HTTP\_CODES#####
+##### HTTPCACHE\_IGNORE_HTTP\_CODES #####
 
 默认：<font color=red>`[]`</font>
 
@@ -352,43 +352,43 @@ HTTP缓存是否开启。
 不缓存列表中的HTTP状态码(code)的响应。
 
 
-#####HTTPCACHE_IGNORE\_MISSING#####
+##### HTTPCACHE_IGNORE\_MISSING #####
 
 默认：<font color=red>`False`</font>
 
 如果启用，在缓存中没找到的request将会被忽略，而不是重新下载。
 
-#####HTTPCACHE_IGNORE\_SCHEMES#####
+##### HTTPCACHE_IGNORE\_SCHEMES #####
 
 默认：<font color=red>`['file']`</font>
 
 不缓存这些URI schemel(://前面的字段，例如http://前面的字段是http)的响应。
 
-#####HTTPCACHE_STORAGE#####
+##### HTTPCACHE_STORAGE #####
 
 默认：<font color=red>`'scrapy.extensions.httpcache.FilesystemCacheStorage'`</font>
 
 实现缓存存储后端的类。
 
-#####HTTPCACHE_DBM\_MODULE#####
+##### HTTPCACHE_DBM\_MODULE #####
 
 默认：<font color=red>`'anydbm'`</font>
 
 使用 DBM存储后端 的数据库模块。 该设置是DBM后端特定的。
 
-#####HTTPCACHE_POLICY#####
+##### HTTPCACHE_POLICY #####
 
 默认：<font color=red>`'scrapy.extensions.httpcache.DummyPolicy'`</font>
 
 实现缓存策略的类。
 
-#####HTTPCACHE_GZIP#####
+##### HTTPCACHE_GZIP #####
 
 默认：<font color=red>`False`</font>
 
 如果启用，将会压缩所有的缓存数据为gzip格式。这个设置Filesystem后端特定的。
 
-#####HTTPCACHE_ALWAYS\_STORE#####
+##### HTTPCACHE_ALWAYS\_STORE #####
 
 默认：<font color=red>`False`</font>
 
@@ -398,7 +398,7 @@ spider可能希望在缓存中有所有可用的响应，以后使用 Cache-Cont
 
 这个策略仍然遵循响应中的 Cache-Control:no-store指令。如果你不想这样，在传入缓存中间件之前过滤掉响应中的Cache-Control:no-store头。
 
-#####HTTPCACHE\_IGNORE\_RESPONSE_CACHE\_CONTROLS#####
+##### HTTPCACHE\_IGNORE\_RESPONSE_CACHE\_CONTROLS #####
 
 默认：<font color=red>`[]`</font>
 
@@ -409,7 +409,7 @@ spider可能希望在缓存中有所有可用的响应，以后使用 Cache-Cont
 我们假设spider不会在请求中发出Cache-Control指令，除非它实际需要它们，因此请求中的指令不会被过滤。
 
 
-###HttpCompressionMiddleware###
+### HttpCompressionMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware
@@ -417,15 +417,15 @@ spider可能希望在缓存中有所有可用的响应，以后使用 Cache-Cont
 
 该中间件提供了对压缩(gzip, deflate)数据的支持。如果安装了brotlipy，此中间件还支持解码brotli-compressed响应。
 
-###设置(HttpCompressionMiddleware Settings)###
+### 设置(HttpCompressionMiddleware Settings) ###
 
-#####COMPRESSION_ENABLED#####
+##### COMPRESSION_ENABLED #####
 
 默认：<font color=red>`True`</font>
 
 Compression Middleware(压缩中间件)是否开启。
 
-###HttpProxyMiddleware###
+### HttpProxyMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware
@@ -443,7 +443,7 @@ Compression Middleware(压缩中间件)是否开启。
 或者 <font color=red>`http://username:password@some_proxy_server:port`</font> 这样。记住这个值比环境变量 <font color=red>`http_proxy`</font> / <font color=red>`https_proxy`</font> 优先级高，也会忽略 <font color=red>`no_proxy`</font> 环境变量。
 
 
-###HttpProxyMiddleware###
+### HttpProxyMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.redirect.RedirectMiddleware
@@ -469,21 +469,21 @@ Compression Middleware(压缩中间件)是否开启。
 
 `Request.meta`key 为 <font color=red>`handle_httpstatus_list`</font> 也能为单个请求指定响应码。如果你想允许所有的响应码你也可以设置meta key <font color=red>`handle_httpstatus_all`</font> 为 <font color=red>`True`</font>。
 
-###(设置)RedirectMiddleware settings###
+### (设置)RedirectMiddleware settings ###
 
-#####REDIRECT_ENABLED#####
+##### REDIRECT_ENABLED #####
 
 默认：<font color=red>`True`</font>
 
 是否启用Redirect中间件。
 
-#####REDIRECT_MAX\_TIMES#####
+##### REDIRECT_MAX\_TIMES #####
 
 默认：<font color=red>`20`</font>
 
 单个request被重定向的最大次数。
 
-###MetaRefreshMiddleware###
+### MetaRefreshMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware
@@ -498,21 +498,21 @@ Compression Middleware(压缩中间件)是否开启。
 
 该中间件遵循 `RedirectMiddleware` 描述的 `REDIRECT_MAX_TIMES` 设定，`dont_redirect` 及 `redirect_urls` meta key。
 
-###设置（MetaRefreshMiddleware settings)###
+### 设置（MetaRefreshMiddleware settings) ###
 
-#####METAREFRESH_ENABLED#####
+##### METAREFRESH_ENABLED #####
 
 默认：<font color=red>`True`</font>
 
 Meta Refresh中间件是否启用
 
-#####METAREFRESH_MAXDELAY#####
+##### METAREFRESH_MAXDELAY #####
 
 默认：<font color=red>`100`</font>
 
 跟进重定向的最大 meta-refresh 延迟(单位:秒)。一些网站使用meta-refresh重定向到一个会话的过期网页，因此我们限制自动重定向的最大延迟。
 
-###RetryMiddleware###
+### RetryMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.retry.RetryMiddleware
@@ -530,15 +530,15 @@ The `RetryMiddleware` can be configured through the following settings (see the 
 
 如果 `Request.meta` 包含 <font color=red>`dont_retry`</font> 键，并且值为True，则该request将会被此中间件忽略。
 
-###设置(RetryMiddleware Settings)###
+### 设置(RetryMiddleware Settings) ###
 
-#####RETRY_ENABLED#####
+##### RETRY_ENABLED #####
 
 默认：<font color=red>`True`</font>
 
 Retry Middleware是否启用。
 
-###RETRY_TIMES###
+### RETRY_TIMES ###
 
 默认：<font color=red>`2`</font>
 
@@ -546,7 +546,7 @@ Retry Middleware是否启用。
 
 重试的最大次数可以使用 `Request.meta` 的 `max_retry_times` 属性为每个请求指定。当被初始化的时候，`max_retry_times` 比 `RETRY_TIMES` 的优先级高。
 
-#####RETRY\_HTTP_CODES#####
+##### RETRY\_HTTP_CODES #####
 
 默认：<font color=red>`[500, 502, 503, 504, 408]`</font>
 
@@ -554,7 +554,7 @@ Retry Middleware是否启用。
 
 某些情况下，你想要把400加到 `RETRY_HTTP_CODES` 因为它通常是作为指示服务器过载的代码。默认情况下不包括它，因为HTTP规范说明了这一点。
 
-###RobotsTxtMiddleware###
+### RobotsTxtMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware
@@ -566,7 +566,7 @@ Retry Middleware是否启用。
 
 如果 `Request.meta` 有 <font color=red>`dont_obey_robotstxt`</font> 键，并设置为True，请求将会被忽略这个中间件，即使 `ROBOTSTXT_OBEY` 启用。
 
-###DownloaderStats###
+### DownloaderStats ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.stats.DownloaderStats
@@ -576,7 +576,7 @@ Retry Middleware是否启用。
 
 您必须启用 `DOWNLOADER_STATS` 来启用该中间件。
 
-###UserAgentMiddleware###
+### UserAgentMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.useragent.UserAgentMiddleware
@@ -587,7 +587,7 @@ Retry Middleware是否启用。
 要使得spider能覆盖默认的user agent，其 user_agent 属性必须被设置。
 
 
-###AjaxCrawlMiddleware###
+### AjaxCrawlMiddleware ###
 
 <table><tr><td>
 <font color=green>class</font>   &nbsp;scrapy.downloadermiddlewares.ajaxcrawl.AjaxCrawlMiddleware
@@ -601,23 +601,23 @@ Retry Middleware是否启用。
 
 </font>
 
-###AjaxCrawlMiddleware设置###
+### AjaxCrawlMiddleware设置 ###
 
-#####AJAXCRAWL_ENABLED#####
+##### AJAXCRAWL_ENABLED #####
 
 默认：<font color=red>`False`</font>
 
 AjaxCrawlMiddleware是否启用。您可能需要针对 通用爬虫 启用该中间件。
 
-###HttpProxyMiddleware settings###
+### HttpProxyMiddleware settings ###
 
-#####HTTPPROXY_ENABLED#####
+##### HTTPPROXY_ENABLED #####
 
 默认：<font color=red>`True`</font>
 
 `HttpProxyMiddleware`是否启用
 
-#####HTTPPROXY_AUTH\_ENCODING#####
+##### HTTPPROXY_AUTH\_ENCODING #####
 
 
 默认：<font color=red>`"latin-1"`</font>
